@@ -35,7 +35,6 @@ module.exports.modifyUser = async (req, res) => {
 
       { new: true, upsert: true, setDefaultsOnInsert: true }
     )
-      .select("-password")
       .then((docs) => res.send(docs))
       .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
