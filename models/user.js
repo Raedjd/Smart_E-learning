@@ -70,7 +70,7 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
+//
 const UserModel = mongoose.model("user", userSchema);
 
 module.exports = UserModel;
