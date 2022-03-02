@@ -5,7 +5,7 @@ mongoose
   .connect(
     "mongodb+srv://" +
       process.env.DB_USER_PASS +
-      "@cluster0.aqqi5.mongodb.net/e-learingDB",
+      "@cluster0.aqqi5.mongodb.net/e-learningDB",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,
