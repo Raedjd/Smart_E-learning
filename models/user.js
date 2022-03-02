@@ -56,6 +56,16 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "teacher", "admin"],
       default: "student",
     },
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    updatedAt: {
+      type: Date,
+    },
+    enabled: {
+      type: Boolean,
+    },
   },
   {
     timestamps: true,
