@@ -36,6 +36,6 @@ const postSchema = new mongoose.Schema(
   }
 );
 
-const PostModel = mongoose.model("user", userSchema);
+const PostModel = mongoose.model("post", userSchema);
 
-module.exports = UserModel;
+module.exports = PostModel;
