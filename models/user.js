@@ -71,6 +71,7 @@ const userSchema = new mongoose.Schema(
   }
 );
 //
+userSchema.pre();
 const UserModel = mongoose.model("user", userSchema);
 
 module.exports = UserModel;
