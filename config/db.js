@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-//---------connect to database----------------//
+//connect to database
 mongoose
   .connect(
     "mongodb+srv://" +
