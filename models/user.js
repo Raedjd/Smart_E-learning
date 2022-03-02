@@ -58,7 +58,6 @@ const userSchema = new mongoose.Schema(
     },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
     },
     updatedAt: {
       type: Date,
