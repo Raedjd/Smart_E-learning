@@ -28,13 +28,12 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
-      enum: ["man", "women"],
     },
     birthdate: {
-      type: String,
+      type: Date,
     },
     contactNumber: {
-      type: String,
+      type: Number,
     },
     aboutMe: {
       type: String,
