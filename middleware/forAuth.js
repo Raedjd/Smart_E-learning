@@ -21,7 +21,7 @@ module.exports.checkUser = (req, res, next) => {
     next();
   }
 };
-
+////////////////////////////////////////////////////////////////////////////////////
 module.exports.requireAuth = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
