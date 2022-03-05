@@ -78,7 +78,7 @@ const createActivationToken = (payload) => {
   });
 };
 
-//---------------------------------------------------login user-------------------------------------------//
+//---------------------------------------------------login user---------------------------------------_----//
 
 module.exports.signIn = async (req, res) => {
   const { username, password } = req.body;
