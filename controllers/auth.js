@@ -1,6 +1,6 @@
 const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
-const sendMail = require("./sendMail");
+const sendMail = require("./verificationMail");
 const { CLIENT_URL } = process.env;
 //register user
 module.exports.signUp = async (req, res) => {
