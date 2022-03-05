@@ -6,6 +6,7 @@ router.post("/register", authController.signUp);
 router.post("/activate-email", authController.activateEmail);
 router.post("/login", authController.signIn);
 router.get("/logout", authController.logout);
+
 //user display
 router.get("/all-users", userController.getAllUsers);
 router.get("/get-user:id", userController.singleUser);
