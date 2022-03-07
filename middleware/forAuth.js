@@ -28,13 +28,29 @@ module.exports.requireAuth = (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err);
-        res.send(200).json("no token");
+        res.send(200).json({ msg: "Invalid Authentication." });
       } else {
         console.log(decodedToken.id);
         next();
       }
     });
   } else {
-    console.log("No token");
+    console.log("Invalid Authentication");
+  }
+};
+//////////////////////////////////////////////////////////////////////////////////////
+module.exports.forResetPass = (req, res, next) => {
+  try {
+    const token = req.header("Authorization");
+    if (!token) return res.status(400).json({ msg: "Invalid Authentication." });
+
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
+      if (err) return res.status(400).json({ msg: "Invalid Authentication." });
+
+      req.user = user;
+      next();
+    });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
   }
 };

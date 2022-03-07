@@ -1,5 +1,6 @@
 const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const sendMail = require("./verificationMail");
 const { CLIENT_URL } = process.env;
 const token_duration = 2 * 24 * 60 * 1000;
@@ -84,9 +85,23 @@ module.exports.signIn = async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await UserModel.login(username, password);
-    const token = createToken(user._id);
-    res.cookie("jwt", token, { http: true, token_duration: token_duration });
-    res.status(200).json({ msg: "Login Success!" });
+
+    if (user.role === "admin") {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+      res.status(200).json({ msg: "Login Success! i'am a admin" });
+      // res.redirect("/dashbord");
+    } else if (user.role == "student") {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+      res.status(200).json({ msg: "Login Success! i'am a student" });
+      // res.redirect("/profil");
+    } else {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+      res.status(200).json({ msg: "Login Success! i'am a teacher" });
+      // res.redirect("/profil");
+    }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -102,4 +117,44 @@ const createToken = (id) => {
 module.exports.logout = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
   res.redirect("/");
+};
+
+//---------------------------------------------------forget password-------------------------------------------//
+module.exports.forgetPass = async (req, res) => {
+  const { email } = req.body;
+  try {
+    const user = await UserModel.findOne({ email });
+
+    if (!user)
+      return res.status(400).json({ msg: "This email does not exist!" });
+    const access_token = createToken({ id: user._id });
+    const url = `${CLIENT_URL}/user/reset/${access_token}`;
+
+    sendMail(email, url, "Reset your password");
+    res.json({ msg: "Re-send the password, please check your email." });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+//---------------------------------------------------reset password-------------------------------------------//
+module.exports.resetPass = async (req, res) => {
+  try {
+    const { password } = req.body;
+    //console.log(password);
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    await UserModel.findOneAndUpdate(
+      { id: req.user.id },
+      {
+        password: passwordHash,
+      }
+    );
+
+    //console.log(req.user.id);
+    //console.log(password);
+    res.json({ msg: "Password successfully changed!" });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
 };
