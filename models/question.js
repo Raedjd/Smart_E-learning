@@ -18,7 +18,20 @@ const questionSchema = new mongoose.Schema(
         type:String , 
         required:true
     },
-    }
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+      updatedAt: {
+        type: Date,
+      },
+      enabled: {
+        type: Boolean,
+      },
+    },
+    {
+      timestamps: true,
+    },
+    
 )
 const questionModel = mongoose.model("question", questionSchema);
 module.exports = questionModel;

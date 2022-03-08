@@ -17,7 +17,19 @@ const responseSchema = new mongoose.Schema(
         message : {
             type:String , 
         },
-    }
+        createdBy: {
+            type: mongoose.Schema.Types.ObjectId,
+          },
+          updatedAt: {
+            type: Date,
+          },
+          enabled: {
+            type: Boolean,
+          },
+        },
+        {
+          timestamps: true,
+        }
 )
 const responseModel = mongoose.model("response", responseSchema);
 module.exports = responseModel;

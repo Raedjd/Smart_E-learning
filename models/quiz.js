@@ -21,10 +21,22 @@ const quizSchema = new mongoose.Schema(
     },
     numberOfQuestion: {
         type:Number,
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+      updatedAt: {
+        type: Date,
+      },
+      enabled: {
+        type: Boolean,
+      },
+    },
+    {
+      timestamps: true,
     }
-
     
-}
+
 
 );
 const QuizModel = mongoose.model("quiz", quizSchema);
