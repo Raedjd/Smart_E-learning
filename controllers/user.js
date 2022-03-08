@@ -57,7 +57,7 @@ module.exports.updatePasswordByUser = async (req, res) => {
       }
     );
 
-    res.json({ msg: "Update Success!" });
+    res.json({ msg: "Password successfully changed!" });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
