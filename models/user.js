@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    FirstName: {
+      type: String,
+    },
+    LastName: {
+      type: String,
+    },
     email: {
       type: String,
       required: true,
@@ -35,9 +41,6 @@ const userSchema = new mongoose.Schema(
     birthdate: {
       type: Date,
     },
-    contactNumber: {
-      type: Number,
-    },
     aboutMe: {
       type: String,
       max: 1024,
@@ -53,6 +56,21 @@ const userSchema = new mongoose.Schema(
     },
     madeCourses: {
       type: [String],
+    },
+    WhatDoUdo: {
+      type: String,
+    },
+    nationality: {
+      type: String,
+    },
+
+    field_of_experience: {
+      //for for become a teacher
+      type: String,
+    },
+    isAudience: {
+      //for become a teacher
+      type: String,
     },
     role: {
       type: String,

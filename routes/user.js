@@ -9,7 +9,11 @@ router.post("/login", authController.signIn);
 router.get("/logout", authController.logout);
 router.post("/forget", authController.forgetPass);
 router.post("/reset", auth.forResetPass, authController.resetPass);
-
+router.patch(
+  "/changepass/:id",
+  auth.requireAuth,
+  userController.updatePasswordByUser
+);
 //user display
 router.get(
   "/all-users",
@@ -20,9 +24,15 @@ router.get(
 router.get("/get-user/:id", auth.requireAuth, userController.singleUser);
 router.put("/modify-user/:id", auth.requireAuth, userController.modifyUser);
 router.delete("/delete-user/:id", auth.requireAuth, userController.removeUser);
+router.put(
+  "/studentToTeacher/:id",
+  auth.requireAuth,
+  userController.updateToBecomeTeacher
+);
 router.patch(
   "/update-role/:id",
   auth.requireAuth,
   userController.updateUserRole
 );
+
 module.exports = router;

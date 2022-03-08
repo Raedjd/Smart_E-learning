@@ -26,6 +26,7 @@
     "googleapis": "^95.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
+    "node-input-validator": "^4.5.0",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
     "validator": "^13.7.0"
