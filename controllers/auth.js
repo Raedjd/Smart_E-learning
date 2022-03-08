@@ -33,7 +33,7 @@ module.exports.signUp = async (req, res) => {
     res.json({
       msg: "Register Success! Please activate your email to start.",
     });
-    console.log(user);
+    // console.log(user);
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -79,7 +79,7 @@ const createActivationToken = (payload) => {
   });
 };
 
-//---------------------------------------------------login user---------------------------------------_----//
+//---------------------------------------------------login user-------------------------------------------//
 
 module.exports.signIn = async (req, res) => {
   const { username, password } = req.body;
@@ -119,7 +119,7 @@ module.exports.logout = async (req, res) => {
   res.redirect("/");
 };
 
-//---------------------------------------------------forget password-------------------------------------------//
+//---------------------------------------------------forget password---------------------------------------//
 module.exports.forgetPass = async (req, res) => {
   const { email } = req.body;
   try {

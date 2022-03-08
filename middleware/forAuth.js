@@ -1,6 +1,5 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user");
-
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -12,7 +11,7 @@ module.exports.checkUser = (req, res, next) => {
       } else {
         let user = await UserModel.findById(decodedToken.id);
         res.locals.user = user;
-        // console.log(res.locals.user);
+        //console.log(res.locals.user);
         next();
       }
     });
@@ -30,7 +29,8 @@ module.exports.requireAuth = (req, res, next) => {
         console.log(err);
         res.send(200).json({ msg: "Invalid Authentication." });
       } else {
-        console.log(decodedToken.id);
+        //  console.log(decodedToken.id);
+        var user = UserModel.findOne({ _id: decodedToken.id });
         next();
       }
     });
@@ -38,6 +38,7 @@ module.exports.requireAuth = (req, res, next) => {
     console.log("Invalid Authentication");
   }
 };
+
 //////////////////////////////////////////////////////////////////////////////////////
 module.exports.forResetPass = (req, res, next) => {
   try {
@@ -50,6 +51,17 @@ module.exports.forResetPass = (req, res, next) => {
       req.user = user;
       next();
     });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+module.exports.authAdmin = async (req, res, next) => {
+  try {
+    if (user.role !== "admin")
+      return res.status(500).json({ msg: "Admin resources access denied." });
+
+    next();
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }

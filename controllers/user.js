@@ -15,7 +15,7 @@ module.exports.singleUser = (req, res) => {
     else console.log("ID unknow:" + "" + req.params.id);
   }).select("-password");
 };
-
+///////////////////////////////////////////////////////////////////////////////
 module.exports.modifyUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID invalid : " + req.params.id);
@@ -41,7 +41,7 @@ module.exports.modifyUser = async (req, res) => {
     res.status(500).json({ message: err });
   }
 };
-
+/////////////////////////////////////////////////////////////////////////////////////
 module.exports.removeUser = async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknow:" + "" + req.params.id);
@@ -50,5 +50,23 @@ module.exports.removeUser = async (req, res) => {
     res.status(200).json({ message: "user deleted. " });
   } catch (err) {
     return res.status(500).json({ message: err });
+  }
+};
+///////////////////////////////////////////////////////////////////////////////////////
+module.exports.updateUserRole = async (req, res) => {
+  // student to teacher
+  try {
+    const { role } = req.body;
+
+    await UserModel.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        role,
+      }
+    );
+
+    res.json({ msg: "Update Success!" });
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
   }
 };
