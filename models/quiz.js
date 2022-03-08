@@ -14,12 +14,19 @@ const quizSchema = new mongoose.Schema(
         type:String , 
         required : true 
     },
-    questions :[{type: Schema.Types.ObjectId, ref: 'question'}] 
+    questions :[{type: Schema.Types.ObjectId, ref: 'question'}], 
+    level  : {
+         type: String,
+         enum: ["beginner", "Medium", "advanced"],
+    },
+    numberOfQuestion: {
+        type:Number,
+    }
 
     
 }
 
 );
-const quizModel = mongoose.model("quiz", quizSchema);
-module.exports = quizModel;
+const QuizModel = mongoose.model("quiz", quizSchema);
+module.exports = QuizModel;
 
