@@ -11,7 +11,12 @@ module.exports.checkUser = (req, res, next) => {
         next();
       } else {
         user = await UserModel.findById(decodedToken.id);
-
+        await UserModel.findOneAndUpdate(
+          { _id: decodedToken.id },
+          {
+            disabled: false,
+          }
+        );
         userId = decodedToken.id;
         res.locals.user = user;
         // console.log(res.locals.user);
