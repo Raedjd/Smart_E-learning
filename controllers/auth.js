@@ -2,6 +2,7 @@ const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const sendMail = require("./verificationMail");
+const ObjectId = require("mongoose").Types.ObjectId;
 const { CLIENT_URL } = process.env;
 const token_duration = 2 * 24 * 60 * 1000;
 
@@ -102,6 +103,13 @@ module.exports.signIn = async (req, res) => {
       res.status(200).json({ msg: "Login Success! i'am a teacher" });
       // res.redirect("/profil");
     }
+    await UserModel.findOneAndUpdate(
+      { _id: user.id },
+      {
+        disabled: false,
+      }
+    );
+    // console.log(user.id);
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -139,20 +147,20 @@ module.exports.forgetPass = async (req, res) => {
 
 //---------------------------------------------------reset password-------------------------------------------//
 module.exports.resetPass = async (req, res) => {
+  if (!ObjectId.isValid(req.user.id))
+    return res.status(400).send("ID unknow:" + "" + req.user.id);
+  //console.log(req.user.id);
   try {
     const { password } = req.body;
-    //console.log(password);
-    const passwordHash = await bcrypt.hash(password, 12);
-
+    const salt = await bcrypt.genSalt();
+    const passwordhash = await bcrypt.hash(password, salt);
     await UserModel.findOneAndUpdate(
-      { id: req.user.id },
+      { _id: ObjectId(req.user.id) },
       {
-        password: passwordHash,
+        password: passwordhash,
       }
-    );
+    ).exec();
 
-    //console.log(req.user.id);
-    //console.log(password);
     res.json({ msg: "Password successfully changed!" });
   } catch (err) {
     return res.status(500).json({ msg: err.message });

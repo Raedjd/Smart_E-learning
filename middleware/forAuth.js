@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/user");
+const ObjectId = require("mongoose").Types.ObjectId;
 module.exports.checkUser = (req, res, next) => {
   const token = req.cookies.jwt;
   if (token) {
@@ -9,9 +10,11 @@ module.exports.checkUser = (req, res, next) => {
         res.cookie("jwt", "", { maxAge: 1 });
         next();
       } else {
-        let user = await UserModel.findById(decodedToken.id);
+        user = await UserModel.findById(decodedToken.id);
+
+        userId = decodedToken.id;
         res.locals.user = user;
-        console.log(res.locals.user);
+        // console.log(res.locals.user);
         next();
       }
     });
@@ -30,7 +33,7 @@ module.exports.requireAuth = (req, res, next) => {
         res.send(200).json({ msg: "Invalid Authentication." });
       } else {
         //  console.log(decodedToken.id);
-        var user = UserModel.findOne({ _id: decodedToken.id });
+        // user = UserModel.findOne({ _id: decodedToken.id });
         next();
       }
     });
@@ -55,9 +58,10 @@ module.exports.forResetPass = (req, res, next) => {
     return res.status(500).json({ msg: err.message });
   }
 };
-
+//////////////////////////////////////////////////////////////////////////////////////
 module.exports.authAdmin = async (req, res, next) => {
   try {
+    //console.log(user);
     if (user.role !== "admin")
       return res.status(500).json({ msg: "Admin resources access denied." });
 
@@ -66,3 +70,5 @@ module.exports.authAdmin = async (req, res, next) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+/////////////////////////////////////////////////////////////////////////////////

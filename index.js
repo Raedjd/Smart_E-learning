@@ -10,16 +10,19 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 //////////////////////////////////////////////////////////////
 
 // jwt: for security auth
-app.get("*", checkUser);
+//app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id);
 });
 const userRoutes = require("./routes/user");
+const postRoutes = require("./routes/post");
 //Routes
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 // Server
 app.listen(process.env.PORT, () => {

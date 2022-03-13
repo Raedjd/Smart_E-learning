@@ -48,6 +48,9 @@ const userSchema = new mongoose.Schema(
     followers: {
       type: [String],
     },
+    following: {
+      type: [String],
+    },
     posts: {
       type: [String],
     },
@@ -63,6 +66,9 @@ const userSchema = new mongoose.Schema(
     nationality: {
       type: String,
     },
+    likes: {
+      type: [String],
+    },
 
     field_of_experience: {
       //for for become a teacher
@@ -77,15 +83,8 @@ const userSchema = new mongoose.Schema(
       enum: ["student", "teacher", "admin"],
       default: "student",
     },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-    },
-    updatedAt: {
-      type: Date,
-    },
-    enabled: {
-      type: Boolean,
-    },
+
+    disabled: { type: Boolean, default: false },
   },
   {
     timestamps: true,
