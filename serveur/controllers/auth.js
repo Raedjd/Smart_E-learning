@@ -90,17 +90,17 @@ module.exports.signIn = async (req, res) => {
     if (user.role === "admin") {
       const token = createToken(user._id);
       res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ msg: "Login Success! i'am a admin" });
+      res.status(200).json({ user });
       // res.redirect("/dashbord");
     } else if (user.role == "student") {
       const token = createToken(user._id);
       res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ msg: "Login Success! i'am a student" });
+      res.status(200).json({ user });
       // res.redirect("/profil");
     } else {
       const token = createToken(user._id);
       res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ msg: "Login Success! i'am a teacher" });
+      res.status(200).json({ user });
       // res.redirect("/profil");
     }
     await UserModel.findOneAndUpdate(
@@ -111,7 +111,8 @@ module.exports.signIn = async (req, res) => {
     );
     // console.log(user.id);
   } catch (err) {
-    return res.status(500).json({ msg: err.message });
+    const errors = signInErrors(err);
+    return res.status(500).json({ errors });
   }
 };
 
@@ -165,4 +166,15 @@ module.exports.resetPass = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
+};
+
+const signInErrors = (err) => {
+  let errors = { username: "", password: "" };
+
+  if (err.message.includes("username")) errors.username = "username unknown!";
+
+  if (err.message.includes("password"))
+    errors.password = "password does not matched!";
+
+  return errors;
 };
