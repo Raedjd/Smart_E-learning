@@ -7,11 +7,14 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     const usernameError = document.querySelector(".username.error");
     const passwordError = document.querySelector(".password.error");
-    axios({
+    const formElementUserNameError = document.querySelector(".form-element.un");
+    const formElementPasswordError = document.querySelector(".form-element.ps");
+
+    await axios({
       method: "post",
       url: `${process.env.REACT_APP_API_URL}api/user/login`,
       withCredentials: true,
@@ -26,8 +29,13 @@ const SignIn = () => {
         } else navigate("/");
       })
       .catch((err) => {
+        console.log(err.response.data);
         usernameError.innerHTML = err.response.data.errors.username;
         passwordError.innerHTML = err.response.data.errors.password;
+        if (err.response.data.errors.username)
+          formElementUserNameError.classList.add("error");
+        if (err.response.data.errors.password)
+          formElementPasswordError.classList.add("error");
       });
   };
 
@@ -47,9 +55,9 @@ const SignIn = () => {
                 </p>
                 {/*----------------------------------------------------------------------*/}
                 <form action="#" onSubmit={handleLogin}>
-                  <div class="form-element ">
-                    <div class="form-alert">
-                      <label htmlfor="username">Username</label>
+                  <div class="form-element un ">
+                    <div class="form-alert ">
+                      <label for="username">Username</label>
                     </div>
                     <div class="form-alert-input">
                       <input
@@ -58,19 +66,17 @@ const SignIn = () => {
                         id="username"
                         onChange={(e) => setUsername(e.target.value)}
                         value={username}
+                        aria-describedby="inputGroupPrepend"
+                        required
                       />
                       <div className="username error text-danger"></div>
                     </div>
                   </div>
                   {/*----------------------------------------------------------------------*/}
-                  <div class="form-element active">
-                    <div class="d-flex justify-content-between">
+                  <div class="form-element ps ">
+                    <div class="form-alert ">
                       <label htmlfor="password">Password</label>
-                      <a href="forget-password.html" class="text-primary fs-6">
-                        Forget Password
-                      </a>
                     </div>
-
                     <div class="form-alert-input">
                       <input
                         type="password"
@@ -78,13 +84,16 @@ const SignIn = () => {
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
+                        aria-describedby="inputGroupPrepend"
+                        required
                       />
                       <div className="password error text-danger"></div>
                     </div>
                   </div>
 
                   {/*----------------------------------------------------------------------*/}
-                  <div class="form-element">
+
+                  <div class="form-alert">
                     <input
                       type="submit"
                       class="button button-lg button--primary w-100"

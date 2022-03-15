@@ -11,34 +11,49 @@ module.exports.signUp = async (req, res) => {
   try {
     //const user = await UserModel.create({ username, email, password });
     const { username, email, password } = req.body;
-    if (!username || !email || !password)
-      return res.status(400).json({ msg: "Please fill in all fields." });
+    const errors = { username: "", email: "", password: "" };
+
     const userUsername = await UserModel.findOne({ username });
-    if (userUsername)
-      return res.status(400).json({ msg: "This username already exists." });
-    if (!validateEmail(email))
-      return res.status(400).json({ msg: "Invalid emails." });
+    if (userUsername) {
+      errors.username = "This username already exists.";
+      return res.status(400).json({ msg: errors });
+    }
+    if (!validateEmail(email)) {
+      errors.email = "Invalid emails.";
+      return res.status(400).json({ msg: errors });
+    }
 
     const userEmail = await UserModel.findOne({ email });
-    if (userEmail)
-      return res.status(400).json({ msg: "This email already exists." });
-
-    if (password.length < 6)
-      return res
-        .status(400)
-        .json({ msg: "Password must be at least 6 characters." });
+    if (userEmail) {
+      errors.email = "This email already exists.";
+      return res.status(400).json({ msg: errors });
+    }
+    if (password.length < 6) {
+      errors.password = "Password must be at least 6 characters.";
+      return res.status(400).json({ msg: errors });
+    }
     const user = { username, email, password };
-    const activation_token = createActivationToken(user);
-    const url = `${CLIENT_URL}/user/activate/${activation_token}`;
+    exports.userToken = createActivationToken(user);
+
+    var random_token = "";
+    for (var i = 0; i < 6; i++) {
+      random_token += process.env.ACTIVATION_TOKEN_SECRET.charAt(
+        Math.floor(Math.random() * process.env.ACTIVATION_TOKEN_SECRET.length)
+      );
+    }
+    exports.rdm = random_token;
+    const url = `${CLIENT_URL}/user/activate/${random_token}`;
     sendMail(email, url);
     res.json({
       msg: "Register Success! Please activate your email to start.",
     });
+
     // console.log(user);
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
 };
+
 //validate email
 function validateEmail(email) {
   const valid =
@@ -48,27 +63,32 @@ function validateEmail(email) {
 //active email
 module.exports.activateEmail = async (req, res) => {
   try {
-    const { activation_token } = req.body;
-    const user = jwt.verify(
-      activation_token,
-      process.env.ACTIVATION_TOKEN_SECRET
-    );
+    const { activation } = req.body;
+    //  console.log(this.rdm);
 
-    const { username, email, password } = user;
+    if (activation === this.rdm) {
+      // console.log(activation === this.rdm);
+      const user = jwt.verify(
+        this.userToken,
+        process.env.ACTIVATION_TOKEN_SECRET
+      );
+      const { username, email, password } = user;
 
-    const check = await UserModel.findOne({ email });
-    if (check)
-      return res.status(400).json({ msg: "This email already exists." });
+      const check = await UserModel.findOne({ email });
+      if (check)
+        return res.status(400).json({ msg: "This email already exists." });
 
-    const newUser = new UserModel({
-      username,
-      email,
-      password,
-    });
+      const newUser = new UserModel({
+        username,
+        email,
+        password,
+      });
 
-    await newUser.save();
-
-    res.json({ msg: "Account has been activated!" });
+      await newUser.save();
+      res.json({ msg: "Account has been activated!" });
+    } else {
+      res.json({ msg: "Account is not activated,repeat another time!" });
+    }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -87,22 +107,10 @@ module.exports.signIn = async (req, res) => {
   try {
     const user = await UserModel.login(username, password);
 
-    if (user.role === "admin") {
-      const token = createToken(user._id);
-      res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ user });
-      // res.redirect("/dashbord");
-    } else if (user.role == "student") {
-      const token = createToken(user._id);
-      res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ user });
-      // res.redirect("/profil");
-    } else {
-      const token = createToken(user._id);
-      res.cookie("jwt", token, { http: true, token_duration: token_duration });
-      res.status(200).json({ user });
-      // res.redirect("/profil");
-    }
+    const token = createToken(user._id);
+    res.cookie("jwt", token, { http: true, token_duration: token_duration });
+    res.status(200).json({ user });
+
     await UserModel.findOneAndUpdate(
       { _id: user.id },
       {
@@ -114,6 +122,16 @@ module.exports.signIn = async (req, res) => {
     const errors = signInErrors(err);
     return res.status(500).json({ errors });
   }
+};
+const signInErrors = (err) => {
+  let errors = { username: "", password: "" };
+
+  if (err.message.includes("username")) errors.username = "Username unknown!";
+
+  if (err.message.includes("password"))
+    errors.password = "password does not matched!";
+
+  return errors;
 };
 
 const createToken = (id) => {
@@ -166,15 +184,4 @@ module.exports.resetPass = async (req, res) => {
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
-};
-
-const signInErrors = (err) => {
-  let errors = { username: "", password: "" };
-
-  if (err.message.includes("username")) errors.username = "username unknown!";
-
-  if (err.message.includes("password"))
-    errors.password = "password does not matched!";
-
-  return errors;
 };

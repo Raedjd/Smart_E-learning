@@ -2,7 +2,7 @@ const { Validator } = require("node-input-validator");
 const UserModel = require("../models/user");
 const ObjectId = require("mongoose").Types.ObjectId;
 const bcrypt = require("bcrypt");
-const sendMail = require("./teacherValid");
+
 const jwt = require("jsonwebtoken");
 
 module.exports.getAllUsers = async (req, res) => {
@@ -132,7 +132,7 @@ module.exports.updateUserRole = async (req, res) => {
     );
     const user = await UserModel.findById({ _id: req.params.id });
     //console.log(user.email);
-    sendMail(user.email);
+    //sendMail(user.email);
 
     res.json({ msg: "Update Success!" });
   } catch (err) {
