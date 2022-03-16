@@ -11,12 +11,13 @@ const reviewSchema = new mongoose.Schema(
         },
         updatedAt: {
           type: Date,
+          default:Date.now
         },
         enabled: {
           type: Boolean,
+          default:true
         },
       }
     );
 
-const ReviewModel = mongoose.model("review", reviewSchema);
-module.exports = ReviewModel;
+module.exports = mongoose.model("review", reviewSchema);

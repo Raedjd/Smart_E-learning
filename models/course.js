@@ -3,26 +3,37 @@ const courseSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      required:true
     },
-    content: {
+    photo: {
+      type:String,
+      required:true
     },
-
     price: {
       type: Number,
+      required:true
     },
-    raiting: {
+    rating: {
       type:Number,
+      required:true
     },
-    createdBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+    // createdBy: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
+   category: {
+      type: String,
+     // ref: "category",
       required: true,
     },
     updatedAt: {
       type: Date,
+      default:Date.now
     },
     enabled: {
       type: Boolean,
+      default:true
     },
   },
   {
@@ -30,6 +41,5 @@ const courseSchema = new mongoose.Schema(
   }
 );
 
-const CourseModel = mongoose.model("course", courseSchema);
 
-module.exports = CourseModel;
+module.exports=mongoose.model("course", courseSchema);
