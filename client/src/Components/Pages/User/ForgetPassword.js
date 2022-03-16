@@ -1,6 +1,31 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const ForgetPassword = () => {
+  const [email, setEmail] = useState("");
+  const handleForgetPassword = async (e) => {
+    e.preventDefault();
+    const forgetSuccess = document.querySelector(".forget");
+    const forgetRefused = document.querySelector(".notforget");
+    forgetSuccess.innerHTML = "";
+    forgetRefused.innerHTML = "";
+    await axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/forget`,
+      withCredentials: true,
+      data: {
+        email: email,
+      },
+    })
+      .then((response) => {
+        console.log(response);
+        forgetSuccess.innerHTML = response.data.msg.successed;
+        forgetRefused.innerHTML = response.data.msg.refused;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <section class="section signup-area signin-area section-padding overflow-hidden">
@@ -11,27 +36,37 @@ const ForgetPassword = () => {
                 <h2 class="font-title--md mb-0">Forget Passowrd</h2>
                 <p class="mt-2 mb-lg-4 mb-3">
                   Don't have account?{" "}
-                  <a href="signup.html" class="text-black-50">
-                    Sign up
+                  <a class="text-black-50">
+                    <Link to="/signup"> Sign up</Link>
                   </a>
                 </p>
-                <form action="#">
+                <form action="#" onSubmit={handleForgetPassword}>
                   <div class="form-element active">
                     <div class="form-alert">
                       <label for="name">Email</label>
                     </div>
                     <div class="form-alert-input">
-                      <input type="email" placeholder="Arif Ahmed" id="name" />
+                      <input
+                        type="email"
+                        placeholder="foulen.benfoulen@gmail.com"
+                        id="email"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        aria-describedby="inputGroupPrepend"
+                        required
+                      />
                     </div>
                   </div>
 
                   <div class="form-element">
-                    <button
+                    <input
                       type="submit"
                       class="button button-lg button--primary w-100"
-                    >
-                      Reset Password
-                    </button>
+                      value="RESET PASSWORD"
+                      disabled={!email}
+                    />
+                    <div className="forget  bg-success"></div>
+                    <div className="notforget text-danger"></div>
                   </div>
                   <span class="d-block text-center text-secondary">
                     or sign in with
@@ -125,7 +160,7 @@ const ForgetPassword = () => {
             <div class="col-lg-7 order-1 order-lg-0">
               <div class="signup-area-image">
                 <img
-                  src="dist/images/signup/Illustration.png"
+                  src="/dist/images/signup/Illustration.png"
                   alt="Illustration Image"
                   class="img-fluid"
                 />
@@ -137,7 +172,7 @@ const ForgetPassword = () => {
 
       <div class="dot-images">
         <img
-          src="dist/images/shape/dots/dots-img-11.png"
+          src="/dist/images/shape/dots/dots-img-11.png"
           alt="shape"
           class="img-fluid second-dotimage"
         />

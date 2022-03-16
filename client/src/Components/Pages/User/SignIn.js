@@ -76,6 +76,9 @@ const SignIn = () => {
                   <div class="form-element ps ">
                     <div class="form-alert ">
                       <label htmlfor="password">Password</label>
+                      <a class="text-primary fs-6">
+                        <Link to="/forgetpassword">Forget Password</Link>
+                      </a>
                     </div>
                     <div class="form-alert-input">
                       <input
@@ -194,7 +197,7 @@ const SignIn = () => {
             <div class="col-xl-7 order-1 order-xl-0">
               <div class="signup-area-image">
                 <img
-                  src="dist/images/signup/Illustration.png"
+                  src="/dist/images/signup/Illustration.png"
                   alt="Illustration Image"
                   class="img-fluid"
                 />
@@ -203,6 +206,13 @@ const SignIn = () => {
           </div>
         </div>
       </section>
+      <div class="dot-images">
+        <img
+          src="/dist/images/shape/dots/dots-img-07.png"
+          alt="shape"
+          class="img-fluid second-dotimage"
+        />
+      </div>
     </div>
   );
 };

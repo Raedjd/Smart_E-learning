@@ -14,14 +14,15 @@ app.use(cookieParser());
 
 //////////////////////////////////////////////////////////////
 const corsOptions = {
-  origin: process.env.CLIENTF_URL,
+  origin: process.env.CLIENT_URL,
   credentials: true,
-  allowedHeaders: ["sessionId", "Content-Type"],
+  allowedHeaders: ["sessionId", "Content-Type", "Authorization"],
   exposedHeaders: ["sessionId"],
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   preflightContinue: false,
 };
 app.use(cors(corsOptions));
+
 // jwt: for security auth
 app.get("*", checkUser);
 app.get("/jwtid", requireAuth, (req, res) => {

@@ -62,10 +62,18 @@ function validateEmail(email) {
 }
 //active email
 module.exports.activateEmail = async (req, res) => {
+  const responses = { successed: "", refused: "" };
   try {
-    const { activation } = req.body;
-    //  console.log(this.rdm);
+    const { verifa } = req.body;
+    const { verifb } = req.body;
+    const { verifc } = req.body;
+    const { verifd } = req.body;
+    const { verife } = req.body;
+    const { veriff } = req.body;
+    const activation = verifa + verifb + verifc + verifd + verife + veriff;
 
+    // console.log(activation);
+    //  console.log(this.rdm);
     if (activation === this.rdm) {
       // console.log(activation === this.rdm);
       const user = jwt.verify(
@@ -85,9 +93,11 @@ module.exports.activateEmail = async (req, res) => {
       });
 
       await newUser.save();
-      res.json({ msg: "Account has been activated!" });
+      responses.successed = "Account has been activated!";
+      res.json({ msg: responses });
     } else {
-      res.json({ msg: "Account is not activated,repeat another time!" });
+      responses.refused = "Account is not activated,repeat another time!";
+      res.json({ msg: responses });
     }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
@@ -148,17 +158,22 @@ module.exports.logout = async (req, res) => {
 
 //---------------------------------------------------forget password---------------------------------------//
 module.exports.forgetPass = async (req, res) => {
+  const responses = { successed: "", refused: "" };
   const { email } = req.body;
   try {
     const user = await UserModel.findOne({ email });
 
-    if (!user)
-      return res.status(400).json({ msg: "This email does not exist!" });
-    const access_token = createToken({ id: user._id });
-    const url = `${CLIENT_URL}/user/reset/${access_token}`;
+    if (!user) {
+      responses.refused = "This email does not exist!";
+      res.json({ msg: responses });
+    } else {
+      const access_token = createToken({ id: user._id });
+      const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
-    sendMail(email, url, "Reset your password");
-    res.json({ msg: "Re-send the password, please check your email." });
+      sendMail(email, url, "Reset your password");
+      responses.successed = "Re-send the password, please check your email.";
+      res.json({ msg: responses });
+    }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }
@@ -170,17 +185,23 @@ module.exports.resetPass = async (req, res) => {
     return res.status(400).send("ID unknow:" + "" + req.user.id);
   //console.log(req.user.id);
   try {
+    const responses = { successed: "", refused: "" };
     const { password } = req.body;
-    const salt = await bcrypt.genSalt();
-    const passwordhash = await bcrypt.hash(password, salt);
-    await UserModel.findOneAndUpdate(
-      { _id: ObjectId(req.user.id) },
-      {
-        password: passwordhash,
-      }
-    ).exec();
-
-    res.json({ msg: "Password successfully changed!" });
+    if (password.length < 6) {
+      responses.refused = "Password must be at least 6 characters.";
+      res.json({ msg: responses });
+    } else {
+      const salt = await bcrypt.genSalt();
+      const passwordhash = await bcrypt.hash(password, salt);
+      await UserModel.findOneAndUpdate(
+        { _id: ObjectId(req.user.id) },
+        {
+          password: passwordhash,
+        }
+      ).exec();
+      responses.successed = "Password successfully changed!";
+      res.json({ msg: responses });
+    }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }

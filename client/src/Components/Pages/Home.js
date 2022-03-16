@@ -6,7 +6,7 @@ const Home = () => {
       {" "}
       <section
         class="main-banner"
-        style="background-image: url(dist/images/banner/banner.jpg);"
+        style="background-image: url(/dist/images/banner/banner.jpg);"
       >
         <div class="container">
           <div class="row">
@@ -54,7 +54,7 @@ const Home = () => {
             <div class="col-lg-5 order-1 order-lg-0">
               <div class="main-banner-end">
                 <img
-                  src="dist/images/banner/banner-image-01.png"
+                  src="/dist/images/banner/banner-image-01.png"
                   alt="image"
                   class="img-fluid"
                 />
@@ -286,12 +286,12 @@ const Home = () => {
         </div>
         <div class="browse-categories-shape">
           <img
-            src="dist/images/shape/dots/dots-img-11.png"
+            src="/dist/images/shape/dots/dots-img-11.png"
             alt="shape"
             class="img-fluid shape-01"
           />
           <img
-            src="dist/images/shape/line01.png"
+            src="/dist/images/shape/line01.png"
             alt="shape"
             class="img-fluid shape-02"
           />

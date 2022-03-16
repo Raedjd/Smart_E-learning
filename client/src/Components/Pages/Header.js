@@ -9,7 +9,7 @@ class Header extends Component {
             <div class="container">
               <a class="navbar-brand" href="index.html">
                 <img
-                  src="dist/images/logo/logo.png"
+                  src="/dist/images/logo/logo.png"
                   alt="Logo"
                   class="img-fluid"
                 />

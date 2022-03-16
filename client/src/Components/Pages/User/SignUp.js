@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const SignUp = () => {
@@ -7,6 +8,7 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
+  const navigate = useNavigate();
   const handleRegister = async (e) => {
     e.preventDefault();
     const terms = document.getElementById("terms");
@@ -41,6 +43,7 @@ const SignUp = () => {
         .then((response) => {
           console.log(response);
           signUpSuccess.innerHTML = response.data.msg;
+          navigate("/verifyemail");
         })
         .catch((err) => {
           console.log(err.response.data);
@@ -164,7 +167,7 @@ const SignUp = () => {
             <div class="col-lg-7 order-1 order-lg-0">
               <div class="signup-area-image">
                 <img
-                  src="dist/images/signup/Illustration.png"
+                  src="/dist/images/signup/Illustration.png"
                   alt="Illustration Image"
                   class="img-fluid"
                 />
@@ -173,6 +176,13 @@ const SignUp = () => {
           </div>
         </div>
       </section>
+      <div class="dot-images">
+        <img
+          src="/dist/images/shape/dots/dots-img-07.png"
+          alt="shape"
+          class="img-fluid second-dotimage"
+        />
+      </div>
     </div>
   );
 };
