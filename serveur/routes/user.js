@@ -3,11 +3,12 @@ const authController = require("../controllers/auth");
 const userController = require("../controllers/user");
 const uploadController = require("../controllers/uploadFile");
 const auth = require("../middleware/forAuth");
-const UserModel = require("../models/user");
+
 //for authentification
 router.post("/register", authController.signUp);
 router.post("/activate-email", authController.activateEmail);
 router.post("/login", authController.signIn);
+router.post("/google-login", authController.googleLogin);
 router.get("/logout", authController.logout);
 router.post("/forget", authController.forgetPass);
 router.post("/reset", auth.forResetPass, authController.resetPass);

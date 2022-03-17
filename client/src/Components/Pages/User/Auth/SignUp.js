@@ -170,6 +170,7 @@ const SignUp = () => {
                   src="/dist/images/signup/Illustration.png"
                   alt="Illustration Image"
                   class="img-fluid"
+                  style={{ zIndex: 1 }}
                 />
               </div>
             </div>
@@ -178,7 +179,13 @@ const SignUp = () => {
       </section>
       <div class="dot-images">
         <img
-          src="/dist/images/shape/dots/dots-img-07.png"
+          src="dist/images/shape/dots/dots-img-10.png"
+          alt="shape"
+          style={{ zIndex: 1 }}
+          class="img-fluid first-dotimage"
+        />
+        <img
+          src="dist/images/shape/dots/dots-img-07.png"
           alt="shape"
           class="img-fluid second-dotimage"
         />

@@ -5,7 +5,9 @@ const sendMail = require("./verificationMail");
 const ObjectId = require("mongoose").Types.ObjectId;
 const { CLIENT_URL } = process.env;
 const token_duration = 2 * 24 * 60 * 1000;
-
+const { google } = require("googleapis");
+const { OAuth2 } = google.auth;
+const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
 //---------------------------------------------------register user-------------------------------------------//
 module.exports.signUp = async (req, res) => {
   try {
@@ -206,3 +208,5 @@ module.exports.resetPass = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
+
+module.exports.googleLogin = async (req, res) => {};

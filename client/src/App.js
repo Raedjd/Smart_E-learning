@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { UserIdContext } from "./Components/Pages/User/AppContext";
 import Routers from "./Components/Routers";
 import axios from "axios";
+import { UserIdContext } from "./Components/Pages/User/AppContext";
 function App() {
-  /*  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   useEffect(async () => {
     await axios({
@@ -16,11 +16,12 @@ function App() {
         setUserId(res.data);
       })
       .catch((err) => console.log("No token exist"));
-  }, [userId]); */
+  }, [userId]);
+
   return (
-    <div className="App">
+    <UserIdContext.Provider value={userId}>
       <Routers />
-    </div>
+    </UserIdContext.Provider>
   );
 }
 
