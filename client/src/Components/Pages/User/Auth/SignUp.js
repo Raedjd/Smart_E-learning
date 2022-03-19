@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import cookie from "js-cookie";
 const SignUp = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
   const navigate = useNavigate();
+  const userId = cookie.get("id");
   const handleRegister = async (e) => {
     e.preventDefault();
     const terms = document.getElementById("terms");
@@ -53,7 +54,7 @@ const SignUp = () => {
         });
     }
   };
-  return (
+  return !userId ? (
     <div>
       <section class="signup-area overflow-hidden">
         <div class="container">
@@ -191,6 +192,8 @@ const SignUp = () => {
         />
       </div>
     </div>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

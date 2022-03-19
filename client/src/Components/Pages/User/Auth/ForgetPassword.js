@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
+import cookie from "js-cookie";
 const ForgetPassword = () => {
   const [email, setEmail] = useState("");
+  const userId = cookie.get("id");
   const handleForgetPassword = async (e) => {
     e.preventDefault();
     const forgetSuccess = document.querySelector(".forget");
@@ -26,7 +28,7 @@ const ForgetPassword = () => {
         console.log(err);
       });
   };
-  return (
+  return !userId ? (
     <div>
       <section class="section signup-area signin-area section-padding overflow-hidden">
         <div class="container">
@@ -184,6 +186,8 @@ const ForgetPassword = () => {
         />
       </div>
     </div>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

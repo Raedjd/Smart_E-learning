@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
+import cookie from "js-cookie";
 const VerifyEmail = () => {
   const [verifa, setVerifa] = useState("");
   const [verifb, setVerifb] = useState("");
@@ -10,6 +11,7 @@ const VerifyEmail = () => {
   const [veriff, setVeriff] = useState("");
   const SuccessActive = document.querySelector(".successed");
   const RefusedSuccess = document.querySelector(".refused");
+  const userId = cookie.get("id");
   const handleVerify = async (e) => {
     e.preventDefault();
     await axios({
@@ -35,7 +37,7 @@ const VerifyEmail = () => {
         console.log(err);
       });
   };
-  return (
+  return !userId ? (
     <section class="signup-area overflow-hidden">
       <div class="container">
         <div class="row align-items-center">
@@ -142,6 +144,8 @@ const VerifyEmail = () => {
         />
       </div>
     </section>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

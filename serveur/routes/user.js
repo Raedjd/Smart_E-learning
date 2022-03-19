@@ -25,8 +25,8 @@ router.get(
   userController.getAllUsers
 );
 router.get("/get-user/:id", auth.requireAuth, userController.getOneUser);
-router.put("/modify-user/:id", auth.requireAuth, userController.modifyUser);
-router.delete("/delete-user/:id", auth.requireAuth, userController.removeUser);
+router.patch("/modify-user", auth.requireAuth, userController.modifyUser);
+router.delete("/delete-user", auth.requireAuth, userController.removeUser);
 router.put(
   "/studentToTeacher/:id",
   auth.requireAuth,

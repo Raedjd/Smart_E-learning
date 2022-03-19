@@ -12,10 +12,10 @@ const userSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    FirstName: {
+    firstName: {
       type: String,
     },
-    LastName: {
+    lastName: {
       type: String,
     },
     email: {
@@ -37,6 +37,10 @@ const userSchema = new mongoose.Schema(
     },
     gender: {
       type: String,
+      enum: ["Men", "Women"],
+    },
+    phone: {
+      type: Number,
     },
     birthdate: {
       type: Date,
@@ -60,7 +64,7 @@ const userSchema = new mongoose.Schema(
     madeCourses: {
       type: [String],
     },
-    WhatDoUdo: {
+    whatDoUdo: {
       type: String,
     },
     nationality: {

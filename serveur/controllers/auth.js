@@ -155,6 +155,7 @@ const createToken = (id) => {
 //---------------------------------------------------logout user-------------------------------------------//
 module.exports.logout = async (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
+  res.cookie("id", "", { maxAge: 1 });
   res.redirect("/");
 };
 

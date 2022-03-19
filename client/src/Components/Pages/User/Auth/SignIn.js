@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 
 import axios from "axios";
+import cookie from "js-cookie";
 const SignIn = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const userId = cookie.get("id");
   const handleLogin = async (e) => {
     e.preventDefault();
     const usernameError = document.querySelector(".username.error");
@@ -26,6 +27,9 @@ const SignIn = () => {
       },
     })
       .then((response) => {
+        const id = response.data.user._id;
+        // console.log(id);
+        cookie.set("id", id);
         if (response.data.user.role === "admin") {
           navigate("/dashbord");
         } else if (response.data.user.role === "student")
@@ -59,7 +63,7 @@ const SignIn = () => {
         console.log(err);
       });
   };
-  return (
+  return !userId ? (
     <div>
       <section class="section signup-area signin-area">
         <div class="container">
@@ -163,6 +167,8 @@ const SignIn = () => {
         />
       </div>
     </div>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

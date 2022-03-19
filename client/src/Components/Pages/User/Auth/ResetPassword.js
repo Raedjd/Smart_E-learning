@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
+import cookie from "js-cookie";
 const ResetPassword = () => {
   const [password, setPassword] = useState("");
+  const userId = cookie.get("id");
 
-  // console.log(useParams());
   const { token } = useParams();
   const handleResetPassword = async (e) => {
     e.preventDefault();
@@ -30,7 +31,7 @@ const ResetPassword = () => {
       });
   };
 
-  return (
+  return !userId ? (
     <section class="section signup-area signin-area section-padding overflow-hidden">
       <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -95,6 +96,8 @@ const ResetPassword = () => {
         />
       </div>
     </section>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

@@ -22,26 +22,28 @@ module.exports.getOneUser = (req, res) => {
 };
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.modifyUser = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID invalid : " + req.params.id);
-
+  const token = req.cookies.jwt;
   try {
-    await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          FirstName: req.body.FirstName,
-          LastName: req.body.LastName,
-          gender: req.body.gender,
-          aboutMe: req.body.aboutMe,
-          birthdate: req.body.birthdate,
-          WhatDoUdo: req.body.WhatDoUdo,
-          nationality: req.body.nationality,
-        },
-      },
+    jwt
+      .verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+        //console.log(decodedToken.id);
+        await UserModel.findOneAndUpdate(
+          { _id: decodedToken.id },
 
-      { new: true, upsert: true, setDefaultsOnInsert: true }
-    )
+          {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            gender: req.body.gender,
+            phone: req.body.phone,
+            birthdate: req.body.birthdate,
+            whatDoUdo: req.body.whatDoUdo,
+            nationality: req.body.nationality,
+            aboutMe: req.body.aboutMe,
+          },
+
+          { new: true, upsert: true, setDefaultsOnInsert: true }
+        );
+      })
       .then((docs) => res.send(docs))
       .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {
@@ -51,14 +53,13 @@ module.exports.modifyUser = async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.updatePasswordByUser = async (req, res) => {
   const token = req.cookies.jwt;
-
+  const responses = {
+    successed: "",
+    old_password: "",
+    new_password: "",
+    confirm_password: "",
+  };
   const { old_password, new_password, confirm_password } = req.body;
-  if (!old_password || !new_password || !confirm_password)
-    return res.status(400).json({ msg: "Please fill in all fields." });
-  if (new_password.length < 6)
-    return res
-      .status(400)
-      .json({ msg: "Password must be at least 6 characters." });
 
   try {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
@@ -66,19 +67,26 @@ module.exports.updatePasswordByUser = async (req, res) => {
       // console.log(current_user);
       let isTrue = bcrypt.compareSync(old_password, current_user.password);
       console.log(isTrue);
-      if (!isTrue) res.json({ msg: "Current Password Invalid!" });
-      else {
-        if (new_password === confirm_password) {
-          const salt = await bcrypt.genSalt();
-          let confirm_passwordHash = await bcrypt.hash(confirm_password, salt);
-          await UserModel.findOneAndUpdate(
-            { _id: decodedToken.id },
-            {
-              password: confirm_passwordHash,
-            }
-          );
-          res.json({ msg: "Password successfully changed!" });
-        } else return res.status(200).json({ msg: "Invalid new password." });
+      if (!isTrue) {
+        responses.old_password = "Current Password Invalid!";
+        res.json({ msg: responses });
+      } else if (new_password.length < 6) {
+        responses.new_password = "Password must be at least 6 characters.";
+        res.json({ msg: responses });
+      } else if (new_password !== confirm_password) {
+        responses.confirm_password = "Password does not matched!";
+        res.json({ msg: responses });
+      } else {
+        const salt = await bcrypt.genSalt();
+        let confirm_passwordHash = await bcrypt.hash(confirm_password, salt);
+        await UserModel.findOneAndUpdate(
+          { _id: decodedToken.id },
+          {
+            password: confirm_passwordHash,
+          }
+        );
+        responses.successed = "Password successfully changed!";
+        res.json({ msg: responses });
       }
     });
   } catch (err) {
@@ -88,11 +96,16 @@ module.exports.updatePasswordByUser = async (req, res) => {
 
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.removeUser = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID unknow:" + "" + req.params.id);
+  const token = req.cookies.jwt;
+
   try {
-    await UserModel.remove({ _id: req.params.id }).exec();
-    res.status(200).json({ message: "user deleted. " });
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+      console.log(decodedToken.id);
+      await UserModel.remove({ _id: decodedToken.id }).exec();
+      res.status(200).json({ message: "user deleted. " });
+    });
+    res.cookie("jwt", "", { maxAge: 1 });
+    res.cookie("id", "", { maxAge: 1 });
   } catch (err) {
     return res.status(500).json({ message: err });
   }
@@ -156,21 +169,19 @@ module.exports.updateUserRole = async (req, res) => {
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.disableUser = async (req, res, next) => {
   const token = req.cookies.jwt;
+
   try {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-      //  console.log(decodedToken.id);
       await UserModel.findOneAndUpdate(
         { _id: decodedToken.id },
         {
           disabled: true,
         }
       );
-
       next();
     });
-
     res.cookie("jwt", "", { maxAge: 1 });
-    res.redirect("/");
+    res.cookie("id", "", { maxAge: 1 });
   } catch (err) {
     return res.status(500).json({ msg: err.message });
   }

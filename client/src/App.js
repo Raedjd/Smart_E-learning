@@ -14,6 +14,7 @@ function App() {
       .then((res) => {
         console.log(res);
         setUserId(res.data);
+        localStorage.setItem(userId, res.data);
       })
       .catch((err) => console.log("No token exist"));
   }, [userId]);
