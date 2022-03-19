@@ -112,21 +112,23 @@ module.exports.removeUser = async (req, res) => {
 };
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.updateToBecomeTeacher = async (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID invalid : " + req.params.id);
-
+  const token = req.cookies.jwt;
   try {
-    await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          field_of_experience: req.body.field_of_experience,
-          isAudience: req.body.isAudience,
-        },
-      },
+    jwt
+      .verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+        //console.log(decodedToken.id);
+        await UserModel.findOneAndUpdate(
+          { _id: decodedToken.id },
 
-      { new: true, upsert: true, setDefaultsOnInsert: true }
-    )
+          {
+            yourSchool: req.body.yourSchool,
+            yourFile: req.body.yourFile,
+            yourPlan: req.body.yourPlan,
+          },
+
+          { new: true, upsert: true, setDefaultsOnInsert: true }
+        );
+      })
       .then((docs) => res.send(docs))
       .catch((err) => res.status(500).send({ message: err }));
   } catch (err) {

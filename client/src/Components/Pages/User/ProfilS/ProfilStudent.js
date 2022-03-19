@@ -292,7 +292,7 @@ const ProfilStudent = () => {
                     aria-controls="nav-purchase"
                     aria-selected="false"
                   >
-                    Purchase History
+                    Become An Instructor
                   </button>
 
                   <button
@@ -468,7 +468,7 @@ const ProfilStudent = () => {
                       aria-controls="nav-purchase"
                       aria-selected="false"
                     >
-                      Purchase History
+                      Become An Instructor
                     </button>
 
                     <button
@@ -570,6 +570,102 @@ const ProfilStudent = () => {
                         </dl>
                       </div>
                     </div>
+                  </div>
+                </div>
+
+                {/*----------------------------------------------------------------------*/}
+                <div
+                  class="tab-pane fade"
+                  id="nav-purchase"
+                  role="tabpanel"
+                  aria-labelledby="nav-purchase-tab"
+                >
+                  <div class="col-lg ">
+                    <div class="main-become-instructor-item me-12">
+                      <div class="main-text">
+                        <h6 class="font-title--sm">Become an Instructor</h6>
+
+                        <div>
+                          <div class="students-info-form">
+                            <form action="#">
+                              <div class="col-12">
+                                <div class="my-5 js-school">
+                                  <label
+                                    class="d-block mb-2 required-asterisked"
+                                    id="schools-label"
+                                  >
+                                    What is the name of your school?
+                                  </label>
+                                  <p class="f6 color-fg-muted">
+                                    <strong class="color-fg-default">
+                                      Note:
+                                    </strong>{" "}
+                                    If your school is not listed, then enter the
+                                    full school name and continue.
+                                  </p>
+
+                                  <input
+                                    type="text"
+                                    id="wdu"
+                                    class="form-control"
+                                    placeholder="School name ... "
+                                  />
+                                </div>
+                                <div class="my-5 js-school">
+                                  <label
+                                    class="d-block mb-2 required-asterisked"
+                                    id="schools-label"
+                                  >
+                                    Give us some documents related to your
+                                    profession!
+                                  </label>
+                                  <p class="f6 color-fg-muted">
+                                    (diploma, work certificate...)
+                                  </p>
+                                  <input
+                                    type="file"
+                                    id="wdu"
+                                    class="form-control"
+                                    placeholder="School name ... "
+                                  />
+                                </div>
+                                <div class="row g-3">
+                                  <label
+                                    class="d-block mb-2 required-asterisked"
+                                    id="schools-label"
+                                  >
+                                    How do you plan to use Studently?
+                                  </label>
+                                  <div class="form-floating">
+                                    <textarea
+                                      class="form-control"
+                                      placeholder="Leave a comment here"
+                                      id="floatingTextarea2"
+                                      style={{ height: "100px" }}
+                                    ></textarea>
+                                    <label for="floatingTextarea2">
+                                      Enter here...
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <input
+                                class="btn btn-outline-primary"
+                                value="Apply as Instructor"
+                              />
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p
+                      class="text-center text-primary font-weight-bold"
+                      style={{ color: "#42414b !important" }}
+                    >
+                      Yay! Wishing you a successful business. &#128525;
+                      &#x1F499;
+                    </p>
                   </div>
                 </div>
 

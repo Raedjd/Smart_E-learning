@@ -74,11 +74,15 @@ const userSchema = new mongoose.Schema(
       type: [String],
     },
 
-    field_of_experience: {
+    yourSchool: {
       //for for become a teacher
       type: String,
     },
-    isAudience: {
+    yourFile: {
+      //for become a teacher
+      type: String,
+    },
+    yourPlan: {
       //for become a teacher
       type: String,
     },
