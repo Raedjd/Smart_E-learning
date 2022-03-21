@@ -1,4 +1,3 @@
-const { Validator } = require("node-input-validator");
 const UserModel = require("../models/user");
 const ObjectId = require("mongoose").Types.ObjectId;
 const bcrypt = require("bcrypt");
@@ -12,13 +11,19 @@ module.exports.getAllUsers = async (req, res) => {
 };
 
 module.exports.getOneUser = (req, res) => {
-  if (!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID unknow:" + "" + req.params.id);
+  const token = req.cookies.jwt;
 
-  UserModel.findById(req.params.id, (err, docs) => {
-    if (!err) res.status(200).send(docs);
-    else console.log("ID unknow:" + "" + req.params.id);
-  }).select("-password");
+  try {
+    jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
+      //console.log(decodedToken.id);
+      const user = await UserModel.findById({ _id: decodedToken.id }).select(
+        "-password"
+      );
+      res.status(200).json(user);
+    });
+  } catch (err) {
+    return res.status(500).json({ message: err });
+  }
 };
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.modifyUser = async (req, res) => {
@@ -110,31 +115,7 @@ module.exports.removeUser = async (req, res) => {
     return res.status(500).json({ message: err });
   }
 };
-///////////////////////////////////////////////////////////////////////////////
-module.exports.updateToBecomeTeacher = async (req, res) => {
-  const token = req.cookies.jwt;
-  try {
-    jwt
-      .verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
-        //console.log(decodedToken.id);
-        await UserModel.findOneAndUpdate(
-          { _id: decodedToken.id },
 
-          {
-            yourSchool: req.body.yourSchool,
-            yourFile: req.body.yourFile,
-            yourPlan: req.body.yourPlan,
-          },
-
-          { new: true, upsert: true, setDefaultsOnInsert: true }
-        );
-      })
-      .then((docs) => res.send(docs))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    res.status(500).json({ message: err });
-  }
-};
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.updateUserRole = async (req, res) => {
   // student to teacher
@@ -154,20 +135,7 @@ module.exports.updateUserRole = async (req, res) => {
     return res.status(500).json({ msg: err.message });
   }
 };
-/* module.exports.editPDP = async (req, res) => {
-  try {
-    console.log(req.user.id);
-    await UserModel.findByIdAndUpdate(
-      req.body.userId,
-      { $set: { picture: "./uploads/profil/" } },
-      { new: true, upsert: true, setDefaultsOnInsert: true }
-    )
-      .then((docs) => res.send(docs))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
-}; */
+
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.disableUser = async (req, res, next) => {
   const token = req.cookies.jwt;

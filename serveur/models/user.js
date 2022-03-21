@@ -32,7 +32,7 @@ const userSchema = new mongoose.Schema(
       max: 1024,
       minlength: 6,
     },
-    picture: {
+    avatar: {
       type: String,
     },
     gender: {
@@ -74,18 +74,11 @@ const userSchema = new mongoose.Schema(
       type: [String],
     },
 
-    yourSchool: {
-      //for for become a teacher
-      type: String,
-    },
-    yourFile: {
+    yourDataFile: {
       //for become a teacher
       type: String,
     },
-    yourPlan: {
-      //for become a teacher
-      type: String,
-    },
+
     role: {
       type: String,
       enum: ["student", "teacher", "admin"],

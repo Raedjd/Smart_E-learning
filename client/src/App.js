@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
 import Routers from "./Components/Routers";
-import axios from "axios";
-import { UserIdContext } from "./Components/Pages/User/AppContext";
+import cookie from "js-cookie";
+import { useDispatch } from "react-redux";
+import { getUser } from "./actions/user.actions";
 function App() {
-  const [userId, setUserId] = useState(null);
+  const dispatch = useDispatch();
+  const userId = cookie.get("id");
 
-  useEffect(async () => {
-    await axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}jwtid`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        console.log(res);
-        setUserId(res.data);
-        localStorage.setItem(userId, res.data);
-      })
-      .catch((err) => console.log("No token exist"));
-  }, [userId]);
+  if (userId) dispatch(getUser());
 
-  return (
-    <UserIdContext.Provider value={userId}>
-      <Routers />
-    </UserIdContext.Provider>
-  );
+  return <Routers />;
 }
 
 export default App;

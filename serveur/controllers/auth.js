@@ -1,7 +1,8 @@
 const UserModel = require("../models/user");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const sendMail = require("./verificationMail");
+const sendResetMail = require("./resetPasswordEmail");
+const sendVerifMail = require("./verificationEmail");
 const ObjectId = require("mongoose").Types.ObjectId;
 const { CLIENT_URL } = process.env;
 const token_duration = 2 * 24 * 60 * 1000;
@@ -44,8 +45,8 @@ module.exports.signUp = async (req, res) => {
       );
     }
     exports.rdm = random_token;
-    const url = `${CLIENT_URL}/user/activate/${random_token}`;
-    sendMail(email, url);
+    const url = `${random_token}`;
+    sendVerifMail(email, url);
     res.json({
       msg: "Register Success! Please activate your email to start.",
     });
@@ -173,7 +174,7 @@ module.exports.forgetPass = async (req, res) => {
       const access_token = createToken({ id: user._id });
       const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
-      sendMail(email, url, "Reset your password");
+      sendResetMail(email, url, "Reset your password");
       responses.successed = "Re-send the password, please check your email.";
       res.json({ msg: responses });
     }
