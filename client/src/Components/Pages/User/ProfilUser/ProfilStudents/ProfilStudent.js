@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import cookie from "js-cookie";
-import axios from "axios";
 
 import MyProfil from "./MyProfil";
 import Settings from "./Settings";
@@ -10,30 +9,8 @@ import BecomeTeacher from "./BecomeTeacher";
 
 const ProfilStudent = () => {
   const userData = useSelector((state) => state.userReducer);
-  const navigate = useNavigate();
-  const userId = cookie.get("id");
-  const removeCookie = (key) => {
-    if (window !== "undefined") {
-      cookie.remove(key, { expires: 1 });
-    }
-  };
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
-  const handleLogout = async (e) => {
-    e.preventDefault();
-    await axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}api/user/logout`,
-      withCredentials: true,
-    })
-      .then((res) => {
-        console.log(res);
-        removeCookie("jwt");
-        removeCookie("id");
-      })
-      .catch((err) => console.log(err));
-    navigate("/home");
-  };
+  const userId = cookie.get("id");
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -206,20 +183,6 @@ const ProfilStudent = () => {
                   >
                     Setting
                   </button>
-
-                  <button
-                    class="nav-link"
-                    id="nav-logout-tab"
-                    data-bs-toggle="tab"
-                    data-bs-target="#nav-logout"
-                    type="button"
-                    role="tab"
-                    aria-controls="nav-logout-tab"
-                    aria-selected="false"
-                    onClick={handleLogout}
-                  >
-                    Logout
-                  </button>
                 </div>
               </nav>
             </div>
@@ -381,19 +344,6 @@ const ProfilStudent = () => {
                       aria-selected="false"
                     >
                       Setting
-                    </button>
-
-                    <button
-                      class="nav-link"
-                      id="nav-logout-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#nav-logout"
-                      type="button"
-                      role="tab"
-                      aria-controls="nav-logout-tab"
-                      aria-selected="false"
-                    >
-                      Logout
                     </button>
                   </div>
                 </nav>

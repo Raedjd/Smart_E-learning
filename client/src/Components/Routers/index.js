@@ -8,7 +8,7 @@ import ForgetPassword from "../Pages/User/Auth/ForgetPassword";
 import ResetPassword from "../Pages/User/Auth/ResetPassword";
 import VerifyEmail from "../Pages/User/Auth/VerifyEmail";
 import Dashbord from "../Pages/User/Dashbord";
-import ProfilStudent from "../Pages/User/ProfilUser/ProdfilStudents/ProfilStudent";
+import ProfilStudent from "../Pages/User/ProfilUser/ProfilStudents/ProfilStudent";
 
 import NotFound from "../Pages/NotFound";
 import InstructorProfil from "../Pages/User/ProfilUser/ProfilTeachers/InstructorProfil";

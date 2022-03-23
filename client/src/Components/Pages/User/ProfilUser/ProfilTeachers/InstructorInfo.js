@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import Popup from "reactjs-popup";
+import "reactjs-popup/dist/index.css";
+import FollowHandle from "../FollowHandle";
+import "./follow.scss";
 const InstructorInfo = () => {
   const userData = useSelector((state) => state.userReducer);
+  const usersData = useSelector((state) => state.usersReducer);
+  const [followersPopup, setFollowersPopup] = useState(false);
+
   return (
     <div class="instructor-courses-instructor">
       <div class="instructor-image mx-auto text-center">
-        <img src="dist/images/hero/hero-img-02.png" alt="Instructor" />
+        <img src={userData.avatar} alt="Instructor" />
       </div>
       <div class="instructor-info text-center">
         <h5 class="font-title--sm">
@@ -77,6 +84,7 @@ const InstructorInfo = () => {
               </svg>
             </a>
           </li>
+
           <li class="list-inline-item">
             <a href="#">
               <svg
@@ -95,6 +103,7 @@ const InstructorInfo = () => {
               </svg>
             </a>
           </li>
+
           <li class="list-inline-item">
             <a href="#">
               <svg
@@ -112,7 +121,9 @@ const InstructorInfo = () => {
             </a>
           </li>
         </ul>
+        <FollowHandle></FollowHandle>
       </div>
+
       <div class="instructor-course-info">
         <div class="instructor-course-info-students">
           <div class="icon d-flex align-items-center justify-content-center">
@@ -172,10 +183,33 @@ const InstructorInfo = () => {
             </svg>
           </div>
           <div class="text text-center">
-            <h6>29,874</h6>
-            <p>Followers</p>
+            <h6>{userData.followers ? userData.followers.length : ""}</h6>
+            {/*  <Popup trigger={<p>Followers</p>} position="right center">
+               <ul>
+                {usersData.map((user) => {
+                  for (let i = 0; i < userData.followers.length; i++) {
+                    if (user._id === userData.followers[i]) {
+                      return (
+                        <li key={user._id}>
+                          {userData.username}
+                          <img
+                            src={userData.avatar}
+                            alt="user-avatar"
+                            width="20"
+                            height="20"
+                          />
+                        </li>
+                      );
+                    }
+                  }
+                  return null;
+                })}
+              </ul> 
+            </Popup> */}
+            <h5 onClick={() => setFollowersPopup(true)}>Followres</h5>
           </div>
         </div>
+        <div class="instructor-course-info-courses"> </div>
         <div class="instructor-course-info-courses">
           <div class="icon d-flex align-items-center justify-content-center">
             <svg
@@ -268,6 +302,30 @@ const InstructorInfo = () => {
           </p>
         </div>
       </div>
+      {/* {followersPopup && (
+        <div className="popup-profil-container">
+          <div className="modal"></div>
+
+          <span className="cross" onClick={() => setFollowersPopup(false)}>
+            &#10005;
+          </span>
+          <ul class="follow">
+            {usersData.map((user) => {
+              for (let i = 0; i < userData.followers.length; i++) {
+                if (user._id === userData.followers[i]) {
+                  return (
+                    <li class="foll" key={user._id}>
+                      <h4>{user.username}</h4>
+                      <img src={user.vatar} />
+                    </li>
+                  );
+                }
+              }
+              return null;
+            })}
+          </ul>
+        </div>
+      )} */}
     </div>
   );
 };

@@ -19,14 +19,9 @@ const MyProfil = () => {
     return date.toString();
   };
   const userData = useSelector((state) => state.userReducer);
+  const usersData = useSelector((state) => state.usersReducer);
   return (
     <div class="tab-content__profile">
-      <div class="tab-content__profile-content">
-        <div class="about-student">
-          <h6 class="font-title--card">About Me</h6>
-          <p class="font-para--md">{userData.aboutMe}</p>
-        </div>
-      </div>
       <div class="tab-content__profile-content">
         <div class="info-student">
           <h6 class="font-title--card">{userData.username} Information</h6>
@@ -71,6 +66,11 @@ const MyProfil = () => {
               <p>{dateParser(userData.createdAt)}</p>
             </dd>
           </dl>
+        </div>
+      </div>
+      <div class="tab-content__profile-content">
+        <div class="info-student">
+          <h6 class="font-title--card"> Information</h6>
         </div>
       </div>
     </div>
