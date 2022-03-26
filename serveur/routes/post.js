@@ -3,7 +3,7 @@ const postController = require("../controllers/post");
 const auth = require("../middleware/forAuth");
 
 //for posts
-router.get("/getpost", auth.requireAuth, postController.readPost);
+router.get("/getposts", auth.requireAuth, postController.readPost);
 router.post("/addpost", auth.requireAuth, postController.createPost);
 router.put("/update-post/:id", auth.requireAuth, postController.updatePost);
 router.delete("/remove-post/:id", auth.requireAuth, postController.deletePost);

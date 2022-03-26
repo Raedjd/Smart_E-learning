@@ -9,6 +9,7 @@ const token_duration = 2 * 24 * 60 * 1000;
 const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 const client = new OAuth2(process.env.MAILING_SERVICE_CLIENT_ID);
+const fetch = require("node-fetch");
 //---------------------------------------------------register user-------------------------------------------//
 module.exports.signUp = async (req, res) => {
   try {
@@ -211,4 +212,94 @@ module.exports.resetPass = async (req, res) => {
   }
 };
 
-module.exports.googleLogin = async (req, res) => {};
+module.exports.googleLogin = async (req, res) => {
+  try {
+    const { tokenId } = req.body;
+
+    const verify = await client.verifyIdToken({
+      idToken: tokenId,
+      audience: process.env.MAILING_SERVICE_CLIENT_ID,
+    });
+
+    // console.log(verify);
+
+    const { email_verified, email, name, picture } = verify.payload;
+
+    const password = email + process.env.GOOGLE_SECRET;
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    if (!email_verified)
+      return res.status(400).json({ msg: "Email verification failed." });
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+
+      res.status(200).json({ user });
+    } else {
+      const newUser = new UserModel({
+        username: name,
+        email,
+        password: passwordHash,
+        avatar: picture,
+      });
+
+      await newUser.save();
+      console.log(newUser);
+      const token = createToken(newUser._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+
+      res.status(200).json({ newUser });
+    }
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};
+
+module.exports.facebookLogin = async (req, res) => {
+  try {
+    const { accessToken, userID } = req.body;
+
+    const URL = `https://graph.facebook.com/v2.9/${userID}/?fields=id,name,email,picture&access_token=${accessToken}`;
+
+    const data = await fetch(URL)
+      .then((res) => res.json())
+      .then((res) => {
+        return res;
+      });
+
+    const { email, name, picture } = data;
+
+    const password = email + process.env.FACEBOOK_SECRET;
+
+    const passwordHash = await bcrypt.hash(password, 12);
+
+    const user = await UserModel.findOne({ email });
+
+    if (user) {
+      const token = createToken(user._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+
+      res.status(200).json({ user });
+    } else {
+      const newUser = new UserModel({
+        username: name,
+        email,
+        password: passwordHash,
+        avatar: picture.data.url,
+      });
+
+      await newUser.save();
+      console.log(newUser);
+      const token = createToken(newUser._id);
+      res.cookie("jwt", token, { http: true, token_duration: token_duration });
+
+      res.status(200).json({ newUser });
+    }
+  } catch (err) {
+    return res.status(500).json({ msg: err.message });
+  }
+};

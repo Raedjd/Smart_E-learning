@@ -9,6 +9,7 @@ router.post("/register", authController.signUp);
 router.post("/activate-email", authController.activateEmail);
 router.post("/login", authController.signIn);
 router.post("/google-login", authController.googleLogin);
+router.post("/facebook-login", authController.facebookLogin);
 router.get("/logout", authController.logout);
 router.post("/forget", authController.forgetPass);
 router.post("/reset", auth.forResetPass, authController.resetPass);

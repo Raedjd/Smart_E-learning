@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import cookie from "js-cookie";
 
 import MyProfil from "./MyProfil";
@@ -9,9 +9,8 @@ import BecomeTeacher from "./BecomeTeacher";
 
 const ProfilStudent = () => {
   const userData = useSelector((state) => state.userReducer);
-
   const userId = cookie.get("id");
-
+  const navigate = useNavigate();
   //////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return userId ? (
@@ -167,6 +166,7 @@ const ProfilStudent = () => {
                     role="tab"
                     aria-controls="nav-purchase"
                     aria-selected="false"
+                    hidden={userData.role === "teacher"}
                   >
                     Become An Instructor
                   </button>

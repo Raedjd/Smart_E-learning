@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { getUsers } from "./actions/users.actions";
 //import logger from "redux-logger";
+import { getPosts } from "./actions/post.actions";
 
 const store = createStore(
   rootReducer,
@@ -17,6 +18,7 @@ const store = createStore(
 );
 
 store.dispatch(getUsers());
+store.dispatch(getPosts());
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

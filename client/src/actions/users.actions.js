@@ -10,7 +10,7 @@ export const getUsers = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch({ type: GET_USERS, payload: res.data });
       })
       .catch((err) => console.log(err));

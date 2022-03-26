@@ -13,7 +13,7 @@ export const getUser = () => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         dispatch({ type: GET_USER, payload: res.data });
       })
       .catch((err) => console.log(err));
@@ -30,7 +30,7 @@ export const uploadAvatar = (data) => {
       withCredentials: true,
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch({ type: UPLOAD_AVATAR, payload: res.data });
       })
       .catch((err) => console.log(err.message));

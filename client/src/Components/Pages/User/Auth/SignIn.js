@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-
+import FacebookLogin from "react-facebook-login";
+import "./social.css";
 import axios from "axios";
 import cookie from "js-cookie";
 const SignIn = () => {
@@ -28,13 +29,11 @@ const SignIn = () => {
     })
       .then((response) => {
         const id = response.data.user._id;
-        // console.log(id);
+
         cookie.set("id", id);
         if (response.data.user.role === "admin") {
           navigate("/dashbord");
-        } else if (response.data.user.role === "student")
-          navigate("/profilstudent");
-        else navigate("/profilteacher");
+        } else navigate("/homeuser");
       })
       .catch((err) => {
         console.log(err.response.data);
@@ -48,15 +47,51 @@ const SignIn = () => {
   };
 
   const responseGoogle = async (response) => {
-    console.log(response);
     await axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/goggle-login`,
+      url: `${process.env.REACT_APP_API_URL}api/user/google-login`,
       withCredentials: true,
       data: { tokenId: response.tokenId },
     })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+
+        if (response.data.newUser) {
+          const idn = response.data.newUser._id;
+          cookie.set("id", idn);
+          navigate("/homeuser");
+        } else {
+          const id = response.data.user._id;
+          cookie.set("id", id);
+          navigate("/homeuser");
+        }
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const responseFacebook = async (response) => {
+    const { accessToken, userID } = response;
+    await axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/facebook-login`,
+      withCredentials: true,
+      data: { accessToken, userID },
+    })
+      .then((response) => {
+        console.log(response.data);
+
+        if (response.data.newUser) {
+          const idn = response.data.newUser._id;
+          cookie.set("id", idn);
+          navigate("/homeuser");
+        } else {
+          const id = response.data.user._id;
+          cookie.set("id", id);
+          navigate("/homeuser");
+        }
       })
 
       .catch((err) => {
@@ -131,12 +166,23 @@ const SignIn = () => {
                     or sign in with
                   </span>
                   {/*----------------------------------------------------------------------*/}{" "}
-                  <GoogleLogin
-                    clientId="974142183042-1sa6viujvb58pfhr8gm69g1rehpa47go.apps.googleusercontent.com"
-                    buttonText="Login with Google"
-                    onSuccess={responseGoogle}
-                    cookiePolicy={"single_host_origin"}
-                  />
+                  <div className="text text-center">
+                    {" "}
+                    <GoogleLogin
+                      clientId="974142183042-1sa6viujvb58pfhr8gm69g1rehpa47go.apps.googleusercontent.com"
+                      buttonText="Login with Google"
+                      onSuccess={responseGoogle}
+                      cookiePolicy={"single_host_origin"}
+                      buttonStyle={{ borderRadius: "4px" }}
+                    />
+                    <FacebookLogin
+                      appId="520413703019587"
+                      autoLoad={false}
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                      cssClass="my-facebook-button-class"
+                    />
+                  </div>
                 </form>
               </div>
             </div>

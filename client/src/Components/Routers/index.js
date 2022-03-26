@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "../Pages/Header";
-import Home from "../Pages/Home";
 import SignUp from "../Pages/User/Auth/SignUp";
 import SignIn from "../Pages/User/Auth/SignIn";
 import ForgetPassword from "../Pages/User/Auth/ForgetPassword";
@@ -9,9 +8,9 @@ import ResetPassword from "../Pages/User/Auth/ResetPassword";
 import VerifyEmail from "../Pages/User/Auth/VerifyEmail";
 import Dashbord from "../Pages/User/Dashbord";
 import ProfilStudent from "../Pages/User/ProfilUser/ProfilStudents/ProfilStudent";
-
 import NotFound from "../Pages/NotFound";
-import InstructorProfil from "../Pages/User/ProfilUser/ProfilTeachers/InstructorProfil";
+import Home from "../Pages/Home";
+import Accueil from "../Pages/User/HomeUser/Accueil";
 
 const RRR = () => {
   return (
@@ -28,7 +27,7 @@ const RRR = () => {
 
           <Route path="/notfound" element={<NotFound />} />
           <Route path="/dashbord" element={<Dashbord />} />
-          <Route path="/instructorprofil" element={<InstructorProfil />} />
+          <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
         </Routes>
       </BrowserRouter>
