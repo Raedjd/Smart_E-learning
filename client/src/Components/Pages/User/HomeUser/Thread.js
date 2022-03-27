@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../../../actions/post.actions";
+import { isEmpty } from "../Utilis";
 import Card from "./Card";
 
 const Thread = () => {
@@ -28,14 +29,7 @@ const Thread = () => {
     window.addEventListener("scroll", loadMore);
     return () => window.removeEventListener("scroll", loadMore);
   }, [loadPost, dispatch, count]);
-  const isEmpty = (value) => {
-    return (
-      value === undefined ||
-      value === null ||
-      (typeof value === "object" && Object.keys(value).length === 0) ||
-      (typeof value === "string" && value.trim().length === 0)
-    );
-  };
+
   return (
     <div className="thread-container">
       <ul>

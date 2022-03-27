@@ -11,8 +11,12 @@ const Info = () => {
 
   return (
     <div class="instructor-courses-instructor">
-      <div class="instructor-image mx-auto text-center">
-        <img src={userData.avatar} alt="Instructor" />
+      <div class=" text-center">
+        <img
+          src={userData.avatar}
+          alt="Instructor"
+          class="img-fluid rounded-circle"
+        />
       </div>
       <div class="instructor-info text-center">
         <h5 class="font-title--sm">
@@ -121,7 +125,6 @@ const Info = () => {
             </a>
           </li>
         </ul>
-        <FollowHandle></FollowHandle>
       </div>
 
       <div class="instructor-course-info">
@@ -253,79 +256,6 @@ const Info = () => {
           bright future.
         </p>
       </div>
-      <div class="instructor-qualification">
-        <h6>Education</h6>
-        <div class="qualification-info">
-          <div class="qualification-info-title">
-            <h6>Bachelor Degree</h6>
-            <p>2008 - 2010</p>
-          </div>
-          <p>Don Honorio Vectura Technological States University</p>
-        </div>
-        <div class="qualification-info">
-          <div class="qualification-info-title">
-            <h6>Vocation</h6>
-            <p>2018 - 2011</p>
-          </div>
-          <p>Gonzalo Puyat School of Arts and Trades</p>
-        </div>
-        <div class="qualification-info pb-0 mb-0 border-0">
-          <div class="qualification-info-title">
-            <h6>Bachelor of Design</h6>
-            <p>2012 - 2014</p>
-          </div>
-          <p>Don Honorio Vectura Technological States University</p>
-        </div>
-      </div>
-      <div class="instructor-qualification mb-0 pb-0 border-0">
-        <h6>Experiences</h6>
-        <div class="qualification-info">
-          <div class="qualification-info-title">
-            <h6>Typeface Design</h6>
-            <p>2008 - 2010</p>
-          </div>
-          <p>
-            Integer ultricies a turpis ac mattis. Integer auctor eleifend diam
-            vitae sodales. Nullam mollis semper rutrum. Vestibulum hendrerit
-            nulla vitae velit semper.
-          </p>
-        </div>
-        <div class="qualification-info pb-0 mb-0 border-0">
-          <div class="qualification-info-title">
-            <h6>Graphic Design</h6>
-            <p>2018 - 2011</p>
-          </div>
-          <p>
-            Integer ultricies a turpis ac mattis. Integer auctor eleifend diam
-            vitae sodales. Nullam mollis semper rutrum. Vestibulum hendrerit
-            nulla vitae velit semper.
-          </p>
-        </div>
-      </div>
-      {/* {followersPopup && (
-        <div className="popup-profil-container">
-          <div className="modal"></div>
-
-          <span className="cross" onClick={() => setFollowersPopup(false)}>
-            &#10005;
-          </span>
-          <ul class="follow">
-            {usersData.map((user) => {
-              for (let i = 0; i < userData.followers.length; i++) {
-                if (user._id === userData.followers[i]) {
-                  return (
-                    <li class="foll" key={user._id}>
-                      <h4>{user.username}</h4>
-                      <img src={user.vatar} />
-                    </li>
-                  );
-                }
-              }
-              return null;
-            })}
-          </ul>
-        </div>
-      )} */}
     </div>
   );
 };

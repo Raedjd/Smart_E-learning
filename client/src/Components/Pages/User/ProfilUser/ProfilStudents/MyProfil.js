@@ -1,23 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { dateParser } from "../../Utilis";
 const MyProfil = () => {
-  const dateParser = (num) => {
-    let options = {
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      weekday: "long",
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    };
-
-    let timestamp = Date.parse(num);
-
-    let date = new Date(timestamp).toLocaleDateString("fr-FR", options);
-
-    return date.toString();
-  };
   const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
   return (
@@ -71,6 +55,12 @@ const MyProfil = () => {
       <div class="tab-content__profile-content">
         <div class="info-student">
           <h6 class="font-title--card"> Information</h6>
+          <h6>
+            Followers:{userData.followers ? userData.followers.length : ""}
+          </h6>
+          <h6>
+            Following:{userData.following ? userData.following.length : ""}
+          </h6>
         </div>
       </div>
     </div>

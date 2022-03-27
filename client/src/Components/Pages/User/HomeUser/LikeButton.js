@@ -13,6 +13,7 @@ const LikeButton = ({ post }) => {
     dispatch(likePost(post._id, userId));
     setLiked(true);
   };
+
   useEffect(() => {
     if (post.likers.includes(userId)) setLiked(true);
     else setLiked(false);
