@@ -79,7 +79,7 @@ const Settings = () => {
       withCredentials: true,
       data: {
         old_password: old_password,
-        lastName: new_password,
+        new_password: new_password,
         confirm_password: confirm_password,
       },
     })

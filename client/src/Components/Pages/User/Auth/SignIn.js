@@ -172,14 +172,14 @@ const SignIn = () => {
                       clientId="974142183042-1sa6viujvb58pfhr8gm69g1rehpa47go.apps.googleusercontent.com"
                       buttonText="Login with Google"
                       onSuccess={responseGoogle}
-                      cookiePolicy={"single_host_origin"}
-                      buttonStyle={{ borderRadius: "4px" }}
+                      theme="dark"
                     />
                     <FacebookLogin
                       appId="520413703019587"
                       autoLoad={false}
                       fields="name,email,picture"
                       callback={responseFacebook}
+                      textButton="Login with Facebook"
                       cssClass="my-facebook-button-class"
                     />
                   </div>
