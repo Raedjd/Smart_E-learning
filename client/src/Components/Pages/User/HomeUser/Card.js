@@ -4,7 +4,7 @@ import { updatePost } from "../../../../actions/post.actions";
 import { dateParser, isEmpty } from "../Utilis";
 import CardComments from "./CardComments";
 import DeletePost from "./DeletePost";
-
+import { AiTwotoneEdit } from "react-icons/ai";
 import "./_card.scss";
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -78,31 +78,29 @@ const Card = ({ post }) => {
               )}
               <div className="card-footer">
                 <div className="comment-icon">
-                  <img
+                  {/*      <img
                     onClick={() => setShowComments(!showComments)}
                     src="./img/icons/message1.svg"
                     alt="comment"
                   />
-                  <span>{post.comments.length}</span>
-                </div>
 
-                <img src="./img/icons/share.svg" alt="share" />
+                  <span>{post.comments.length}</span> */}
+                </div>
+                {userData._id === post.posterId && (
+                  <div className="button-container">
+                    <span onClick={() => setIsUpdated(!isUpdated)}>
+                      <AiTwotoneEdit />
+                    </span>
+
+                    <DeletePost id={post._id} />
+                  </div>
+                )}
               </div>
               {showComments && <CardComments post={post} />}
             </div>
           </>
         )}
       </li>
-
-      {userData._id === post.posterId && (
-        <div className="button-container">
-          <span onClick={() => setIsUpdated(!isUpdated)}>
-            <img src="./img/icons/edit.svg" alt="edit" />
-          </span>
-
-          <DeletePost id={post._id} />
-        </div>
-      )}
     </div>
   );
 };

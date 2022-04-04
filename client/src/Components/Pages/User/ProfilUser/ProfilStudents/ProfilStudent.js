@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import cookie from "js-cookie";
 
 import MyProfil from "./MyProfil";
@@ -10,9 +10,6 @@ import BecomeTeacher from "./BecomeTeacher";
 const ProfilStudent = () => {
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
-  const navigate = useNavigate();
-  //////////////////////////////////////////////////////////////////////////////////////////////////////
-
   return userId ? (
     <div className="profilStudent">
       <div>

@@ -2,9 +2,13 @@ import React from "react";
 import Info from "./Info";
 import Posts from "./Posts";
 import Suggestions from "./Suggestions";
-
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import cookie from "js-cookie";
 const Accueil = () => {
-  return (
+  const userData = useSelector((state) => state.userReducer);
+  const userId = cookie.get("id");
+  return userId ? (
     <section
       class="section instructor-courses"
       style={{ backgroundColor: "#ebebf2" }}
@@ -23,6 +27,8 @@ const Accueil = () => {
         </div>
       </div>
     </section>
+  ) : (
+    <Navigate to="/notfound" />
   );
 };
 

@@ -12,7 +12,7 @@ const CardComments = ({ post }) => {
   return (
     <div class="comments-container">
       {post.comments.map((comment) => {
-        return <div key={comment._id}></div>;
+        return <div key={comment._id}>fdggs</div>;
       })}
     </div>
   );

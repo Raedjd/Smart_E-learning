@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deletePost } from "../../../../actions/post.actions";
-
+import { AiFillDelete } from "react-icons/ai";
 const DeletePost = (props) => {
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const DeletePost = (props) => {
         }
       }}
     >
-      <img src="./img/icons/trash.svg" alt="trash" />
+      <AiFillDelete />
     </span>
   );
 };

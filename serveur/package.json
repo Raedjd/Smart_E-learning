@@ -36,6 +36,7 @@
     "nodemon": "^2.0.15",
     "shortid": "^2.2.16",
     "stream": "^0.0.2",
+    "twilio": "^3.76.0",
     "validator": "^13.7.0"
   }
 }

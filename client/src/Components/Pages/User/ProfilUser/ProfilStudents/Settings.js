@@ -53,17 +53,21 @@ const Settings = () => {
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   const handleDelete = async (e) => {
     e.preventDefault();
-    await axios({
-      method: "delete",
-      url: `${process.env.REACT_APP_API_URL}api/user/delete-user`,
-      withCredentials: true,
-    })
-      .then((response) => {
-        removeCookie("jwt");
-        removeCookie("id");
+    if (
+      window.confirm("Be careful! Your account will be permanently deleted.")
+    ) {
+      await axios({
+        method: "delete",
+        url: `${process.env.REACT_APP_API_URL}api/user/delete-user`,
+        withCredentials: true,
       })
-      .catch((err) => console.log(err));
-    navigate("/home");
+        .then((response) => {
+          removeCookie("jwt");
+          removeCookie("id");
+        })
+        .catch((err) => console.log(err));
+      navigate("/home");
+    }
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   const handleChangePassword = async (e) => {
@@ -129,13 +133,6 @@ const Settings = () => {
     if (!avatar) return console.log("No files were uploaded.");
 
     if (!avatar.size > 1024 * 1024) console.log("Size too large.");
-
-    if (
-      avatar.type !== "image/jpeg" &&
-      avatar.type !== "image/jpg" &&
-      avatar.type !== "image/png"
-    )
-      console.log("File format is incorrect.");
 
     let data = new FormData();
     data.append("file", avatar);
@@ -376,7 +373,7 @@ const Settings = () => {
                 />
               </div>
             </form>
-            <p>Image size should be under 1MB image ratio 200px.</p>
+            <p>Image size should be under 1024MB .</p>
           </div>
         </div>
       </div>

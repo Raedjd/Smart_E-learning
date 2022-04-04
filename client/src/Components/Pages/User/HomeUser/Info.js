@@ -209,7 +209,7 @@ const Info = () => {
                 })}
               </ul> 
             </Popup> */}
-            <h5 onClick={() => setFollowersPopup(true)}>Followres</h5>
+            <p onClick={() => setFollowersPopup(true)}>Followres</p>
           </div>
         </div>
         <div class="instructor-course-info-courses"> </div>
