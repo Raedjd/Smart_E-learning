@@ -1,0 +1,12 @@
+.main{
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    flex-direction: row;
+}
+h1{
+    text-align: center; 
+    margin: 25px;
+}

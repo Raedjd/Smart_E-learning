@@ -1,0 +1,13 @@
+.Question-input{
+    display: flex;
+    align-items: flex-end;
+}
+.add-question-btn{
+    display: flex;
+justify-content: center;
+align-items: center;
+width: 32px;
+height: 32px;
+margin-bottom: 3px;
+margin-left: 15px;
+}

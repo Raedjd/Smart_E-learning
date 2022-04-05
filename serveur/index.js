@@ -36,10 +36,13 @@ app.get("/jwtid", requireAuth, (req, res) => {
 const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
 const uploadRoutes = require("./routes/uploadFile");
+const quizRoutes = require("./routes/quiz");
 //Routes
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/quiz", quizRoutes);
+
 // Server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);

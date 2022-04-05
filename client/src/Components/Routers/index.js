@@ -11,6 +11,9 @@ import ProfilStudent from "../Pages/User/ProfilUser/ProfilStudents/ProfilStudent
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Home";
 import Accueil from "../Pages/User/HomeUser/Accueil";
+import AllQuizes from "../Pages/Quiz/AllQuizes";
+import AddQuiz from "../Pages/Quiz/AddQuiz";
+import QuizDetail from "../Pages/Quiz/QuizDetail";
 
 const RRR = () => {
   return (
@@ -29,6 +32,10 @@ const RRR = () => {
           <Route path="/dashbord" element={<Dashbord />} />
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
+
+          <Route path="/all-quizes" element={<AllQuizes />} />
+          <Route path="/add-quiz" element={<AddQuiz />} />
+          <Route path="/quiz/:id" element={<QuizDetail />} />
         </Routes>
       </BrowserRouter>
     </div>

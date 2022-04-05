@@ -10,6 +10,9 @@ import BecomeTeacher from "./BecomeTeacher";
 const ProfilStudent = () => {
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
+
+  console.log(userData.role);
+  console.log(userId);
   return userId ? (
     <div className="profilStudent">
       <div>
