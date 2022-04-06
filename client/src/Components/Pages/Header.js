@@ -109,10 +109,13 @@ const Header = () => {
               </li>
 
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">
-                  Contact
-                </a>
+               
+              <Link className="nav-link" to="/All-quizes" > quizes</Link>
+
               </li>
+              
+
+              
             </ul>
             <div class="d-flex align-items-center justify-content-between rightContent">
               <form class="header__Search-form" id="searchForm">

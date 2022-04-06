@@ -1,23 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
+import { Link ,useParams } from "react-router-dom";
+import quizes from "./api/quizes";
 import "./css/SingleQuiz.css";
 import QuizDetail from "./QuizDetail";
+
 function SingleQuiz({ quiz }) {
+  
 
   return (
-    <div>
-      <div className="card">
-        <div className="card-body">
-          <h5 className="card-title">{quiz.title}</h5>
-          <p className="card-text">{quiz.description}</p>
-          <h6 className="card-subtitle mb-2 text-muted">{quiz.level}</h6>
-          <Link className="card-link" to={`quiz/${quiz._id}`}>
-            More detail
-          </Link>
-         
-          
-        </div>
+    <div className="col-lg-4 col-md-6 card-quiz">
+      <div className="cardFeature">
+        <h5 className="font-title--xs text-primary"> {quiz.title}</h5>
+        <h5 className="font-title--xs">{`level :  ${quiz.level}`}</h5>
+
+        <hr></hr>
+        <Link  className="btn btn-primary" to={`/quiz/${quiz._id}`}> more details</Link>
+
+        <button hidden={!(window.location.href==="http://localhost:3000/profilstudent")} onClick={()=>{
+        quizes.delete(`/delete-quiz/${quiz._id}`)
+        
+      }} className="btn btn-danger btn-delete-teacher-quiz">
+        delete
+      </button>
       </div>
     </div>
   );

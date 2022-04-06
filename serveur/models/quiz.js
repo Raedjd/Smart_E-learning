@@ -23,11 +23,11 @@ const quizSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        answers: [
+        answers: [ 
           {
             isRight: {
               type: Boolean,
-              default: false,
+              required:true 
             },
             message: {
               type: String,

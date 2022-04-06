@@ -14,6 +14,14 @@ import Accueil from "../Pages/User/HomeUser/Accueil";
 import AllQuizes from "../Pages/Quiz/AllQuizes";
 import AddQuiz from "../Pages/Quiz/AddQuiz";
 import QuizDetail from "../Pages/Quiz/QuizDetail";
+import CreatCategory from "../Pages/ForumUser/Category/CreatCategory";
+import BrowseCategory from "../Pages/ForumUser/Category/BrowseCategory"
+import ShowCategory from "../Pages/ForumUser/Category/ShowCategory";
+import ShowForum from "../Pages/ForumUser/Forum/ShowForum";
+import CreateForum from "../Pages/ForumUser/Forum/CreateForum"
+import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
+import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
+import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 
 const RRR = () => {
   return (
@@ -36,6 +44,20 @@ const RRR = () => {
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
+
+          <Route path="/Category/create" element={<CreatCategory/> } />
+          <Route path="/Category/:id" element={<BrowseCategory/> } />
+          <Route path="/category/new/:id" element={<ShowCategory />} />
+          <Route path="/forum/new/:quizId" element={<ShowForum />} />
+
+          <Route path="/forum/create/:id" element={<CreateForum />} />
+          <Route path="/forum" element={<BrowseForum/>} />
+          <Route path="/topic/new/:id" element={<ShowTopic/>} />
+          <Route path="/topic/create/:id" element={<CreateTopic/>} />
+
+
+         
+          
         </Routes>
       </BrowserRouter>
     </div>

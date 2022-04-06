@@ -5,10 +5,9 @@ function Answer({ answer ,question, updateAnswerFeild } ) {
     updateAnswerFeild(question.id ,answer)
   };
   const checkboxhandler =  (e) =>{
-    answer.isRigth=e.target.checked
+    answer.isRight=e.target.checked
+    console.log("🚀 ~ file: Answer.js ~ line 9 ~ checkboxhandler ~ answer.isRigth", answer.isRight)
     updateAnswerFeild(question.id ,answer)
-
-
   }
 
   

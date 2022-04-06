@@ -6,6 +6,9 @@ import cookie from "js-cookie";
 import MyProfil from "./MyProfil";
 import Settings from "./Settings";
 import BecomeTeacher from "./BecomeTeacher";
+import AllQuiz from "../../../Quiz/AllQuizes"
+import TeacherQuiz from "../../../Quiz/TeacherQuiz"
+
 
 const ProfilStudent = () => {
   const userData = useSelector((state) => state.userReducer);
@@ -144,17 +147,17 @@ const ProfilStudent = () => {
                     Active Courses
                   </button>
 
-                  <button
+                  <button hidden={userData.role==="student"}
                     class="nav-link"
-                    id="nav-completedcourses-tab"
+                    id="nav-quiz-tab"
                     data-bs-toggle="tab"
-                    data-bs-target="#nav-completedcourses"
+                    data-bs-target="#nav-quiz"
                     type="button"
                     role="tab"
-                    aria-controls="nav-completedcourses"
+                    aria-controls="nav-quiz"
                     aria-selected="false"
                   >
-                    Completed Courses
+                      All quiz
                   </button>
 
                   <button
@@ -309,15 +312,15 @@ const ProfilStudent = () => {
 
                     <button
                       class="nav-link"
-                      id="nav-completedcourses-tab"
+                      id="nav-quiz-tab"
                       data-bs-toggle="tab"
-                      data-bs-target="#nav-completedcourses"
+                      data-bs-target="#nav-quiz"
                       type="button"
                       role="tab"
-                      aria-controls="nav-completedcourses"
+                      aria-controls="nav-quiz"
                       aria-selected="false"
                     >
-                      Completed Courses
+                      all quiz
                     </button>
 
                     <button
@@ -352,14 +355,13 @@ const ProfilStudent = () => {
             <div class="students-info-main">
               <div class="tab-content" id="nav-tabContent">
                 <div
-                  class="tab-pane fade show active"
-                  id="nav-profile"
-                  role="tabpanel"
-                  aria-labelledby="nav-profile-tab"
-                >
+                  class="tab-pane fade show active"id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab"  >
                   <MyProfil />
                 </div>
 
+                <div class="tab-pane fade" id="nav-quiz" role="tabpanel" aria-labelledby="nav-quiz-tab">
+                  <TeacherQuiz />
+                </div>
                 {/*----------------------------------------------------------------------*/}
                 <div
                   class="tab-pane fade"

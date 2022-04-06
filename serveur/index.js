@@ -42,6 +42,10 @@ app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/quiz", quizRoutes);
+app.use('/api/category', require("./controllers/Category"));
+app.use('/api/forum', require("./controllers/Forum"));
+app.use('/api/topic', require("./controllers/Topic"));
+app.use('/api/comment', require("./controllers/Comment"));
 
 // Server
 app.listen(process.env.PORT, () => {

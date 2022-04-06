@@ -6,8 +6,9 @@
     display: flex;
 justify-content: center;
 align-items: center;
-width: 32px;
-height: 32px;
-margin-bottom: 3px;
-margin-left: 15px;
+margin-top: 20px;
+}
+.submit-quiz-btn{
+    display: flex;
+    justify-content: center;
 }

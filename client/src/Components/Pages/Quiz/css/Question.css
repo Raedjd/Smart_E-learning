@@ -1,0 +1,10 @@
+.question-box{
+    margin :10px;
+}
+.question-box-input-btn{
+    display: flex;
+    margin: 5px;
+}
+.delete-question-btn{
+    margin-left: 7px;
+}

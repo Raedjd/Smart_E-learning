@@ -1,11 +1,6 @@
 .card{
-width: 18rem;
-text-align: center;
+    width: 18rem;
 }
-.big-card{
-    margin: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.quiz-detail-information{
+    margin: 50px;
 }
-

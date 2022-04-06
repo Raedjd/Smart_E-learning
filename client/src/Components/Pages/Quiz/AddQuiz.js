@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import Question from "./Question";
 import quizes from "./api/quizes";
+import { useSelector } from "react-redux";
+import cookie from "js-cookie";
 
 import "./css/AddQuiz.css";
 function AddQuiz() {
+  const userData = useSelector((state) => state.userReducer);
+  const userId = cookie.get("id");
+  
   const [questions, setquestions] = useState([]);
-  const [numberOfquestion, setnumberOfquestion] = useState(1);
+  const [numberOfquestion, setnumberOfquestion] = useState(0);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [level, setlevel] = useState("beginner");
@@ -22,7 +27,6 @@ function AddQuiz() {
         answers: [],
       },
     ]);
-    console.log(numberOfquestion);
   };
   const updateFields = (id, message) => {
     const list = questions.map((question) => {
@@ -39,6 +43,7 @@ function AddQuiz() {
 
   const updateAnswerFeild = (id, answer) => {
     const list = questions.map((question) => {
+    console.log("🚀 ~ file: AddQuiz.js ~ line 46 ~ list ~ question", question.answers)
       if (question.id === id) {
         return {
           ...question,
@@ -49,11 +54,7 @@ function AddQuiz() {
     });
     setquestions(list);
   };
-  const handleRemove = (id) => {
-    const list = questions.filter((question) => question.id !== id);
-    setquestions(list);
-    setnumberOfquestion(numberOfquestion - 1);
-  };
+  
   const addAnswer = (id, answer) => {
     const list = questions.map((question) => {
       if (question.id === id) {
@@ -70,11 +71,13 @@ function AddQuiz() {
     e.preventDefault();
     quizes
       .post("/add-quiz", {
+        quizCreator:userId,
         title: title,
         description: description,
         questions: questions,
         level: level,
         numberOfQuestion: numberOfquestion,
+
       })
       .then(() => {
         console.log("succes");
@@ -82,6 +85,8 @@ function AddQuiz() {
   };
 
   return (
+    <div>
+      <h1>Add Quiz</h1>
     <div className="container">
       <form>
         <div className="form-group">
@@ -114,6 +119,7 @@ function AddQuiz() {
             <option>advanced</option>
           </select>
         </div>
+        
         {questions.map((question, index) => (
           <div key={index} className="Question-input">
             <Question
@@ -121,25 +127,27 @@ function AddQuiz() {
               updateFields={updateFields}
               addAnswer={addAnswer}
               updateAnswerFeild={updateAnswerFeild}
+              questions={questions}
+              setquestions={setquestions}
+              setnumberOfquestion={setnumberOfquestion}
+              numberOfquestion={numberOfquestion}
             />
-            <button
-              className="add-question-btn"
-              onClick={() => handleRemove(question.id)}
-            >
-              {" "}
-              <i className="fa fa-trash"></i>{" "}
-            </button>
+         
+           
+            
           </div>
         ))}
-
-        <button type="submit" className="btn btn-primary" onClick={addQuestion}>
+       
+        <button type="submit" className="btn btn-primary add-question-btn" onClick={addQuestion}>
           add question
         </button>
-
-        <button onClick={addquiz} type="submit" className="btn btn-primary">
+        <hr></hr>
+        <div className="submit-quiz-btn"><button onClick={addquiz} type="submit" className="btn btn-primary submit-quiz-btn">
           Submit
-        </button>
+        </button></div>
+        
       </form>
+    </div>
     </div>
   );
 }

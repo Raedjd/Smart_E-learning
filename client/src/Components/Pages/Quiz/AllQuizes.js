@@ -5,10 +5,11 @@ import SingleQuiz from "./SingleQuiz";
 //import css
 import "./css/allQuizes.css";
 function AllQuizes() {
+  
   const [allquizes, setallquizes] = useState([]);
   //retreive all quizes
   const retreiveQuizes = async () => {
-    const response = await quizes.get("/all-quizs");
+    const response = await quizes.get(`/all-quizs`);
     return response.data;
   };
   useEffect(() => {
@@ -21,6 +22,7 @@ function AllQuizes() {
   return (
     <div>
       <h1>All quizes</h1>
+      <hr></hr>
       <div className="main">
         {allquizes.map((quiz) => (
           <SingleQuiz key={quiz._id} quiz={quiz} />
