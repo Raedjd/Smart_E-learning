@@ -1,44 +1,22 @@
 import mongoose from 'mongoose';
 
 const courseSchema = mongoose.Schema({
-    title: {
-        type: String,
-        required:true
-      },
-    // description: {
-    //     type: String,
-    //     required:true
-    //   },
-    teacher: {
-        type: String,
-        required:true
-      },
-      price: {
-        type: Number,
-        required:true
-      },
-    tags: {
-        type: [String],
-        required:true
-      },
-    selectedFile: {
-        type: String,
-        required:true
-      },
-    likeCount: {
-        type: Number,
-        default: 0,
-    },
+    title: String,
+    description: String,
+    name: String,
+    price: Number,
+    creator: String,
+    tags: [String],
+    selectedFile: String,
+    reviews : [],
+    likes: { type: [String], default: [] },
+    comments: { type: [String], default: [] },
     createdAt: {
         type: Date,
         default: new Date(),
     },
-    enabled: {
-        type: Boolean,
-        default:true
-      },
 })
 
-var courseMessage = mongoose.model('courseMessage', courseSchema);
+var CourseMessage = mongoose.model('CourseMessage', courseSchema);
 
-export default courseMessage;
+export default CourseMessage;

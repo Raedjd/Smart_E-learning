@@ -1,15 +1,48 @@
 import express from 'express';
 import mongoose from 'mongoose';
+
 import CourseMessage from '../models/courseMessage.js';
 
 const router = express.Router();
 
-export const getCourses = async (req, res) => { 
+export const getCourses = async (req, res) => {
+    const { page } = req.query;
+    
     try {
-        const courseMessages = await CourseMessage.find();
-                
-        res.status(200).json(courseMessages);
-    } catch (error) {
+        const LIMIT = 8;
+        const startIndex = (Number(page) - 1) * LIMIT; // get the starting index of every page
+    
+        const total = await CourseMessage.countDocuments({});
+        const courses = await CourseMessage.find().sort({ _id: -1 }).limit(LIMIT).skip(startIndex);
+
+        res.json({ data: courses, currentPage: Number(page), numberOfPages: Math.ceil(total / LIMIT)});
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getCoursesBySearch = async (req, res) => {
+    const { searchQuery, tags } = req.query;
+
+    try {
+        const title = new RegExp(searchQuery, "i");
+
+        const courses = await CourseMessage.find({ $or: [ { title }, { tags: { $in: tags.split(',') } } ]});
+
+        res.json({ data: courses });
+    } catch (error) {    
+        res.status(404).json({ message: error.message });
+    }
+}
+
+export const getCoursesByCreator = async (req, res) => {
+    const { name } = req.query;
+
+    try {
+        const courses = await CourseMessage.find({ name });
+
+        res.json({ data: courses });
+    } catch (error) {    
         res.status(404).json({ message: error.message });
     }
 }
@@ -27,14 +60,14 @@ export const getCourse = async (req, res) => {
 }
 
 export const createCourse = async (req, res) => {
-    const { title, teacher, selectedFile, price, tags } = req.body;
+    const course = req.body;
 
-    const newCourseMessage = new CourseMessage({ title, teacher, selectedFile, price, tags })
+    const newCourseMessage = new CourseMessage({ ...course, creator: req.userId, createdAt: new Date().toISOString() })
 
     try {
         await newCourseMessage.save();
 
-        res.status(201).json(newCourseMessage );
+        res.status(201).json(newCourseMessage);
     } catch (error) {
         res.status(409).json({ message: error.message });
     }
@@ -42,11 +75,11 @@ export const createCourse = async (req, res) => {
 
 export const updateCourse = async (req, res) => {
     const { id } = req.params;
-    const { title, teacher, price, selectedFile, tags } = req.body;
+    const { title, description, creator, price,selectedFile, tags } = req.body;
     
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No such course with this id: ${id}`);
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No course with id: ${id}`);
 
-    const updatedCourse = { price, title, teacher, tags, selectedFile, _id: id };
+    const updatedCourse = { creator, title, description, tags, price,selectedFile, _id: id };
 
     await CourseMessage.findByIdAndUpdate(id, updatedCourse, { new: true });
 
@@ -56,7 +89,7 @@ export const updateCourse = async (req, res) => {
 export const deleteCourse = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No such course with this id: ${id}`);
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No course with id: ${id}`);
 
     await CourseMessage.findByIdAndRemove(id);
 
@@ -66,14 +99,38 @@ export const deleteCourse = async (req, res) => {
 export const likeCourse = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No such course with this id: ${id}`);
+    if (!req.userId) {
+        return res.json({ message: "Unauthenticated" });
+      }
+
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No course with id: ${id}`);
     
     const course = await CourseMessage.findById(id);
 
-    const updatedCourse = await CourseMessage.findByIdAndUpdate(id, { likeCount: course.likeCount + 1 }, { new: true });
-    
-    res.json(updatedCourse);
+    const index = course.likes.findIndex((id) => id ===String(req.userId));
+
+    if (index === -1) {
+      course.likes.push(req.userId);
+    } else {
+      course.likes = course.likes.filter((id) => id !== String(req.userId));
+    }
+
+    const updatedCourse = await CourseMessage.findByIdAndUpdate(id, course, { new: true });
+
+    res.status(200).json(updatedCourse);
 }
 
+export const commentCourse = async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    const course = await CourseMessage.findById(id);
+
+    course.comments.push(value);
+
+    const updatedCourse = await CourseMessage.findByIdAndUpdate(id, course, { new: true });
+
+    res.json(updatedCourse);
+};
 
 export default router;

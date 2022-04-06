@@ -43,25 +43,14 @@ export default makeStyles({
   },
   title: {
     padding: '0 16px',
-    textTransform:'capitalize',
-
   },
   cardActions: {
     padding: '0 16px 8px 16px',
     display: 'flex',
     justifyContent: 'space-between',
   },
-  teacher:{
-    padding: '0 16px 8px 16px',
-    display: 'flex',
-    textTransform:'capitalize',
+  cardAction: {
+    display: 'block',
+    textAlign: 'initial',
   },
-  
-  card_Content:{
-    padding: '0 16px 8px 16px',
-    display: 'flex',
-  },
-  price :{
-    marginLeft:'30%'
-  }
 });
