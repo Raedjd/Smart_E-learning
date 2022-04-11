@@ -1,0 +1,13 @@
+.main{
+    display: flex;  
+    align-items: center;
+    flex-wrap: wrap;
+
+    flex-direction: row;
+    text-align: center;
+    margin: 10px;
+}
+h1{
+    text-align: center; 
+    margin: 25px;
+}

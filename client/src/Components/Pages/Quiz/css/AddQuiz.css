@@ -1,0 +1,14 @@
+.Question-input{
+    display: flex;
+    align-items: flex-end;
+}
+.add-question-btn{
+    display: flex;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+}
+.submit-quiz-btn{
+    display: flex;
+    justify-content: center;
+}
