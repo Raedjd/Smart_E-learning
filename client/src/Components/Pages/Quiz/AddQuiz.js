@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Question from "./Question";
+import { BrowserRouter, Routes, Route  } from "react-router-dom";
+
 import quizes from "./api/quizes";
 import { useSelector } from "react-redux";
 import cookie from "js-cookie";
@@ -79,7 +81,7 @@ function AddQuiz() {
         numberOfQuestion: numberOfquestion,
 
       })
-      .then(() => {
+      .then(() => { 
         console.log("succes");
       });
   };
@@ -142,7 +144,7 @@ function AddQuiz() {
           add question
         </button>
         <hr></hr>
-        <div className="submit-quiz-btn"><button onClick={addquiz} type="submit" className="btn btn-primary submit-quiz-btn">
+        <div className="submit-quiz-btn"><button onClick={addquiz} type="submit"  className="btn btn-primary submit-quiz-btn">
           Submit
         </button></div>
         

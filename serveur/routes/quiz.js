@@ -12,4 +12,4 @@ router.get("/teacher-quiz/:teacherId",quizController.allTeacherQuiz)
 
 
 
-module.exports = router;
+module.exports = router;  
