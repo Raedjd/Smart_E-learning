@@ -22,7 +22,7 @@ import CreateForum from "../Pages/ForumUser/Forum/CreateForum"
 import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
 import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
 import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
-
+import PassQuiz from "../Pages/Quiz/PassQuiz";
 const RRR = () => {
   return (
     <div className="routes">
@@ -44,6 +44,7 @@ const RRR = () => {
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
+          <Route path ="/pass-quiz/:id" element ={<PassQuiz />} />
 
           <Route path="/Category/create" element={<CreatCategory/> } />
           <Route path="/Category/:id" element={<BrowseCategory/> } />

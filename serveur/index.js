@@ -37,16 +37,20 @@ const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
 const uploadRoutes = require("./routes/uploadFile");
 const quizRoutes = require("./routes/quiz");
+const quizHistoryRoutes = require ("./routes/QuizHistory");
 //Routes
+
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/quiz", quizRoutes);
+app.use("/api/quizHistory" , quizHistoryRoutes);
+
 app.use('/api/category', require("./controllers/Category"));
 app.use('/api/forum', require("./controllers/Forum"));
 app.use('/api/topic', require("./controllers/Topic"));
 app.use('/api/comment', require("./controllers/Comment"));
-
+ 
 // Server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);

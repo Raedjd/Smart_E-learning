@@ -19,7 +19,7 @@ const quizSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        response: [
+        answers: [
           {
             isRight: {
               type: Boolean,

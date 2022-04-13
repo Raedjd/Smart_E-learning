@@ -2,8 +2,13 @@ import React , {useState} from "react";
 import { Link  } from "react-router-dom";
 import quizes from "./api/quizes";
 import "./css/SingleQuiz.css";
+import cookie from "js-cookie";
+
+
 
 function SingleQuiz({ quiz }) {
+  const userId = cookie.get("id");
+
   const deletequizHandler= () =>{
       quizes.delete(`/delete-quiz/${quiz._id}`)
   }
@@ -14,11 +19,14 @@ function SingleQuiz({ quiz }) {
         <h5 className="font-title--xs">{`level :  ${quiz.level}`}</h5>
 
         <hr></hr>
-        <Link  className="btn btn-primary" to={`/quiz/${quiz._id}`}> more details</Link>
-
-        <button hidden={!(window.location.href==="http://localhost:3000/profilstudent")} onClick={deletequizHandler} className="btn btn-danger btn-delete-teacher-quiz">
+        <div className="singlequiz-btn">
+        <Link  hidden={!(quiz.quizCreator===userId)} className="btn btn-success singlequiz-btn-detail" to={`/pass-quiz/${quiz._id}`}> Pass quiz</Link>
+        <Link  className="btn btn-primary singlequiz-btn-detail" to={`/quiz/${quiz._id}`}> more details</Link>
+        <button hidden={!(window.location.href==="http://localhost:3000/profilstudent")} onClick={deletequizHandler} className="btn btn-danger singlequiz-btn">
         delete
       </button>
+        </div>
+       
       </div>
     </div>
   );

@@ -1,0 +1,8 @@
+.btn-submit-answers{
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+.question-card{
+    margin: 8px;
+}

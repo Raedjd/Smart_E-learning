@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Question from "./Question";
-import { BrowserRouter, Routes, Route  } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import quizes from "./api/quizes";
 import { useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import "./css/AddQuiz.css";
 function AddQuiz() {
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
-  
+
   const [questions, setquestions] = useState([]);
   const [numberOfquestion, setnumberOfquestion] = useState(0);
   const [title, settitle] = useState("");
@@ -45,7 +45,10 @@ function AddQuiz() {
 
   const updateAnswerFeild = (id, answer) => {
     const list = questions.map((question) => {
-    console.log("🚀 ~ file: AddQuiz.js ~ line 46 ~ list ~ question", question.answers)
+      console.log(
+        "🚀 ~ file: AddQuiz.js ~ line 46 ~ list ~ question",
+        question.answers
+      );
       if (question.id === id) {
         return {
           ...question,
@@ -56,7 +59,7 @@ function AddQuiz() {
     });
     setquestions(list);
   };
-  
+
   const addAnswer = (id, answer) => {
     const list = questions.map((question) => {
       if (question.id === id) {
@@ -73,15 +76,14 @@ function AddQuiz() {
     e.preventDefault();
     quizes
       .post("/add-quiz", {
-        quizCreator:userId,
+        quizCreator: userId,
         title: title,
         description: description,
         questions: questions,
         level: level,
         numberOfQuestion: numberOfquestion,
-
       })
-      .then(() => { 
+      .then(() => {
         console.log("succes");
       });
   };
@@ -89,67 +91,73 @@ function AddQuiz() {
   return (
     <div>
       <h1>Add Quiz</h1>
-    <div className="container">
-      <form>
-        <div className="form-group">
-          <label>Title</label>
-          <input
-            type="text"
-            className="form-control"
-            id="title"
-            placeholder="Enter title"
-            onChange={(event) => settitle(event.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <label>Description</label>
-          <textarea
-            className="form-control"
-            id="Description"
-            rows="3"
-            onChange={(event) => setdescription(event.target.value)}
-          ></textarea>
-        </div>
-        <div className="form-group">
-          <label>Level</label>
-          <select
-            onChange={(event) => setlevel(event.target.value)}
-            className="form-control"
-          >
-            <option>beginner</option>
-            <option>Medium</option>
-            <option>advanced</option>
-          </select>
-        </div>
-        
-        {questions.map((question, index) => (
-          <div key={index} className="Question-input">
-            <Question
-              question={question}
-              updateFields={updateFields}
-              addAnswer={addAnswer}
-              updateAnswerFeild={updateAnswerFeild}
-              questions={questions}
-              setquestions={setquestions}
-              setnumberOfquestion={setnumberOfquestion}
-              numberOfquestion={numberOfquestion}
+      <div className="container">
+        <form>
+          <div className="form-group">
+            <label>Title</label>
+            <input
+              type="text"
+              className="form-control"
+              id="title"
+              placeholder="Enter title"
+              onChange={(event) => settitle(event.target.value)}
             />
-         
-           
-            
           </div>
-        ))}
-       
-        <button type="submit" className="btn btn-primary add-question-btn" onClick={addQuestion}>
-          add question
-        </button>
-        <hr></hr>
-        <div className="submit-quiz-btn"><button onClick={addquiz} type="submit"  className="btn btn-primary submit-quiz-btn">
-          Submit
-        </button></div>
-        
-      </form>
-    </div>
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              className="form-control"
+              id="Description"
+              rows="3"
+              onChange={(event) => setdescription(event.target.value)}
+            ></textarea>
+          </div>
+          <div className="form-group">
+            <label>Level</label>
+            <select
+              onChange={(event) => setlevel(event.target.value)}
+              className="form-control"
+            >
+              <option>beginner</option>
+              <option>Medium</option>
+              <option>advanced</option>
+            </select>
+          </div>
+
+          {questions.map((question, index) => (
+            <div key={index} className="Question-input">
+              <Question
+                question={question}
+                updateFields={updateFields}
+                addAnswer={addAnswer}
+                updateAnswerFeild={updateAnswerFeild}
+                questions={questions}
+                setquestions={setquestions}
+                setnumberOfquestion={setnumberOfquestion}
+                numberOfquestion={numberOfquestion}
+              />
+            </div>
+          ))}
+
+          <button
+            type="submit"
+            className="btn btn-primary add-question-btn"
+            onClick={addQuestion}
+          >
+            add question
+          </button>
+          <hr></hr>
+          <div className="submit-quiz-btn">
+            <button
+              onClick={addquiz}
+              type="submit"
+              className="btn btn-primary submit-quiz-btn"
+            >
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

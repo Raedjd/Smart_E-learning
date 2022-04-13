@@ -4,3 +4,13 @@
 .btn-delete-teacher-quiz{
     margin-left: 8px;
 }
+.singlequiz-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+.singlequiz-btn-detail{
+    margin:5px;
+}
