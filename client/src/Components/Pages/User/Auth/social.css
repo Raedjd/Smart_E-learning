@@ -1,0 +1,22 @@
+.my-facebook-button-class {
+  width: 170px;
+  height: 43px;
+  border-radius: 4px;
+  background: #4285f4;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  margin: 5px;
+  display: inline-block;
+}
+.my-google-button-class {
+  width: 165px;
+  height: 35px;
+  border-radius: 4px;
+  background: #90a0c4;
+  color: white;
+  border: 0px transparent;
+  text-align: center;
+  margin: 5px;
+  display: inline-block;
+}
