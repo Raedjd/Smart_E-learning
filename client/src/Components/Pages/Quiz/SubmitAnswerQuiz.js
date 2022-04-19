@@ -5,8 +5,15 @@ import QuizHistory from "./api/QuizHistory";
 function SubmitAnswerQuiz({numberOfquestion , counter,quiz}) {
     const userData = useSelector((state) => state.userReducer);
     const userId = cookie.get("id");
-    const addHistoryquiz = () => {
-        console.log(quiz)
+    const addHistoryquiz = (e) => {
+        e.preventDefault();
+        QuizHistory.post("/add-quizhistory",{
+            student : userId, 
+            quiz:quiz._id,
+            score:`your score is ${counter}/${numberOfquestion}`
+            
+        })
+        console.log("success")
       };
     return ( 
         <div className="btn-submit-answers">

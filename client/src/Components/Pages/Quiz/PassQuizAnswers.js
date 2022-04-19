@@ -1,14 +1,14 @@
 import React from "react";
-function PassQuizAnswers({ question , setcounter , counter}) {
-  
-  const radioboxhandler=(e) =>{
+function PassQuizAnswers({ question, setcounter, counter }) {
+  const radioboxhandler = (e) => {
     if (e.target.value === "true") {
-        setcounter(counter+1)
+      setcounter((counter) => counter + 1);
     }
     if (e.target.value === "false") {
-        if(counter > 0)
-        setcounter(counter-1)
-    }}
+      if (counter > 0) setcounter((counter) => counter - 1);
+    }
+  };
+
   return (
     <div>
       {question.answers.map((answer) => (
@@ -23,8 +23,6 @@ function PassQuizAnswers({ question , setcounter , counter}) {
           />
         </li>
       ))}
-     
-
     </div>
   );
 }

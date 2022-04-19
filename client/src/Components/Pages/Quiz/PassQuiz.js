@@ -49,7 +49,11 @@ function PassQuiz() {
           </div>
         </div>
       ))}
-      <SubmitAnswerQuiz counter={counter} quiz={data.quiz} numberOfquestion={numberOfquestion} />
+      <SubmitAnswerQuiz
+        counter={counter}
+        quiz={data.quiz}
+        numberOfquestion={numberOfquestion}
+      />
     </div>
   );
 }

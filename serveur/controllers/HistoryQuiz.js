@@ -1,5 +1,7 @@
 const UserModel = require("../models/user");
 const QuizHistoryModel = require("../models/QuizHistory");
+const QuizModel = require("../models/quiz");
+
 
 module.exports.allQuizsHistory = async (req, res) => {
   try {
@@ -36,6 +38,11 @@ module.exports.allStudentQuiz = async (req, res) => {
     const QuizHistory = await QuizHistoryModel.find({
       student: req.params.studentId,
     });
+   // const user = await UserModel.findById(req.params.studentId);
+   // const quiz = await QuizModel.findById(QuizHistory.quiz);
+
+
+
     res.status(200).json(QuizHistory);
     // res.send("test")
   } catch (err) {

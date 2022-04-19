@@ -10,7 +10,7 @@ const quizhistorySchema = new mongoose.Schema(
         ref: "Quiz", 
     },
     score: {
-        type: Number,
+        type: String,
     }
   },
 
