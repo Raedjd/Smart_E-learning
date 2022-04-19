@@ -1,4 +1,5 @@
 import React from "react";
+import "./cardour.scss";
 
 const Cardour = ({ name, image, creatorName, creatorImage, price }) => {
   return (
@@ -6,7 +7,15 @@ const Cardour = ({ name, image, creatorName, creatorImage, price }) => {
       <div class="contentCard contentCard--course">
         <div class="contentCard-top">
           <a href="course-details.html">
-            <img src={image} alt="images" class="img-fluid" />
+            <img
+              src={image}
+              alt="images"
+              class="img-fluid"
+              style={{
+                height: "250px",
+                width: "400px",
+              }}
+            />
           </a>
         </div>
         <div class="contentCard-bottom">
@@ -21,7 +30,7 @@ const Cardour = ({ name, image, creatorName, creatorImage, price }) => {
               class="contentCard-user d-flex align-items-center"
             >
               <img
-                src={creatorImage}
+                src="dist/images/courses/7.png"
                 alt="client-image"
                 class="rounded-circle"
               />

@@ -11,7 +11,7 @@ import {
   COMMENT,
   FETCH_BY_CREATOR,
 } from "../constants/actionTypes";
-import * as api from "../Components/Pages/Course/api/index";
+import * as api from "../Components/Pages/Courses/api/index";
 
 export const getCourse = (id) => async (dispatch) => {
   try {
@@ -38,7 +38,7 @@ export const getCourses = (page) => async (dispatch) => {
     });
     dispatch({ type: END_LOADING });
   } catch (error) {
-    console.log(error);
+    console.log(error, "fqfqsfqsf");
   }
 };
 

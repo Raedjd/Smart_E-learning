@@ -33,7 +33,8 @@ import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
 import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
-import Courses from "../Pages/Courses/Courses/Courses"
+import Courses from "../Pages/Courses/Courses/Courses";
+import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
 
 const RRR = () => {
   return (
