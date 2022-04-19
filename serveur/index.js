@@ -1,3 +1,4 @@
+const { errorHandler } = require("./middleware/errorMiddleware");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -7,6 +8,7 @@ require("./config/db");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const app = express();
+
 //////////////////////////////////////////////////////////////
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -42,10 +44,13 @@ app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/quiz", quizRoutes);
-app.use('/api/category', require("./controllers/Category"));
-app.use('/api/forum', require("./controllers/Forum"));
-app.use('/api/topic', require("./controllers/Topic"));
-app.use('/api/comment', require("./controllers/Comment"));
+app.use("/api/category", require("./controllers/Category"));
+app.use("/api/forum", require("./controllers/Forum"));
+app.use("/api/topic", require("./controllers/Topic"));
+app.use("/api/comment", require("./controllers/Comment"));
+app.use("/api/categories", require("./routes/categoryRoutes"));
+app.use("/api/subcategories", require("./routes/subCategoryRoutes"));
+app.use("/api/badges", require("./routes/badgeRoute"));
 
 // Server
 app.listen(process.env.PORT, () => {

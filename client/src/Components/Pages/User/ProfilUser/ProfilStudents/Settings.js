@@ -47,7 +47,7 @@ const Settings = () => {
         removeCookie("id");
       })
       .catch((err) => console.log(err));
-    navigate("/home");
+    navigate("/homep");
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ const Settings = () => {
           removeCookie("id");
         })
         .catch((err) => console.log(err));
-      navigate("/home");
+      navigate("/homep");
     }
   };
   //////////////////////////////////////////////////////////////////////////////////////////////////////

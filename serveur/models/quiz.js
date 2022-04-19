@@ -10,10 +10,6 @@ const quizSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    description : {
-        type:String ,
-        required:true
-    },
     questions: [
       {
         stage: {
@@ -23,11 +19,11 @@ const quizSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        answers: [ 
+        response: [
           {
             isRight: {
               type: Boolean,
-              required:true 
+              default: false,
             },
             message: {
               type: String,
@@ -36,14 +32,12 @@ const quizSchema = new mongoose.Schema(
         ],
       },
     ],
-   
     level: {
       type: String,
       enum: ["beginner", "Medium", "advanced"],
     },
     numberOfQuestion: {
       type: Number,
-     
     },
     enabled: {
       type: Boolean,

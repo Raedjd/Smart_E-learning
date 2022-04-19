@@ -1,12 +1,12 @@
-import React from "react";
-import { Link ,useParams } from "react-router-dom";
+import React , {useState} from "react";
+import { Link  } from "react-router-dom";
 import quizes from "./api/quizes";
 import "./css/SingleQuiz.css";
-import QuizDetail from "./QuizDetail";
 
 function SingleQuiz({ quiz }) {
-  
-
+  const deletequizHandler= () =>{
+      quizes.delete(`/delete-quiz/${quiz._id}`)
+  }
   return (
     <div className="col-lg-4 col-md-6 card-quiz">
       <div className="cardFeature">
@@ -16,10 +16,7 @@ function SingleQuiz({ quiz }) {
         <hr></hr>
         <Link  className="btn btn-primary" to={`/quiz/${quiz._id}`}> more details</Link>
 
-        <button hidden={!(window.location.href==="http://localhost:3000/profilstudent")} onClick={()=>{
-        quizes.delete(`/delete-quiz/${quiz._id}`)
-        
-      }} className="btn btn-danger btn-delete-teacher-quiz">
+        <button hidden={!(window.location.href==="http://localhost:3000/profilstudent")} onClick={deletequizHandler} className="btn btn-danger btn-delete-teacher-quiz">
         delete
       </button>
       </div>

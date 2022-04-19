@@ -27,9 +27,7 @@ function TeacherQuiz() {
       useEffect(()=>{
 
       })
-      const removeQuizHandler= async (id) =>{
-     console.log(id) 
-          }
+      
     return (  <div>
       <h2 className="text-center">All Quiz</h2>
     <div className="container">

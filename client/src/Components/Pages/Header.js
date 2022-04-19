@@ -13,10 +13,10 @@ const Header = () => {
       cookie.remove(key, { expires: 1 });
     }
   };
+  console.log(userData);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   const handleLogout = async (e) => {
-    e.preventDefault();
     await axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}api/user/logout`,
@@ -28,11 +28,12 @@ const Header = () => {
         removeCookie("id");
       })
       .catch((err) => console.log(err));
-    navigate("/home");
+    navigate("/homep");
+    window.location.reload();
   };
 
   return (
-    <header>
+    <header hidden={userData.role === "admin"}>
       <nav className="navbar navbar-expand-xl navbar-light bg-transparent">
         <div class="container">
           <a class="navbar-brand" href="index.html">
@@ -76,7 +77,13 @@ const Header = () => {
                 <div class="nav-item--dropdown">
                   <ul>
                     <li>
-                      <a href="course-search.html">search course list</a>
+                      <Link
+                        // className="nav-link"
+                        to="/searchcourse"
+                        style={{ textDecoration: "none" }}
+                      >
+                        Search courses
+                      </Link>
                     </li>
                     <li>
                       <a href="course-details.html">course details</a>
@@ -109,13 +116,11 @@ const Header = () => {
               </li>
 
               <li class="nav-item">
-               
-              <Link className="nav-link" to="/All-quizes" > quizes</Link>
-
+                <Link className="nav-link" to="/All-quizes">
+                  {" "}
+                  quizes
+                </Link>
               </li>
-              
-
-              
             </ul>
             <div class="d-flex align-items-center justify-content-between rightContent">
               <form class="header__Search-form" id="searchForm">
