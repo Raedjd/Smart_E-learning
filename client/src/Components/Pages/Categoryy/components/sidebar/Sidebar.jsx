@@ -12,9 +12,34 @@ import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined
 import { Link } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
-
+import cookie from "js-cookie";
+import axios from "axios";
+import {  useNavigate } from "react-router-dom";
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
+  const navigate = useNavigate();
+  const userId = cookie.get("id");
+  const removeCookie = (key) => {
+    if (window !== "undefined") {
+      cookie.remove(key, { expires: 1 });
+    }
+  };
+
+  const handleLogout = async (e) => {
+
+    await axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}api/user/logout`,
+      withCredentials: true,
+    })
+      .then((res) => {
+        console.log(res);
+        removeCookie("jwt");
+        removeCookie("id");
+      })
+      .catch((err) => console.log(err));
+    navigate("/homep");
+  };
   return (
     <div className="sidebar">
       <div className="top">
@@ -82,10 +107,12 @@ const Sidebar = () => {
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
+            <Link to="/dash/users" style={{ textDecoration: "none" }}></Link>
           </li>
           <li>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span onClick={handleLogout}>Logout</span>
+
           </li>
         </ul>
       </div>

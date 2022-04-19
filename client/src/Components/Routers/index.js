@@ -6,7 +6,6 @@ import SignIn from "../Pages/User/Auth/SignIn";
 import ForgetPassword from "../Pages/User/Auth/ForgetPassword";
 import ResetPassword from "../Pages/User/Auth/ResetPassword";
 import VerifyEmail from "../Pages/User/Auth/VerifyEmail";
-import Dashbord from "../Pages/User/Dashbord";
 import ProfilStudent from "../Pages/User/ProfilUser/ProfilStudents/ProfilStudent";
 import NotFound from "../Pages/NotFound";
 import Home from "../Pages/Categoryy/pages/home/Home";
@@ -33,6 +32,7 @@ import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
 import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
 import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
+import HomeP from "../Pages/HomeP";
 
 const RRR = () => {
   return (
@@ -40,7 +40,7 @@ const RRR = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/homep" element={<HomeP />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
@@ -48,7 +48,6 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/dashbord" element={<Dashbord />} />
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
           <Route path="/searchcourse" element={<SearchCourse />}></Route>
