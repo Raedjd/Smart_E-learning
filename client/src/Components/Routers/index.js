@@ -33,6 +33,7 @@ import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
 import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
+import Courses from "../Pages/Courses/Courses/Courses"
 
 const RRR = () => {
   return (
@@ -48,6 +49,8 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
+          <Route path="/courses" element={<Courses />} />
+
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
           <Route path="/searchcourse" element={<SearchCourse />}></Route>
