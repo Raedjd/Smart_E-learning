@@ -18,7 +18,7 @@
 <ul data-sourcepos="15:4-18:91" dir="auto">
 <li data-sourcepos="15:4-15:37">PORT=5000 <code>your localhost port</code></li>
 <li data-sourcepos="16:4-16:56">CLIENT_URL=<a href="http://localhost:3000" rel="nofollow">http://localhost:3000</a> <code>your customer URL</code></li>
-<li data-sourcepos="17:4-17:68">DB_USER_PASS=xxxx:xxxxxxx <code>your username and password</code></li>
+<li data-sourcepos="17:4-17:68">DB_USER_PASS=xxxx:xxxxxxx <code>your name and password</code></li>
 <li data-sourcepos="18:4-18:91">TOKEN_SECRET=990bf68e6adf1be5f1671bba3bec692056922454 <code>your random secret key</code></li>
 </ul>
 </li>
