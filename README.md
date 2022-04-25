@@ -12,3 +12,14 @@
 <h3 data-sourcepos="11:1-11:17" dir="auto"><a id="user-content-back-config-" class="anchor" aria-hidden="true" href="#back-config-">
   <g-emoji class="g-emoji" alias="wrench" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f527.png">🔧</g-emoji>
   <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Back config :</h3>
+<ul data-sourcepos="13:1-18:91" dir="auto">
+<li data-sourcepos="13:1-13:57">Mettez vos informations de cluster dans <code>/config/db.js</code></li>
+<li data-sourcepos="14:1-18:91">Créez le fichier <code>.env</code> dans <code>/config/</code> dans les données suivantes
+<ul data-sourcepos="15:4-18:91" dir="auto">
+<li data-sourcepos="15:4-15:37">PORT=5000 <code>votre port localhost</code></li>
+<li data-sourcepos="16:4-16:56">CLIENT_URL=<a href="http://localhost:3000" rel="nofollow">http://localhost:3000</a> <code>votre URL client</code></li>
+<li data-sourcepos="17:4-17:68">DB_USER_PASS=fs:fromscratch <code>votre identifiant et mot de passe</code></li>
+<li data-sourcepos="18:4-18:91">TOKEN_SECRET=990bf68e6adf1be5f1671bba3bec692056922454 <code>votre clé secrète aléatoire</code></li>
+</ul>
+</li>
+</ul>
