@@ -42,3 +42,5 @@
 -  This project is dedicated to everyone who seeks knowledge.
 -  User friendly,modern, helps socially distant people specially to learn.
 -  E-learning app with virtual assistant and outside recommendation.
+<hr data-sourcepos="19:1-20:2">
+<p data-sourcepos="26:1-26:74" dir="auto"><a target="_blank" rel="noopener noreferrer" href="/JustFS/mern-project/blob/master/client/public/img/screenshot.jpg"><img src="/JustFS/mern-project/raw/master/client/public/img/screenshot.jpg" alt="Texte alternatif" title="Capture d'écran" style="max-width: 100%;"></a></p>
