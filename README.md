@@ -16,10 +16,10 @@
 <li data-sourcepos="13:1-13:57">Put your cluster information in <code>/config/db.js</code></li>
 <li data-sourcepos="14:1-18:91">Create the file <code>.env</code> in <code>/config/</code> in the following data
 <ul data-sourcepos="15:4-18:91" dir="auto">
-<li data-sourcepos="15:4-15:37">PORT=5000 <code>votre port localhost</code></li>
-<li data-sourcepos="16:4-16:56">CLIENT_URL=<a href="http://localhost:3000" rel="nofollow">http://localhost:3000</a> <code>votre URL client</code></li>
-<li data-sourcepos="17:4-17:68">DB_USER_PASS=fs:fromscratch <code>votre identifiant et mot de passe</code></li>
-<li data-sourcepos="18:4-18:91">TOKEN_SECRET=990bf68e6adf1be5f1671bba3bec692056922454 <code>votre clé secrète aléatoire</code></li>
+<li data-sourcepos="15:4-15:37">PORT=5000 <code>your localhost port</code></li>
+<li data-sourcepos="16:4-16:56">CLIENT_URL=<a href="http://localhost:3000" rel="nofollow">http://localhost:3000</a> <code>your customer URL</code></li>
+<li data-sourcepos="17:4-17:68">DB_USER_PASS=xxxx:xxxxxxx <code>your username and password</code></li>
+<li data-sourcepos="18:4-18:91">TOKEN_SECRET=990bf68e6adf1be5f1671bba3bec692056922454 <code>your random secret key</code></li>
 </ul>
 </li>
 </ul>
