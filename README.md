@@ -11,7 +11,7 @@
 </h3>
 
 <p data-sourcepos="5:1-5:33" dir="auto">Start the server : <code>cd serveur</code> +  <code>npm start</code></p>
-<p data-sourcepos="7:1-7:46" dir="auto">Start front : <code>cd client</code> + <code>npm start</code></p>
+<p data-sourcepos="7:1-7:46" dir="auto">Start the front : <code>cd client</code> + <code>npm start</code></p>
 <hr data-sourcepos="9:1-10:0">
 
 
