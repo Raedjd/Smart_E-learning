@@ -6,10 +6,8 @@
 
 
 - The purpose of this project is to facilitate for the students to get the knowledge they need and to facilitate the process of providing courses and tutorials for teachers.
-- By using some of the trends in IT and computer science we are going to make a modern web application(e-learning) that will provide the students with the best resources and dynamically recommend resources from outside the app itself and it classifies the students depending on specific characteristic to help teachers validate and provide better guidance
--  This project is dedicated to everyone who seeks knowledge.
--  User friendly,modern, helps socially distant people specially to learn.
--  E-learning app with virtual assistant and outside recommendation.
+- By using some of the trends in IT and computer science we are going to make a modern web application(e-learning) that will provide the students with the best resources and dynamically recommend resources from outside the app itself and it classifies the students depending on specific characteristic to help teachers validate and provide better guidance.
+
 <hr data-sourcepos="19:1-20:2">
 
 <h2 data-sourcepos="2:1-2:13" dir="auto"><a id="user-content-mern-stack" class="anchor" aria-hidden="true" href="#mern-stack"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path><g-emoji class="g-emoji" alias="rocket" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f680.png">🚀</g-emoji></svg></a>MERN Stack</h2>
