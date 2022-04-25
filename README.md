@@ -39,3 +39,6 @@
 
 
 - By using some of the trends in IT and computer science we are going to make a modern web application(e-learning) that will provide the students with the best resources and dynamically recommend resources from outside the app itself and it classifies the students depending on specific characteristic to help teachers validate and provide better guidance
+-  This project is dedicated to everyone who seeks knowledge.
+-  User friendly,modern, helps socially distant people specially to learn.
+-  E-learning app with virtual assistant and outside recommendation.
