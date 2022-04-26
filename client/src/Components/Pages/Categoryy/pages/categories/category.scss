@@ -1,0 +1,99 @@
+.list {
+    display: flex;
+    width: 100%;
+
+    .listContainer {
+        flex: 6;
+        .catWidgets {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            gap: 20px;
+        }
+        .tables {
+            padding: 20px;
+            .table {
+                .cellWrapper {
+                    display: flex;
+                    align-items: center;
+                }
+                .deleteBtn {
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+                    padding: 10px;
+                    border-radius: 12px;
+                    background-color: rgb(213, 65, 65);
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 600;
+                    transition: all ease-in-out .3s;
+                    &:hover {
+                        background-color: rgb(231, 126, 126);
+                        transition: all ease-in-out .3s;
+                    }
+                }
+                .updateBtn {
+                    cursor: pointer;
+                    border: none;
+                    outline: none;
+                    padding: 10px;
+                    border-radius: 12px;
+                    background-color: #f6ae3c;
+                    color: #fff;
+                    font-size: 12px;
+                    font-weight: 600;
+                    transition: all ease-in-out .3s;
+                
+                    &:hover {
+                        background-color: #facd83;
+                        transition: all ease-in-out .3s;
+                    }
+                }
+            }
+        }
+        .wrapperInput {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            p {
+                width: 50%;
+                text-align: center;
+                color: gray;
+                margin: 20px;
+            }
+            .inputGroup {
+                display: flex;
+                align-items: center;
+                input {
+                    outline: none;
+                    border: 1px solid gray;
+                    padding: 10px;
+                    width: 200px;
+                    height: 44px;
+                    border-radius: 5px;
+                    border-bottom-right-radius: 0;
+                    border-top-right-radius: 0;
+                    border-right:none ;
+                }
+                button {
+                    // height: 100%;
+                    cursor: pointer;
+                    padding: 10px 20px;
+                    border: none;
+                    outline: none;
+                    background-color: rgb(70, 70, 240);
+                    color: #fff;
+                    font-size: 16px;
+                    font-weight: 600;
+                    border-radius: 5px;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+            }
+        }
+    }
+}

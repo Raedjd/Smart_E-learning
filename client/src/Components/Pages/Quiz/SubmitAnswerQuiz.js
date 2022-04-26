@@ -1,19 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import cookie from "js-cookie";
 import QuizHistory from "./api/QuizHistory";
-function SubmitAnswerQuiz({numberOfquestion , counter,quiz}) {
-    const userData = useSelector((state) => state.userReducer);
+function SubmitAnswerQuiz({numberOfquestion , score,quiz}) {
     const userId = cookie.get("id");
     const addHistoryquiz = (e) => {
         e.preventDefault();
         QuizHistory.post("/add-quizhistory",{
             student : userId, 
             quiz:quiz._id,
-            score:`your score is ${counter}/${numberOfquestion}`
+            quizName:quiz.title,
+            score:`your score is ${score}/${numberOfquestion}`
             
         })
         console.log("success")
+        console.log(quiz)
       };
     return ( 
         <div className="btn-submit-answers">

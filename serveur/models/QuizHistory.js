@@ -9,6 +9,9 @@ const quizhistorySchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Quiz", 
     },
+    quizName : {
+      type:String,
+    },
     score: {
         type: String,
     }

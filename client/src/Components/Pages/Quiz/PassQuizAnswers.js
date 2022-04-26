@@ -8,7 +8,7 @@ function PassQuizAnswers({ question, setcounter, counter }) {
       if (counter > 0) setcounter((counter) => counter - 1);
     }
   };
-
+  console.log(question)
   return (
     <div>
       {question.answers.map((answer) => (

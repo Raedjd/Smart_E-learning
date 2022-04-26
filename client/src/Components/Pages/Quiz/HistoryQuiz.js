@@ -31,9 +31,8 @@ function HistoryQuiz() {
   useEffect(() => {
    
   }, []);
-  console.log(historyQuizs);
   if (!historyQuizs) return <Spinner />;
-
+console.log(historyQuizs)
   return (
       <div>
     {historyQuizs.map((Historyquiz) => (
@@ -43,7 +42,7 @@ function HistoryQuiz() {
           <div>
             <h5 className="font-title--xs text-primary">
               {" "}
-              {userData.username}
+              {Historyquiz.quizName}
             </h5>
             <h5 className="font-title--xs">{`score :  ${Historyquiz.score}`}</h5>
           </div>

@@ -1,0 +1,26 @@
+.badgeInfo {
+    box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+    padding: 50px;
+    margin: 200px auto;
+    width: max-content;
+    display: flex;
+    position: relative;
+    .right {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        justify-content: center;
+        max-width: 300px;
+    }
+    .deleteB {
+        position: absolute;
+        right: 0;
+        top: 0;
+        background-color: #c62828;
+        padding: 7px;
+        cursor: pointer;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 600;
+    }
+}

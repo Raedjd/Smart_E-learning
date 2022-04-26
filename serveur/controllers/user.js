@@ -1,7 +1,7 @@
 const UserModel = require("../models/user");
 const ObjectId = require("mongoose").Types.ObjectId;
 const bcrypt = require("bcrypt");
-
+const sendCong = require("./teacherEmail");
 const jwt = require("jsonwebtoken");
 
 module.exports.getAllUsers = async (req, res) => {
@@ -128,7 +128,7 @@ module.exports.updateUserRole = async (req, res) => {
     );
     const user = await UserModel.findById({ _id: req.params.id });
     //console.log(user.email);
-    //sendMail(user.email);
+    sendCong(user.email);
 
     res.json({ msg: "Update Success!" });
   } catch (err) {

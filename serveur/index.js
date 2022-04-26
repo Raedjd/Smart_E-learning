@@ -1,3 +1,4 @@
+const { errorHandler } = require("./middleware/errorMiddleware");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -40,6 +41,9 @@ const quizRoutes = require("./routes/quiz");
 const quizHistoryRoutes = require ("./routes/QuizHistory");
 //Routes
 
+const courseRoutes = require("./routes/courses.js");
+const reviewRouter = require("./routes/review.js");
+//Routes
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
@@ -51,6 +55,16 @@ app.use('/api/forum', require("./controllers/Forum"));
 app.use('/api/topic', require("./controllers/Topic"));
 app.use('/api/comment', require("./controllers/Comment"));
  
+app.use("/api/category", require("./controllers/Category"));
+app.use("/api/forum", require("./controllers/Forum"));
+app.use("/api/topic", require("./controllers/Topic"));
+app.use("/api/comment", require("./controllers/Comment"));
+app.use("/api/categories", require("./routes/categoryRoutes"));
+app.use("/api/subcategories", require("./routes/subCategoryRoutes"));
+app.use("/api/badges", require("./routes/badgeRoute"));
+app.use("/courses", courseRoutes);
+app.use("/reviews", reviewRouter);
+
 // Server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);

@@ -10,7 +10,6 @@ import "./css/AddQuiz.css";
 function AddQuiz() {
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
-
   const [questions, setquestions] = useState([]);
   const [numberOfquestion, setnumberOfquestion] = useState(0);
   const [title, settitle] = useState("");
@@ -59,7 +58,6 @@ function AddQuiz() {
     });
     setquestions(list);
   };
-
   const addAnswer = (id, answer) => {
     const list = questions.map((question) => {
       if (question.id === id) {

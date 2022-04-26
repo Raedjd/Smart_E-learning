@@ -76,7 +76,13 @@ const Header = () => {
                 <div class="nav-item--dropdown">
                   <ul>
                     <li>
-                      <a href="course-search.html">search course list</a>
+                      <Link
+                        // className="nav-link"
+                        to="/searchcourse"
+                        style={{ textDecoration: "none" }}
+                      >
+                        Search courses
+                      </Link>
                     </li>
                     <li>
                       <a href="course-details.html">course details</a>
@@ -109,13 +115,11 @@ const Header = () => {
               </li>
 
               <li class="nav-item">
-               
-              <Link className="nav-link" to="/All-quizes" > quizes</Link>
-
+                <Link className="nav-link" to="/All-quizes">
+                  {" "}
+                  quizes
+                </Link>
               </li>
-              
-
-              
             </ul>
             <div class="d-flex align-items-center justify-content-between rightContent">
               <form class="header__Search-form" id="searchForm">

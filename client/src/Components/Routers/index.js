@@ -23,13 +23,28 @@ import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
 import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
 import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import PassQuiz from "../Pages/Quiz/PassQuiz";
+import Login from "../Pages/Categoryy/pages/login/Login";
+import List from "../Pages/Categoryy/pages/list/List";
+import Single from "../Pages/Categoryy/pages/single/Single";
+import New from "../Pages/Categoryy/pages/new/New";
+import { productInputs, userInputs } from "../Pages/Categoryy/formSource";
+import "../Pages/Categoryy/style/dark.scss";
+import Category from "../Pages/Categoryy/pages/categories/Category";
+import Subcategory from "../Pages/Categoryy/pages/subcategories/Subcategory";
+import BadgePage from "../Pages/Categoryy/pages/badge/BadgePage";
+import SingleBadge from "../Pages/Categoryy/pages/singleBadge/SingleBadge";
+import SearchCourse from "../Pages/SearchCourse";
+import HomeP from "../Pages/HomeP";
+import Courses from "../Pages/Courses/Courses/Courses";
+import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
+
 const RRR = () => {
   return (
     <div className="routes">
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/homep" element={<HomeP />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
@@ -37,9 +52,11 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/dashbord" element={<Dashbord />} />
+          <Route path="/courses" element={<Courses />} />
+
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
+          <Route path="/searchcourse" element={<SearchCourse />}></Route>
 
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
@@ -48,6 +65,9 @@ const RRR = () => {
 
           <Route path="/Category/create" element={<CreatCategory/> } />
           <Route path="/Category/:id" element={<BrowseCategory/> } />
+
+          <Route path="/Category/create" element={<CreatCategory />} />
+          <Route path="/Category/:id" element={<BrowseCategory />} />
           <Route path="/category/new/:id" element={<ShowCategory />} />
           <Route path="/forum/new/:quizId" element={<ShowForum />} />
 
@@ -59,6 +79,40 @@ const RRR = () => {
 
          
           
+          <Route path="/forum" element={<BrowseForum />} />
+          <Route path="/topic/new/:id" element={<ShowTopic />} />
+          <Route path="/topic/create/:id" element={<CreateTopic />} />
+
+          <Route path="/dash">
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="users">
+              <Route index element={<List />} />
+              <Route path=":userId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={userInputs} title="Add New User" />}
+              />
+            </Route>
+            <Route path="products">
+              <Route index element={<List />} />
+              <Route path=":productId" element={<Single />} />
+              <Route
+                path="new"
+                element={<New inputs={productInputs} title="Add New Product" />}
+              />
+            </Route>
+            <Route path="categories">
+              <Route index element={<Category />} />
+            </Route>
+            <Route path="subcategories">
+              <Route index element={<Subcategory />} />
+            </Route>
+            <Route path="badges">
+              <Route index element={<BadgePage />} />
+              <Route path=":badgeId" element={<SingleBadge />} />
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>

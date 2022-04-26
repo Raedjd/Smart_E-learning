@@ -16,6 +16,7 @@ module.exports.addQuizHistory = async (req, res) => {
   const quizsHistory = new QuizHistoryModel({
     student: req.body.student,
     quiz: req.body.quiz,
+    quizName:req.body.quizName,
     score: req.body.score,
   });
   await quizsHistory.save();

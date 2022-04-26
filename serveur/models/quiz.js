@@ -32,6 +32,9 @@ const quizSchema = new mongoose.Schema(
         ],
       },
     ],
+    description : {
+        type :String,
+    },
     level: {
       type: String,
       enum: ["beginner", "Medium", "advanced"],
