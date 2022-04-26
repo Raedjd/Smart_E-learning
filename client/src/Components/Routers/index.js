@@ -6,23 +6,13 @@ import SignIn from "../Pages/User/Auth/SignIn";
 import ForgetPassword from "../Pages/User/Auth/ForgetPassword";
 import ResetPassword from "../Pages/User/Auth/ResetPassword";
 import VerifyEmail from "../Pages/User/Auth/VerifyEmail";
-import Dashbord from "../Pages/User/Dashbord";
 import ProfilStudent from "../Pages/User/ProfilUser/ProfilStudents/ProfilStudent";
 import NotFound from "../Pages/NotFound";
-import Home from "../Pages/Home";
+import Home from "../Pages/Categoryy/pages/home/Home";
 import Accueil from "../Pages/User/HomeUser/Accueil";
 import AllQuizes from "../Pages/Quiz/AllQuizes";
 import AddQuiz from "../Pages/Quiz/AddQuiz";
 import QuizDetail from "../Pages/Quiz/QuizDetail";
-import CreatCategory from "../Pages/ForumUser/Category/CreatCategory";
-import BrowseCategory from "../Pages/ForumUser/Category/BrowseCategory"
-import ShowCategory from "../Pages/ForumUser/Category/ShowCategory";
-import ShowForum from "../Pages/ForumUser/Forum/ShowForum";
-import CreateForum from "../Pages/ForumUser/Forum/CreateForum"
-import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
-import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
-import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
-import PassQuiz from "../Pages/Quiz/PassQuiz";
 import Login from "../Pages/Categoryy/pages/login/Login";
 import List from "../Pages/Categoryy/pages/list/List";
 import Single from "../Pages/Categoryy/pages/single/Single";
@@ -33,9 +23,19 @@ import Category from "../Pages/Categoryy/pages/categories/Category";
 import Subcategory from "../Pages/Categoryy/pages/subcategories/Subcategory";
 import BadgePage from "../Pages/Categoryy/pages/badge/BadgePage";
 import SingleBadge from "../Pages/Categoryy/pages/singleBadge/SingleBadge";
+import CreatCategory from "../Pages/ForumUser/Category/CreatCategory";
+import BrowseCategory from "../Pages/ForumUser/Category/BrowseCategory";
+import ShowCategory from "../Pages/ForumUser/Category/ShowCategory";
+import ShowForum from "../Pages/ForumUser/Forum/ShowForum";
+import CreateForum from "../Pages/ForumUser/Forum/CreateForum";
+import BrowseForum from "../Pages/ForumUser/Forum/BrowseForum";
+import ShowTopic from "../Pages/ForumUser/Topic/ShowTopic";
+import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
 import Courses from "../Pages/Courses/Courses/Courses";
+import PassQuiz from "../Pages/Quiz/PassQuiz"
+import VideoChat from "../Pages/VideoChat/VideoChat"
 import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
 
 const RRR = () => {
@@ -62,9 +62,7 @@ const RRR = () => {
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
           <Route path ="/pass-quiz/:id" element ={<PassQuiz />} />
-
-          <Route path="/Category/create" element={<CreatCategory/> } />
-          <Route path="/Category/:id" element={<BrowseCategory/> } />
+          <Route path="/videoChat" element ={<VideoChat />} />
 
           <Route path="/Category/create" element={<CreatCategory />} />
           <Route path="/Category/:id" element={<BrowseCategory />} />
@@ -72,13 +70,6 @@ const RRR = () => {
           <Route path="/forum/new/:quizId" element={<ShowForum />} />
 
           <Route path="/forum/create/:id" element={<CreateForum />} />
-          <Route path="/forum" element={<BrowseForum/>} />
-          <Route path="/topic/new/:id" element={<ShowTopic/>} />
-          <Route path="/topic/create/:id" element={<CreateTopic/>} />
-
-
-         
-          
           <Route path="/forum" element={<BrowseForum />} />
           <Route path="/topic/new/:id" element={<ShowTopic />} />
           <Route path="/topic/create/:id" element={<CreateTopic />} />

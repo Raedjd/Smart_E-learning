@@ -94,7 +94,7 @@ function PassQuiz() {
                     className="passAnswer"
                     onClick={() => HandleCurrenctQuestion(answer.isRight)}
                   >
-                    {`${answer.message} + ${answer.isRight}`}
+                    {`${answer.message}`}
                   </button>
                 </li>
               ))}
