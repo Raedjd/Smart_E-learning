@@ -2,7 +2,10 @@ import React, { useEffect, useState } from "react";
 import QuizHistory from "./api/QuizHistory";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
-import quizes from "./api/quizes";
+import "./css/HistoryQuiz.css";
+import { dateParser } from "../../Pages/User/Utilis";
+
+
 
 
 import Spinner from "./Spinner";
@@ -34,7 +37,7 @@ function HistoryQuiz() {
   if (!historyQuizs) return <Spinner />;
 console.log(historyQuizs)
   return (
-      <div>
+      <div className="history-quiz-container">
     {historyQuizs.map((Historyquiz) => (
 
     <div className="col-lg-4 col-md-6 card-quiz">
@@ -45,8 +48,10 @@ console.log(historyQuizs)
               {Historyquiz.quizName}
             </h5>
             <h5 className="font-title--xs">{`score :  ${Historyquiz.score}`}</h5>
+                        <h5 className="font-title--xs">{`Date  :  ${dateParser(Historyquiz.createdAt)}`}</h5>
+
           </div>
-        
+          
       </div>
       </div>
       ))}
