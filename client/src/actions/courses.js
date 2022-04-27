@@ -12,6 +12,7 @@ import {
   FETCH_BY_CREATOR,
 } from "../constants/actionTypes";
 import * as api from "../Components/Pages/Courses/api/index";
+import { useNavigate } from "react-router-dom";
 
 export const getCourse = (id) => async (dispatch) => {
   try {
@@ -71,12 +72,13 @@ export const getCoursesBySearch = (searchQuery) => async (dispatch) => {
 };
 
 export const createCourse = (course, history) => async (dispatch) => {
+
   try {
     dispatch({ type: START_LOADING });
     const { data } = await api.createCourse(course);
 
     dispatch({ type: CREATE, payload: data });
-    history.push(`/courses/${data._id}`);
+    // history.push(`/courses/${data._id}`);
   } catch (error) {
     console.log(error);
   }

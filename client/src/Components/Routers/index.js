@@ -34,8 +34,7 @@ import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
 import Courses from "../Pages/Courses/Courses/Courses";
-import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
-
+import HomeCourse from '../Pages/Courses/HomeCourse/HomeCourse'
 const RRR = () => {
   return (
     <div className="routes">
@@ -50,11 +49,11 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses" element={<HomeCourse />} />
 
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
-          <Route path="/searchcourse" element={<SearchCourse />}></Route>
+          <Route path="/searchcourse" element={<SearchCourse/>}></Route>
 
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />

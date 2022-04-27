@@ -42,6 +42,11 @@ const SearchCourse = () => {
       setCatArr(arr);
     }
   };
+  if (courses.length==0){
+  return(<div>
+      There is no courses for the moment 
+  </div>)}
+  else
   return (
     <div>
       <section class="section event-search" style={{ marginTop: "50px" }}>
@@ -61,7 +66,7 @@ const SearchCourse = () => {
                       class="button button-lg button--primary"
                       type="submit"
                       id="button-addon2"
-                      onClick={SearchCourse}
+                     onClick={SearchCourse}
                     >
                       Search
                     </button>
@@ -280,7 +285,7 @@ const SearchCourse = () => {
                       <Cardour
                         name={e.title}
                         image={e.selectedFile}
-                        creatorImage={e.creator.image}
+                     //  creatorImage={e.creator.image}
                         creatorName={e.name}
                         price={e.price + "$"}
                       />

@@ -1,8 +1,8 @@
 const express = require("express");
 const mongoose = require("mongoose");
-
 const CourseMessage = require("../models/courseMessage.js");
 const User = require("../models/user.js");
+const ObjectId = require("mongoose").Types.ObjectId;
 
 
 const router = express.Router();
@@ -72,6 +72,7 @@ module.exports.getCourse = async (req, res) => {
 
 module.exports.createCourse = async (req, res) => {
   const course = req.body;
+  const { id } = req.params;
 
   const newCourseMessage = new CourseMessage({...course,  createdAt: new Date().toISOString(),
   });
@@ -104,30 +105,33 @@ module.exports.updateCourse = async (req, res) => {
   await CourseMessage.findByIdAndUpdate(id, updatedCourse, { new: true });
 
   res.json(updatedCourse);
+  
 };
 
+
+
 module.exports.deleteCourse = async (req, res) => {
-  const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No course with id: ${id}`);
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("No course with id:"+req.params.id);
 
-  await CourseMessage.findByIdAndRemove(id);
+  await CourseMessage.findByIdAndRemove(req.params.id);
 
   res.json({ message: "Course deleted successfully." });
 };
 
+
+
 module.exports.likeCourse = async (req, res) => {
-  const { id } = req.params;
 
   if (!req.userId) {
     return res.json({ message: "Unauthenticated" });
   }
 
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No course with id: ${id}`);
+  if (!mongoose.Types.ObjectId.isValid(req.params.id))
+    return res.status(404).send("No course with id:" +req.params.id);
 
-  const course = await CourseMessage.findById(id);
+  const course = await CourseMessage.findById(req.params.id);
 
   const index = course.likes.findIndex((id) => id === String(req.userId));
 
@@ -137,6 +141,7 @@ module.exports.likeCourse = async (req, res) => {
     course.likes = course.likes.filter((id) => id !== String(req.userId));
   }
 
+  
   const updatedCourse = await CourseMessage.findByIdAndUpdate(id, course, {
     new: true,
   });
@@ -159,4 +164,3 @@ module.exports.commentCourse = async (req, res) => {
   res.json(updatedCourse);
 };
 
-// module.exports = router;
