@@ -34,7 +34,11 @@ import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
 import Courses from "../Pages/Courses/Courses/Courses";
-import HomeCourse from '../Pages/Courses/HomeCourse/HomeCourse'
+
+import PassQuiz from "../Pages/Quiz/PassQuiz"
+import VideoChat from "../Pages/VideoChat/VideoChat"
+import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
+
 const RRR = () => {
   return (
     <div className="routes">
@@ -58,6 +62,8 @@ const RRR = () => {
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
+          <Route path ="/pass-quiz/:id" element ={<PassQuiz />} />
+          <Route path="/videoChat" element ={<VideoChat />} />
 
           <Route path="/Category/create" element={<CreatCategory />} />
           <Route path="/Category/:id" element={<BrowseCategory />} />

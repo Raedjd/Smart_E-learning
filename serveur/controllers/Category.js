@@ -14,11 +14,11 @@ router.post("/create", async (req, res) => {
   res.send(newCategory);
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res) => { 
   const cat = await Categoryy.findById(req.params.id);
   if (!cat) {
     res.status(404).send({
-      message: "Category not found",
+      message: "Category not found", 
     });
     return;
   }

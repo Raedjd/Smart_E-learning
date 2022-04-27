@@ -24,9 +24,7 @@ function TeacherQuiz() {
         };
         getAllQuizes();
       }, []);
-      useEffect(()=>{
-
-      })
+     
       
     return (  <div>
       <h2 className="text-center">All Quiz</h2>
