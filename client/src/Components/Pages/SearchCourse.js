@@ -14,6 +14,7 @@ const SearchCourse = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/courses").then((data) => {
       setCourses(data.data.data);
+      console.log(data.data.data[3]);
     });
   }, []);
 
@@ -280,7 +281,7 @@ const SearchCourse = () => {
                       <Cardour
                         name={e.title}
                         image={e.selectedFile}
-                        creatorImage={e.creator.image}
+                        // creatorImage={e.creator.image}
                         creatorName={e.name}
                         price={e.price + "$"}
                       />

@@ -1,7 +1,8 @@
 import React from "react";
+import Chatbot from "../Pages/chatbot/Chatbot";
 
 const HomeP = () => {
-  return <div>Home</div>;
+  return <Chatbot />;
 };
 
 export default HomeP;
