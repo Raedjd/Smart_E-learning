@@ -28,6 +28,7 @@
     "mongoose": "^6.2.4",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.15",
+    "shortid": "^2.2.16",
     "validator": "^13.7.0"
   }
 }

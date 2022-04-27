@@ -1,0 +1,70 @@
+.list {
+    display: flex;
+    .listContainer {
+        flex:6;
+        background-color: #fff;
+    }
+    .badgesWidgets {
+        display: flex;
+        flex-wrap: wrap;
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .Title {
+        padding: 20px;
+        font-weight: 600;
+        color: gray;
+    }
+    
+    .inputG {
+        box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+        padding: 20px;
+        margin: 20px;
+    
+        .ramadan {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+    
+            .line {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+    
+                input {
+                    outline: none;
+                    border: 1px solid gray;
+                    border-radius: 5px;
+                    padding: 8px 20px;
+                    width: 240px;
+                }
+    
+                select {
+                    width: 240px;
+                    padding: 8px 20px;
+                }
+            }
+    
+            textarea {
+                width: 490px;
+                height: 120px;
+            }
+    
+            button {
+                // height: 100%;
+                cursor: pointer;
+                padding: 10px 20px;
+                border: none;
+                outline: none;
+                background-color: rgb(70, 70, 240);
+                color: #fff;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 5px;
+            }
+        }
+    }
+}

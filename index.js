@@ -18,8 +18,10 @@ app.get("/jwtid", requireAuth, (req, res) => {
   res.status(200).send(res.locals.user._id);
 });
 const userRoutes = require("./routes/user");
+const topicRoutes = require('./routes/topic');
 //Routes
 app.use("/api/user", userRoutes);
+app.use("/api/topic",topicRoutes )
 
 // Server
 app.listen(process.env.PORT, () => {
