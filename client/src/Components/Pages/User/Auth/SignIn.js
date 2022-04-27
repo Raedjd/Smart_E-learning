@@ -32,7 +32,7 @@ const SignIn = () => {
 
         cookie.set("id", id);
         if (response.data.user.role === "admin") {
-          navigate("/dash");
+          navigate("/dashbord");
         } else navigate("/homeuser");
       })
       .catch((err) => {

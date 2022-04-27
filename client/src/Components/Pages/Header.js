@@ -13,10 +13,10 @@ const Header = () => {
       cookie.remove(key, { expires: 1 });
     }
   };
-  console.log(userData);
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   const handleLogout = async (e) => {
+    e.preventDefault();
     await axios({
       method: "get",
       url: `${process.env.REACT_APP_API_URL}api/user/logout`,
@@ -28,12 +28,11 @@ const Header = () => {
         removeCookie("id");
       })
       .catch((err) => console.log(err));
-    navigate("/homep");
-    window.location.reload();
+    navigate("/home");
   };
 
   return (
-    <header hidden={userData.role === "admin"}>
+    <header>
       <nav className="navbar navbar-expand-xl navbar-light bg-transparent">
         <div class="container">
           <a class="navbar-brand" href="index.html">

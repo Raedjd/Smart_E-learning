@@ -11,8 +11,6 @@ const List = () => {
         <Navbar/>
         <Datatable/>
       </div>
-
-    
     </div>
   )
 }

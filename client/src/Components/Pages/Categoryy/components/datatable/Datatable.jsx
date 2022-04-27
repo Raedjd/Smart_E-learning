@@ -1,89 +1,55 @@
 import "./datatable.scss";
+import { DataGrid } from "@mui/x-data-grid";
+import { userColumns, userRows } from "../../datatablesource";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { useSelector } from "react-redux";
-import { saveAs } from "file-saver";
-import { AiOutlineFileUnknown } from "react-icons/ai";
-import axios from "axios";
 const Datatable = () => {
-  const userData = useSelector((state) => state.usersReducer);
+  const [data, setData] = useState(userRows);
 
+  const handleDelete = (id) => {
+    setData(data.filter((item) => item.id !== id));
+  };
 
-const usersData = Object.keys(userData).map((key) => userData[key]);
-
+  const actionColumn = [
+    {
+      field: "action",
+      headerName: "Action",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="cellAction">
+            <Link to="/dash/users/test" style={{ textDecoration: "none" }}>
+              <div className="viewButton">View</div>
+            </Link>
+            <div
+              className="deleteButton"
+              onClick={() => handleDelete(params.row.id)}
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
   return (
-    <div className="tables">
-          <TableContainer component={Paper} className="table">
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell className="tableCell">ID</TableCell>
-                  <TableCell className="tableCell">username</TableCell>
-                  <TableCell className="tableCell">Email</TableCell>
-                  <TableCell className="tableCell">Status</TableCell>
-                  <TableCell className="tableCell">Document</TableCell>
-          
-                  <TableCell className="tableCell">***</TableCell> 
-                </TableRow>
-              </TableHead>
-              <TableBody> 
-                 {usersData.map((user, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="tableCell">{i + 1}</TableCell>
-                    <TableCell className="tableCell">{user.username}</TableCell>
-                    <TableCell className="tableCell">{user.email}</TableCell>
-                    <TableCell className="tableCell">{user.role}</TableCell>
-                    <TableCell className="tableCell">  <button
-                        onClick={() => {
-                          saveAs(
-                            user.yourDataFile
-                          );
-                     
-                        }}
-                       hidden={!user.yourDataFile}  
-                      >
-                      <AiOutlineFileUnknown/>
-                      </button> </TableCell>
-       
-                
-               
-                     <TableCell className="tableCell">
-                      <button
-                  
-                  onClick={() => {
-                    axios({
-                      method: "patch",
-                      url: `${process.env.REACT_APP_API_URL}api/user/update-role/${user._id}`,
-                      withCredentials: true,
-                
-                    })
-                      .then((response) => {
-                        console.log(response);
-                      })
-                      .catch((err) => {
-                        console.log(err); 
-                      });
-                    // console.log(user._id)
-                     window.location.reload();
-                  }}
-                        className="updateBtn"
-                        hidden={user.role !== "student"}
-                      >
-                        Become a teacher
-                      </button>
-                    </TableCell> 
-                  </TableRow>
-                ))} 
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+    <div className="datatable">
+      <div className="datatableTitle">
+        Add New User
+        <Link to="/users/new" className="link">
+          Add New
+        </Link>
+      </div>
+      <DataGrid
+        className="datagrid"
+        rows={data}
+        columns={userColumns.concat(actionColumn)}
+        pageSize={9}
+        rowsPerPageOptions={[9]}
+        checkboxSelection
+      />
+    </div>
   );
 };
 

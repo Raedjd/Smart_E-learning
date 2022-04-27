@@ -20,8 +20,8 @@ export const userColumns = [
   },
 
   {
-    field: "document",
-    headerName: "Document",
+    field: "age",
+    headerName: "Age",
     width: 100,
   },
   {

@@ -39,8 +39,6 @@ const userRoutes = require("./routes/user");
 const postRoutes = require("./routes/post");
 const uploadRoutes = require("./routes/uploadFile");
 const quizRoutes = require("./routes/quiz");
-const courseRoutes = require("./routes/courses.js");
-const reviewRouter = require("./routes/review.js");
 //Routes
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
@@ -53,8 +51,7 @@ app.use("/api/comment", require("./controllers/Comment"));
 app.use("/api/categories", require("./routes/categoryRoutes"));
 app.use("/api/subcategories", require("./routes/subCategoryRoutes"));
 app.use("/api/badges", require("./routes/badgeRoute"));
-app.use("/api/courses", courseRoutes);
-app.use("/api/reviews", reviewRouter)
+
 // Server
 app.listen(process.env.PORT, () => {
   console.log(`Listening on port ${process.env.PORT}`);
