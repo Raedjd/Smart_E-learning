@@ -35,7 +35,8 @@ module.exports.requireAuth = (req, res, next) => {
     jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
       if (err) {
         console.log(err);
-        res.send(200).json({ msg: "Invalid Authentication." });
+        res.send(200).json({ msg: "Invalid Authentication.1" });
+        
       } else {
         //  console.log(decodedToken.id);
         // user = UserModel.findOne({ _id: decodedToken.id });
@@ -43,7 +44,7 @@ module.exports.requireAuth = (req, res, next) => {
       }
     });
   } else {
-    console.log("Invalid Authentication");
+    console.log("Invalid Authentication2");
   }
 };
 
@@ -51,10 +52,10 @@ module.exports.requireAuth = (req, res, next) => {
 module.exports.forResetPass = (req, res, next) => {
   try {
     const token = req.header("Authorization");
-    if (!token) return res.status(400).json({ msg: "Invalid Authentication." });
+    if (!token) return res.status(400).json({ msg: "Invalid Authentication.3" });
 
     jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-      if (err) return res.status(400).json({ msg: "Invalid Authentication." });
+      if (err) return res.status(400).json({ msg: "Invalid Authentication.4" });
 
       req.user = user;
       next();

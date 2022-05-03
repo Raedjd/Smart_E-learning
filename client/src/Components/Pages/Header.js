@@ -119,6 +119,13 @@ const Header = () => {
                   {" "}
                   quizes
                 </Link>
+                
+              </li>
+              <li class="nav-item">
+                <Link className="nav-link" to="/videoChat">
+                  {" "}
+                  VideoChat
+                </Link>
               </li>
             </ul>
             <div class="d-flex align-items-center justify-content-between rightContent">

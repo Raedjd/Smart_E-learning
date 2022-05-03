@@ -6,12 +6,12 @@ function Answer({ answer ,question, updateAnswerFeild } ) {
   };
   const checkboxhandler =  (e) =>{
     answer.isRight=e.target.checked
-    console.log("🚀 ~ file: Answer.js ~ line 9 ~ checkboxhandler ~ answer.isRigth", answer.isRight)
     updateAnswerFeild(question.id ,answer)
   }
 
   
   return (
+    
     <div>
       <label>Answer: </label>
       <input
@@ -21,7 +21,7 @@ function Answer({ answer ,question, updateAnswerFeild } ) {
         placeholder="enter your answer"
         onChange={inputHandler}
       />
-      <input type="checkbox" name="isRight"   onChange={checkboxhandler}/> isRight
+      <input type="radio" name={question.id}   onChange={checkboxhandler}/> isRight
     </div>
   );
 }

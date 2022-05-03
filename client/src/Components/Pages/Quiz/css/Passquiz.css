@@ -1,0 +1,23 @@
+.questionCard{
+    width: 100%;
+}
+.questionTitle{
+    text-align: center;
+    font-weight: 600;
+    padding: 15px;
+
+}
+.passAnswer{
+    border: none;
+    background: none;
+    width: 100%;
+    font-weight: 300;
+    padding: 10px;
+}
+.passAnswer:hover {
+    background-color:gainsboro;
+
+}
+.quiz-result{
+    width: 100%;
+}

@@ -7,6 +7,7 @@ import MyProfil from "./MyProfil";
 import Settings from "./Settings";
 import BecomeTeacher from "./BecomeTeacher";
 import AllQuiz from "../../../Quiz/AllQuizes"
+import HistoryQuiz from "../../../Quiz/HistoryQuiz";
 import TeacherQuiz from "../../../Quiz/TeacherQuiz"
 
 
@@ -159,7 +160,18 @@ const ProfilStudent = () => {
                   >
                       All quiz
                   </button>
-
+                  <button hidden={userData.role==="teacher"}
+                    class="nav-link"
+                    id="nav-quizHistory-tab"
+                    data-bs-toggle="tab"
+                    data-bs-target="#nav-quizHistory"
+                    type="button"
+                    role="tab"
+                    aria-controls="nav-quizHistory"
+                    aria-selected="false"
+                  >
+                      quiz History
+                  </button>
                   <button
                     class="nav-link"
                     id="nav-purchase-tab"
@@ -322,7 +334,18 @@ const ProfilStudent = () => {
                     >
                       all quiz
                     </button>
-
+                    <button
+                      class="nav-link"
+                      id="nav-quizHistory-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#nav-quizHistory"
+                      type="button"
+                      role="tab"
+                      aria-controls="nav-quizHistory"
+                      aria-selected="false"
+                    >
+                    quiz History
+                    </button>
                     <button
                       class="nav-link"
                       id="nav-purchase-tab"
@@ -361,6 +384,9 @@ const ProfilStudent = () => {
 
                 <div class="tab-pane fade" id="nav-quiz" role="tabpanel" aria-labelledby="nav-quiz-tab">
                   <TeacherQuiz />
+                </div>
+                <div class="tab-pane fade" id="nav-quizHistory" role="tabpanel" aria-labelledby="nav-quizHistory-tab">
+                  <HistoryQuiz />
                 </div>
                 {/*----------------------------------------------------------------------*/}
                 <div

@@ -19,7 +19,7 @@ const quizSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        response: [
+        answers: [
           {
             isRight: {
               type: Boolean,
@@ -32,6 +32,9 @@ const quizSchema = new mongoose.Schema(
         ],
       },
     ],
+    description : {
+        type :String,
+    },
     level: {
       type: String,
       enum: ["beginner", "Medium", "advanced"],

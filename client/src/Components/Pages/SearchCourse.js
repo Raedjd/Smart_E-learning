@@ -1,71 +1,35 @@
 import React, { useEffect, useState } from "react";
 import Cardour from "./Cardour";
+import axios from "axios";
 
 const SearchCourse = () => {
+  const [data, setData] = useState([]);
   const [searchs, setSearchs] = useState("");
-  const data = [
-    {
-      name: "english",
-      img: "dist/images/courses/demo-img-01.png",
-      category: "language",
-      creator: {
-        name: "john",
-        image: "dist/images/courses/7.png",
-      },
-    },
-    {
-      name: "english",
-      img: "dist/images/courses/demo-img-01.png",
-      category: "language",
-      creator: {
-        name: "john",
-        image: "dist/images/courses/7.png",
-      },
-    },
-    {
-      name: "english",
-      img: "dist/images/courses/demo-img-01.png",
-      category: "language",
-      creator: {
-        name: "john",
-        image: "dist/images/courses/7.png",
-      },
-    },
-    {
-      name: "python",
-      img: "dist/images/courses/demo-img-01.png",
-      category: "ai",
-      creator: {
-        name: "john",
-        image: "dist/images/courses/7.png",
-      },
-    },
-    {
-      name: "js",
-      img: "dist/images/courses/demo-img-01.png",
-      category: "web",
-      creator: {
-        name: "john",
-        image: "dist/images/courses/7.png",
-      },
-    },
-  ];
+  const [catData, setCatData] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/categories").then((data) => {
+      setCatData(data.data);
+    });
+  }, []);
+  useEffect(() => {
+    axios.get("http://localhost:5000/courses").then((data) => {
+      setCourses(data.data.data);
+      console.log(data.data.data[3]);
+    });
+  }, []);
+
   const [courses, setCourses] = useState([]);
   const [catArr, setCatArr] = useState([]);
   useEffect(() => {
-    setCourses(data);
+    setData(courses);
   }, []);
-  useEffect(() => {
-    console.log(catArr);
-  }, [catArr]);
 
-  const category = ["language", "web", "ai"];
   const handleSearch = (e) => {
     setSearchs(e.target.value);
   };
   const SearchCourse = (e) => {
     e.preventDefault();
-    let searchArr = data.filter((course) => course.name === searchs);
+    let searchArr = data.filter((course) => course.title === searchs);
     setCourses(searchArr);
   };
   const checkingHandle = (e) => {
@@ -79,6 +43,11 @@ const SearchCourse = () => {
       setCatArr(arr);
     }
   };
+  if (courses.length==0){
+  return(<div>
+      There is no courses for the moment 
+  </div>)}
+  else
   return (
     <div>
       <section class="section event-search" style={{ marginTop: "50px" }}>
@@ -98,7 +67,7 @@ const SearchCourse = () => {
                       class="button button-lg button--primary"
                       type="submit"
                       id="button-addon2"
-                      onClick={SearchCourse}
+                     onClick={SearchCourse}
                     >
                       Search
                     </button>
@@ -125,7 +94,7 @@ const SearchCourse = () => {
           <div class="row">
             <div class="col-lg-4 d-none d-lg-block">
               <div class="accordion sidebar-filter" id="sidebarFilter">
-                {/* <!-- Category  --> */}
+                {/* <!-- Category 2222222 --> */}
                 <div class="accordion-item">
                   <h2 class="accordion-header" id="categoryAcc">
                     <button
@@ -147,18 +116,17 @@ const SearchCourse = () => {
                   >
                     <div class="accordion-body">
                       <form action="#">
-                        {category.map((e) => (
+                        {catData.map((e) => (
                           <div class="accordion-body__item">
                             <div class="check-box">
                               <input
                                 type="checkbox"
                                 class="checkbox-primary"
-                                value={e}
+                                value={e.name}
                                 onChange={checkingHandle}
                               />
-                              <label> {e} </label>
+                              <label> {e.name} </label>
                             </div>
-                            <p class="check-details">1,54,750</p>
                           </div>
                         ))}
                       </form>
@@ -316,11 +284,12 @@ const SearchCourse = () => {
                 {catArr.length === 0
                   ? courses.map((e) => (
                       <Cardour
-                        name={e.name}
-                        image={e.img}
-                        creatorImage={e.creator.image}
-                        creatorName={e.creator.name}
-                        price="$45"
+                        name={e.title}
+                        image={e.selectedFile}
+                     //  creatorImage={e.creator.image}
+                        // creatorImage={e.creator.image}
+                        creatorName={e.name}
+                        price={e.price + "$"}
                       />
                     ))
                   : courses
@@ -331,11 +300,11 @@ const SearchCourse = () => {
                       })
                       .map((e) => (
                         <Cardour
-                          name={e.name}
-                          image={e.img}
+                          name={e.title}
+                          image={e.selectedFile}
                           creatorImage={e.creator.image}
-                          creatorName={e.creator.name}
-                          price="$45"
+                          creatorName={e.name}
+                          price={e.price + "$"}
                         />
                       ))}
               </div>
