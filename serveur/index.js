@@ -13,7 +13,7 @@ const server = require("http").createServer(app);
 //////////////////////////////////////////////////////////////
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cookieParser());
+app.use(cookieParser()); 
 
 //////////////////////////////////////////////////////////////
 const corsOptions = {
