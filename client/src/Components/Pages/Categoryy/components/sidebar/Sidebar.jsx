@@ -86,6 +86,12 @@ const Sidebar = () => {
             <li>
               <QuizIcon className="icon" />
               <span>Quizes</span>
+              </li>
+              </Link>
+          <Link to="/dash/topics" style={{ textDecoration: "none" }}>
+            <li>
+              <ClassIcon className="icon" />
+              <span>Topics</span>
             </li>
           </Link>
           <p className="title">USEFUL</p>

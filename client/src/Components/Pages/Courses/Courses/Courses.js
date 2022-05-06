@@ -15,7 +15,6 @@ const Courses = ({ setCurrentId }) => {
       setCourses(data.data.data);
     });
   }, []);
-  console.log(courses);
   const classes = useStyles();
 
   if (!courses.length && !isLoading) return "No courses";

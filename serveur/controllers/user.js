@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const sendCong = require("./teacherEmail");
 const jwt = require("jsonwebtoken");
 
+
+
 module.exports.getAllUsers = async (req, res) => {
   const allUsers = await UserModel.find().select("-password"); //select all data except password
   const users = allUsers.filter((user) => user.disabled === false);
@@ -186,6 +188,8 @@ module.exports.follow = async (req, res) => {
     return res.status(500).json({ message: err });
   }
 };
+
+
 ///////////////////////////////////////////////////////////////////////////////
 module.exports.unfollow = async (req, res) => {
   if (

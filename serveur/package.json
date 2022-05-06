@@ -39,6 +39,8 @@
     "socket.io": "^4.5.0",
     "stream": "^0.0.2",
     "twilio": "^3.76.0",
-    "validator": "^13.7.0"
+    "validator": "^13.7.0",
+    "@google-cloud/storage": "^5.18.2",
+    "dialogflow": "^1.2.0"
   }
 }

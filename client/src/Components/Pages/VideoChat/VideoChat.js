@@ -9,6 +9,7 @@ import Peer from "simple-peer";
 import io from "socket.io-client";
 import { useSelector } from "react-redux";
 import cookie from "js-cookie"
+import "./Videochat.css";
 const socket = io.connect('http://localhost:5000')
 
 
@@ -96,9 +97,9 @@ function  VideoChat() {
 	}
 
 	return (
-		<>
+		<div className="body-video-chat">
 			<h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
-		<div className="container">
+		<div className="container-video">
 			<div className="video-container">
 				<div className="video">
 					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
@@ -155,7 +156,7 @@ function  VideoChat() {
 				) : null}
 			</div>
 		</div>
-		</>
+		</div>
 	)
 }
 

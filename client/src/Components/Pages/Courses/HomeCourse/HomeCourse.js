@@ -37,7 +37,7 @@ const Home = () => {
   const searchCourse = () => {
     if (search.trim() || tags) {
       dispatch(getCoursesBySearch({ search, tags: tags.join(",") }));
-      history.push(
+      history(
         `/courses/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
       );
     } else {
@@ -101,14 +101,17 @@ const Home = () => {
                 Search
               </Button>
             </AppBar>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
+            <Form currentId={currentId}  setCurrentId={setCurrentId} />
+            {console.log(currentId)}
 
-            {!searchQuery && !tags.length && (
+             {!searchQuery && !tags.length && (
               <Paper className={classes.pagination} elevation={6}>
-                <Pagination page={page} />
+                <Pagination 
+                 page={page}
+                 />
                 <br />
               </Paper>
-            )}
+            )} 
           </Grid>
         </Grid>
       </Container>

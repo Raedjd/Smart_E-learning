@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate , } from "react-router-dom";
 import Header from "../Pages/Header";
 import SignUp from "../Pages/User/Auth/SignUp";
 import SignIn from "../Pages/User/Auth/SignIn";
@@ -38,8 +38,20 @@ import PassQuiz from "../Pages/Quiz/PassQuiz"
 import VideoChat from "../Pages/VideoChat/VideoChat"
 import AdminQuizes from "../Pages/Quiz/AdminQuizes";
 import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
+import { useContext } from "react";
+import cookie from "js-cookie";
+import { useSelector } from "react-redux";
+import Messenger from "../Pages/Messenger/Messenger";
+import TopicManag from "../Pages/Categoryy/pages/Topics/TopicManag";
+
+ 
+
+
 
 const RRR = () => {
+
+  const userData = useSelector((state) => state.userReducer);
+  const userId = cookie.get("id");
   return (
     <div className="routes">
       <BrowserRouter>
@@ -53,11 +65,11 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses" element={<HomeCourse />} />
 
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
-          <Route path="/searchcourse" element={<SearchCourse />}></Route>
+          <Route path="/searchcourse" element={<SearchCourse/>}></Route>
 
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
@@ -68,12 +80,15 @@ const RRR = () => {
           <Route path="/Category/create" element={<CreatCategory />} />
           <Route path="/Category/:id" element={<BrowseCategory />} />
           <Route path="/category/new/:id" element={<ShowCategory />} />
-          <Route path="/forum/new/:quizId" element={<ShowForum />} />
+          <Route path="/forum/new/:id" element={<ShowForum />} />
 
           <Route path="/forum/create/:id" element={<CreateForum />} />
           <Route path="/forum" element={<BrowseForum />} />
           <Route path="/topic/new/:id" element={<ShowTopic />} />
           <Route path="/topic/create/:id" element={<CreateTopic />} />
+          <Route path="/messenger">
+            <Route exact path="/messenger"   element={!userId ? <SignIn/> : <Messenger />}/>
+        </Route>
 
           <Route path="/dash">
             <Route index element={<Home />} />
@@ -106,6 +121,9 @@ const RRR = () => {
             </Route>
             <Route path="Quizes">
               <Route index element={<AdminQuizes />} />
+              </Route>
+            <Route path="topics">
+              <Route index element={<TopicManag />} />
             </Route>
           </Route>
         </Routes>

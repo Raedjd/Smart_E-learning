@@ -9,26 +9,15 @@ import { createCourse, updateCourse } from "../../../../actions/courses";
 import useStyles from "./styles";
 
 const Form = ({ currentId, setCurrentId }) => {
+  
   const userId = cookie.get("id");
-  const [courseData, setCourseData] = useState({
-    title: "",
-    description: "",
-    tags: [],
-    price: "",
-    selectedFile: "",
-  });
-  const course = useSelector((state) =>
-    currentId
-      ? state.courses.courses.find(
-          (description) => description._id === currentId
-        )
-      : null
-  );
+  const [courseData, setCourseData] = useState({title: "",description: "",tags: [],price: "",selectedFile: "",});
+  const course = useSelector((state) =>currentId? state.courses.courses.find((description) => description._id === currentId): null);
+  const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"));
   const history = useNavigate();
-
   const clear = () => {
     setCurrentId(0);
     setCourseData({
@@ -39,32 +28,58 @@ const Form = ({ currentId, setCurrentId }) => {
       selectedFile: "",
     });
   };
+   useEffect(() => {
+     if (!course?.title) 
+        {clear();}
+     if (course) setCourseData(course);
+   }, [course]);
+   const Category = [
+    { label: 'Language',value:'language' },
+    { label: 'Math',value:'math' },
+    { label: 'IT',value:'it' },
+    { label: 'Back',value:'back' },
+    { label: 'Front',value:'front'}]
+   
+   const level = [
+    { label: 'Beginner',value:'Beginner' },
+    { label: ' Intermediate',value:'Intermediate' },
+    { label: 'Advanced',value:'Advanced' }] 
 
-  useEffect(() => {
-    if (!course?.title) clear();
-    if (course) setCourseData(course);
-  }, [course]);
+
+    const handleCat=(e)=> {
+      setCourseData({ ...courseData, category: e.target.value })
+    }
+    const handleLvl=(e)=> {
+      setCourseData({ ...courseData, level: e.target.value })
+    }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (currentId === 0) {
+    if (currentId === 0)
+     {
       dispatch(
-        createCourse({ ...courseData, name: user?.result?.name }, history)
+        createCourse({ ...courseData,name:userData.firstName + " " + userData.lastName ,creator:userId },history)
       );
       clear();
-      console.log(courseData);
-    } else {
+      console.log("user?.result.username");
+    }
+     else {
+       console.log("currentid:",currentId)
       dispatch(
-        updateCourse(currentId, { ...courseData, name: user?.result?.name })
+        updateCourse(currentId, { ...courseData, name:userData.firstName + " " + userData.lastName})
       );
+
       clear();
-      console.log(courseData);
+    //  console.log(courseData);
     }
   };
 
   if (!userId) {
     return (
+
+
+      
       <Paper className={classes.paper} elevation={6}>
         <Typography variant="h6" align="center">
           Please Sign In to create your own courses and like other's courses.
@@ -86,7 +101,7 @@ const Form = ({ currentId, setCurrentId }) => {
 
   return (
     <Paper className={classes.paper} elevation={6}>
-      <form
+       <form
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
@@ -128,6 +143,18 @@ const Form = ({ currentId, setCurrentId }) => {
             setCourseData({ ...courseData, price: e.target.value })
           }
         />
+        <select onChange={handleCat} fullWidth >
+          <option  default>select category</option>
+          {Category.map(e=>( 
+            <option value={e.value} >{e.value}</option>
+          )) }
+        </select> <br/>
+        <select onChange={handleLvl} fullWidth >
+          <option  default>select level</option>
+          {level.map(e=>( 
+            <option value={e.value} >{e.value}</option>
+          )) }
+        </select>
 
         <div style={{ padding: "5px 0", width: "94%" }}>
           <ChipInput
