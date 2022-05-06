@@ -98,7 +98,7 @@ function  VideoChat() {
 
 	return (
 		<div className="body-video-chat">
-			<h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
+			<h1 style={{ textAlign: "center" }}>Video Call</h1>
 		<div className="container-video">
 			<div className="video-container">
 				<div className="video">
