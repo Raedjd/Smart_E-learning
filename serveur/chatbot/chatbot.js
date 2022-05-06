@@ -2,6 +2,7 @@
 const structjson = require("./structjson");
 const dialogflow = require("dialogflow");
 const config = require("../config/keys");
+const UserModel = require("../models/user");
 
 const projectID = config.googleProjectID;
 const credentials = {
@@ -77,6 +78,13 @@ module.exports = {
           self.saveRegistration(queryResult.parameters.fields);
         }
         break;
+      case "subscribe-yes":
+        console.log(queryResult.allRequiredParamsPresent);
+        if (queryResult.allRequiredParamsPresent) {
+          console.log(queryResult.parameters);
+          self.signUp(queryResult.parameters.fields);
+        }
+        break;
     }
     return responses;
   },
@@ -89,6 +97,21 @@ module.exports = {
     });
     try {
       let reg = await registration.save();
+      console.log(reg);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  signUp: async function (fields) {
+    const user = new UserModel({
+      username: fields.username,
+      password: fields.password,
+      email: fields.email,
+      firstName: fields.firstName,
+      lastName: fields.lastName,
+    });
+    try {
+      let reg = await user.save();
       console.log(reg);
     } catch (err) {
       console.log(err);
