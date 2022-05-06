@@ -38,7 +38,7 @@ function AllQuizes() {
         <h1>All Quizes</h1>
         <div className="container">
           <div className="row">
-            <div className="col-lg-4 d-none d-lg-block">
+            <div className="col-lg-3 d-none d-lg-block">
               <h2>Filter</h2>
   
               <LevelFilter
@@ -51,7 +51,7 @@ function AllQuizes() {
 
             </div>
             
-            <div className="col-lg-8">
+            <div className="col-lg-9">
               <div className="row event-search-content">
                 {filterLevel.map((quiz) => (
                   <SingleQuiz key={quiz._id} quiz={quiz} />

@@ -81,6 +81,12 @@ const Sidebar = () => {
               <span>Badges</span>
             </li>
           </Link>
+          <Link to="/dash/topics" style={{ textDecoration: "none" }}>
+            <li>
+              <ClassIcon className="icon" />
+              <span>Topics</span>
+            </li>
+          </Link>
           <p className="title">USEFUL</p>
           <li>
             <InsertChartIcon className="icon" />

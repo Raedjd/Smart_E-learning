@@ -15,6 +15,8 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import { useDispatch } from "react-redux";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import cookie from "js-cookie";
+
 
 import {
   likeCourse,
@@ -23,14 +25,17 @@ import {
 } from "../../../../../actions/courses";
 import useStyles from "./styles";
 
-const Course = ({ course, setCurrentId }) => {
+const Course = ({ course,currentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const [likes, setLikes] = useState(course?.likes);
   const dispatch = useDispatch();
   const history = useNavigate();
   const classes = useStyles();
+  const userId = cookie.get("id");
+  
 
-  const userId = user?.result.googleId || user?.result?._id;
+
+  //const userId = user?.result.googleId || user?.result?._id;
   const hasLikedCourse = course.likes.find((like) => like === userId);
 
   const handleLike = async () => {
@@ -72,7 +77,7 @@ const Course = ({ course, setCurrentId }) => {
   const openCourse = (e) => {
     dispatch(getCourse(course._id, history));
 
-    history.push(`/courses/${course._id}`);
+    history(`/courses/${course._id}`);
   };
 
   return (
@@ -97,14 +102,12 @@ const Course = ({ course, setCurrentId }) => {
             {moment(course.createdAt).fromNow()}
           </Typography>
         </div>
-        {(user?.result?.googleId === course?.creator ||
-          user?.result?._id === course?.creator) && (
+        {(userId === course?.creator ) && (
           <div className={classes.overlay2} name="edit">
             <Button
               onClick={(e) => {
                 e.stopPropagation();
-                setCurrentId(course._id);
-                console.log(user.id)
+                currentId=course._id
               }}
               style={{ color: "white" }}
               size="small"
@@ -141,8 +144,7 @@ const Course = ({ course, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        {(user?.result?.googleId === course?.creator ||
-          user?.result?._id === course?.creator) && (
+        {(userId === course?.creator ) && (
           <Button
             size="small"
             color="secondary"

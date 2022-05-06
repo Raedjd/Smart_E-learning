@@ -25,7 +25,6 @@ router.get(
   //auth.authAdmin,
   userController.getAllUsers
 );
-
 router.get("/get-user", auth.requireAuth, userController.getOneUser);
 router.patch("/modify-user", auth.requireAuth, userController.modifyUser);
 router.delete("/delete-user", auth.requireAuth, userController.removeUser);

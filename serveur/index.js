@@ -8,6 +8,7 @@ require("./config/db");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
 const app = express();
+const server = require("http").createServer(app);
 
 //////////////////////////////////////////////////////////////
 app.use(bodyParser.json());
@@ -29,6 +30,36 @@ app.use(
     useTempFiles: true,
   })
 );
+// Socket io
+///////////////////////////////////////////////
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methodes: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  socket.emit("me", socket.id);
+
+  socket.on("disconnect", () => {
+    socket.broadcast.emit("callEnded");
+  });
+
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("callUser", {
+      signal: data.signalData,
+      from: data.from,
+      name: data.name,
+    });
+  });
+
+  socket.on("answerCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
+  });
+});
+
+//////////////////////////////////////////////
 
 // jwt: for security auth
 app.get("*", checkUser);
@@ -46,18 +77,27 @@ const reviewRouter = require("./routes/review.js");
 const conversationRoute = require("./routes/conversations");
 
 const messageRoute = require("./routes/messages");
+const quizHistoryRoutes = require("./routes/QuizHistory");
+
 //Routes
 app.use("/api/user", userRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/quiz", quizRoutes);
 app.use("/api/oneuser", oneuserRoutes);
+app.use("/api/quizHistory", quizHistoryRoutes);
+
+app.use("/api/category", require("./controllers/Category"));
+app.use("/api/forum", require("./controllers/Forum"));
+app.use("/api/topic", require("./controllers/Topic"));
+app.use("/api/comment", require("./controllers/Comment"));
 
 app.use("/api/category", require("./controllers/Category"));
 app.use("/api/forum", require("./controllers/Forum"));
 app.use("/api/topic", require("./controllers/Topic"));
 app.use("/api/comment", require("./controllers/Comment"));
 app.use("/api/categories", require("./routes/categoryRoutes"));
+app.use("/api/topics", require("./routes/topicsRoutes"));
 app.use("/api/subcategories", require("./routes/subCategoryRoutes"));
 app.use("/api/badges", require("./routes/badgeRoute"));
 app.use("/courses", courseRoutes);
@@ -66,7 +106,10 @@ app.use("/api/conversations", conversationRoute);
 
 app.use("/api/messages", messageRoute);
 
+
+
 // Server
-app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
+  require("./routes/dialogFlowRoutes")(app);
   console.log(`Listening on port ${process.env.PORT}`);
 });

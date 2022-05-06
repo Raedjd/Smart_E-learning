@@ -39,9 +39,16 @@ import { useContext } from "react";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
 import Messenger from "../Pages/Messenger/Messenger";
+import PassQuiz from "../Pages/Quiz/PassQuiz";
+import VideoChat from "../Pages/VideoChat/VideoChat";
+import TopicManag from "../Pages/Categoryy/pages/Topics/TopicManag";
+
+ 
+
 
 
 const RRR = () => {
+
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
   return (
@@ -57,20 +64,22 @@ const RRR = () => {
           <Route path="/verifyemail" element={<VerifyEmail />} />
 
           <Route path="/notfound" element={<NotFound />} />
-          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses" element={<HomeCourse />} />
 
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
-          <Route path="/searchcourse" element={<SearchCourse />}></Route>
+          <Route path="/searchcourse" element={<SearchCourse/>}></Route>
 
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
+          <Route path ="/pass-quiz/:id" element ={<PassQuiz />} />
+          <Route path="/videoChat" element ={<VideoChat />} />
 
           <Route path="/Category/create" element={<CreatCategory />} />
           <Route path="/Category/:id" element={<BrowseCategory />} />
           <Route path="/category/new/:id" element={<ShowCategory />} />
-          <Route path="/forum/new/:quizId" element={<ShowForum />} />
+          <Route path="/forum/new/:id" element={<ShowForum />} />
 
           <Route path="/forum/create/:id" element={<CreateForum />} />
           <Route path="/forum" element={<BrowseForum />} />
@@ -105,10 +114,12 @@ const RRR = () => {
             <Route path="subcategories">
               <Route index element={<Subcategory />} />
             </Route>
-            
             <Route path="badges">
               <Route index element={<BadgePage />} />
               <Route path=":badgeId" element={<SingleBadge />} />
+            </Route>
+            <Route path="topics">
+              <Route index element={<TopicManag />} />
             </Route>
           </Route>
         </Routes>

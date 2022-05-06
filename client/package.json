@@ -24,6 +24,7 @@
     "moment": "^2.27.0",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^17.0.2",
     "react-facebook-login": "^4.1.1",
     "react-file-base64": "^1.0.3",
@@ -45,8 +46,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.4.1",
     "sass": "^1.49.9",
-    "socket.io-client": "^4.5.0",
     "timeago.js": "^4.0.2",
+    "simple-peer": "^9.11.1",
+    "socket.io-client": "^4.5.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

@@ -25,7 +25,7 @@ export default function ShowForum(){
 
     const getTopics = async() =>{
 
-        const response = await axios.get('/api/topic/forum/'+id);
+        const response = await axios.get('http://localhost:5000/api/topic/forum/'+id);
         setTopics(response.data);
 
     };
