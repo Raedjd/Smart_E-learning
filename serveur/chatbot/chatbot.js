@@ -104,11 +104,11 @@ module.exports = {
   },
   signUp: async function (fields) {
     const user = new UserModel({
-      username: fields.username,
-      password: fields.password,
-      email: fields.email,
-      firstName: fields.firstName,
-      lastName: fields.lastName,
+      username: fields.name.stringValue,
+      password: fields.password.stringValue,
+      email: fields.email.stringValue,
+      firstName: fields.firstName.stringValue,
+      lastName: fields.lastName.stringValue,
     });
     try {
       let reg = await user.save();
