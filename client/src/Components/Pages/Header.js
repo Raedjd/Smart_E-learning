@@ -122,7 +122,7 @@ const Header = () => {
                 
               </li>
               <li class="nav-item">
-                <Link className="nav-link" to="/videoChat">
+                <Link  className="nav-link" to="/videoChat" hidden={!(userId)}>
                   {" "}
                   VideoChat
                 </Link>
