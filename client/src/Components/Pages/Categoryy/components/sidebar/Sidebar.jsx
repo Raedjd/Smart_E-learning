@@ -3,6 +3,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ClassIcon from '@mui/icons-material/Class';
 import InsertChartIcon from "@mui/icons-material/InsertChart";
+import QuizIcon from '@mui/icons-material/Quiz';
 import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -79,6 +80,12 @@ const Sidebar = () => {
             <li>
               <ClassIcon className="icon" />
               <span>Badges</span>
+            </li>
+          </Link>
+          <Link to="/dash/Quizes" style={{ textDecoration: "none" }}>
+            <li>
+              <QuizIcon className="icon" />
+              <span>Quizes</span>
             </li>
           </Link>
           <p className="title">USEFUL</p>

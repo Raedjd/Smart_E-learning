@@ -36,6 +36,7 @@ import HomeP from "../Pages/HomeP";
 import Courses from "../Pages/Courses/Courses/Courses";
 import PassQuiz from "../Pages/Quiz/PassQuiz"
 import VideoChat from "../Pages/VideoChat/VideoChat"
+import AdminQuizes from "../Pages/Quiz/AdminQuizes";
 import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
 
 const RRR = () => {
@@ -102,6 +103,9 @@ const RRR = () => {
             <Route path="badges">
               <Route index element={<BadgePage />} />
               <Route path=":badgeId" element={<SingleBadge />} />
+            </Route>
+            <Route path="Quizes">
+              <Route index element={<AdminQuizes />} />
             </Route>
           </Route>
         </Routes>
