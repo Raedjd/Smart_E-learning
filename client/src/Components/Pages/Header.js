@@ -122,8 +122,8 @@ const Header = () => {
                         src={userData.avatar}
                         alt="user-avatar"
                         class="rounded-circle "
-                        width="25"
-                        height="25"
+                        width="30"
+                        height="30"
                       />
                       &nbsp;&nbsp;
                       <small>{userData.username}</small>
