@@ -102,11 +102,11 @@ function  VideoChat() {
 		<div className="container-video">
 			<div className="video-container">
 				<div className="video">
-					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
+					{stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "350px" }} />}
 				</div>
 				<div className="video">
 					{callAccepted && !callEnded ?
-					<video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+					<video playsInline ref={userVideo} autoPlay style={{ width: "350px"}} />:
 					null}
 				</div>
 			</div>

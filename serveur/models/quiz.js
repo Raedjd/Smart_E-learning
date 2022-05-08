@@ -39,7 +39,11 @@ const quizSchema = new mongoose.Schema(
       type: String,
       enum: ["beginner", "Medium", "advanced"],
     },
-    numberOfQuestion: {
+    category: {
+      type: String,
+      enum: ["development", "business", "design" , "marketing"],
+    },
+    numberOfQuestion: { 
       type: Number,
     },
     enabled: {

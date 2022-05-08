@@ -20,6 +20,7 @@ module.exports.addQuiz = async (req, res) => {
     questions: req.body.questions,
     level: req.body.level,
     description:req.body.description,
+    category:req.body.category,
     numberOfQuestion:req.body.numberOfQuestion,
     updatedAt: Date.now(),
   });

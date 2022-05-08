@@ -68,6 +68,14 @@ function QuizDetail() {
                                                 <p>{data.quiz.level}</p>
                                             </dd>
                                         </dl>
+                                        <dl class="row my-0 info-student-topic">
+                                            <dt class="col-sm-4">
+                                                <span>Category : </span>
+                                            </dt>
+                                            <dd class="col-sm-8">
+                                                <p>{data.quiz.category}</p>
+                                            </dd>
+                                        </dl>
                                         
                                         <dl class="row my-0 info-student-topic">
                                             <dt class="col-sm-4">

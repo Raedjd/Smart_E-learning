@@ -14,6 +14,7 @@ function AddQuiz() {
   const [numberOfquestion, setnumberOfquestion] = useState(0);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
+  const [category , setcategory]=useState("development")
   const [level, setlevel] = useState("beginner");
 
   const addQuestion = (e) => {
@@ -80,12 +81,13 @@ function AddQuiz() {
         questions: questions,
         level: level,
         numberOfQuestion: numberOfquestion,
+        category : category
       })
       .then(() => {
         console.log("succes");
       });
   };
-
+console.log(category)
   return (
     <div>
       <h1>Add Quiz</h1>
@@ -119,6 +121,19 @@ function AddQuiz() {
               <option>beginner</option>
               <option>Medium</option>
               <option>advanced</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label>category</label>
+            <select
+              onChange={(event) => setcategory(event.target.value)}
+              className="form-control"
+            >
+              <option>development</option>
+              <option>business</option>
+              <option>design</option>
+              <option>marketing</option>
+
             </select>
           </div>
 
