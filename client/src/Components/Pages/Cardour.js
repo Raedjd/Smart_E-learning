@@ -3,7 +3,7 @@ import "./cardour.scss";
 
 const Cardour = ({ name, image, creatorName, creatorImage, price }) => {
   return (
-    <div class="col-md-6 mb-4">
+    <div class="col-md-6 mb-4" style={{ width: "400px" }}>
       <div class="contentCard contentCard--course">
         <div class="contentCard-top">
           <a href="course-details.html">

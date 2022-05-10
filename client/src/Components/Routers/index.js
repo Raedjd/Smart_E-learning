@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate , } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "../Pages/Header";
 import SignUp from "../Pages/User/Auth/SignUp";
 import SignIn from "../Pages/User/Auth/SignIn";
@@ -43,12 +43,7 @@ import PassQuiz from "../Pages/Quiz/PassQuiz";
 import VideoChat from "../Pages/VideoChat/VideoChat";
 import TopicManag from "../Pages/Categoryy/pages/Topics/TopicManag";
 
- 
-
-
-
 const RRR = () => {
-
   const userData = useSelector((state) => state.userReducer);
   const userId = cookie.get("id");
   return (
@@ -56,7 +51,7 @@ const RRR = () => {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/homep" element={<HomeP />} />
+          <Route path="/" element={<HomeP />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/forgetpassword" element={<ForgetPassword />} />
@@ -68,13 +63,13 @@ const RRR = () => {
 
           <Route path="/homeuser" element={<Accueil />} />
           <Route path="/profilstudent" element={<ProfilStudent />}></Route>
-          <Route path="/searchcourse" element={<SearchCourse/>}></Route>
+          <Route path="/searchcourse" element={<SearchCourse />}></Route>
 
           <Route path="/all-quizes" element={<AllQuizes />} />
           <Route path="/add-quiz" element={<AddQuiz />} />
           <Route path="/quiz/:id" element={<QuizDetail />} />
-          <Route path ="/pass-quiz/:id" element ={<PassQuiz />} />
-          <Route path="/videoChat" element ={<VideoChat />} />
+          <Route path="/pass-quiz/:id" element={<PassQuiz />} />
+          <Route path="/videoChat" element={<VideoChat />} />
 
           <Route path="/Category/create" element={<CreatCategory />} />
           <Route path="/Category/:id" element={<BrowseCategory />} />
@@ -86,8 +81,12 @@ const RRR = () => {
           <Route path="/topic/new/:id" element={<ShowTopic />} />
           <Route path="/topic/create/:id" element={<CreateTopic />} />
           <Route path="/messenger">
-            <Route exact path="/messenger"   element={!userId ? <SignIn/> : <Messenger />}/>
-        </Route>
+            <Route
+              exact
+              path="/messenger"
+              element={!userId ? <SignIn /> : <Messenger />}
+            />
+          </Route>
 
           <Route path="/dash">
             <Route index element={<Home />} />
