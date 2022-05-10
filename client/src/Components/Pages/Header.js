@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 
 import cookie from "js-cookie";
 import axios from "axios";
+import logo from "../../logo.png";
+
 const Header = () => {
   const userData = useSelector((state) => state.userReducer);
   const navigate = useNavigate();
@@ -37,7 +39,8 @@ const Header = () => {
         <div class="container">
           <a class="navbar-brand" href="index.html">
             <img
-              src="/dist/images/logo/logo.png"
+              style={{ width: "200px" }}
+              src={logo}
               alt="Logo"
               class="img-fluid"
             />
@@ -70,29 +73,12 @@ const Header = () => {
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#">
-                  Course
-                </a>
-                <div class="nav-item--dropdown">
-                  <ul>
-                    <li>
-                      <Link
-                        // className="nav-link"
-                        to="/searchcourse"
-                        style={{ textDecoration: "none" }}
-                      >
-                        Search courses
-                      </Link>
-                    </li>
-                    <li>
-                      <a href="course-details.html">course details</a>
-                    </li>
-                    <li>
-                      <a href="watch.html">Watch Course</a>
-                    </li>
-                  </ul>
-                </div>
+                <Link className="nav-link" to="/searchcourse">
+                  {" "}
+                  Courses
+                </Link>
               </li>
+
               <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="about.html">
                   About
@@ -119,108 +105,52 @@ const Header = () => {
                   {" "}
                   quizes
                 </Link>
-                
               </li>
               <li class="nav-item">
-                <Link className="nav-link" to="/videoChat">
+                <Link className="nav-link" to="/videoChat" hidden={!userId}>
                   {" "}
                   VideoChat
                 </Link>
               </li>
             </ul>
             <div class="d-flex align-items-center justify-content-between rightContent">
-              <form class="header__Search-form" id="searchForm">
-                <button
-                  type="button"
-                  class="border-0 bg-transparent header__Search-button"
-                  onclick="openSearch()"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <circle
-                      cx="9.19522"
-                      cy="9.19518"
-                      r="7.61714"
-                      stroke="#35343E"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></circle>
-                    <path
-                      d="M15.0493 15.4866L18.3493 18.778"
-                      stroke="#35343E"
-                      stroke-width="1.6"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                  </svg>
-                </button>
-                <div id="myOverlay" class="overlay">
-                  <span
-                    class="closebtn"
-                    onclick="closeSearch()"
-                    title="Close Overlay"
-                  >
-                    ×
-                  </span>
-                  <div class="overlay-content">
-                    <div>
-                      <input type="text" placeholder="Search.." name="search" />
-                      <button type="button">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#ffff"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="feather feather-search"
-                        >
-                          <circle cx="11" cy="11" r="8"></circle>
-                          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                        </svg>
-                      </button>
-                    </div>
+              <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href="#">
+                    <a hidden={!userId}>
+                      <img
+                        src={userData.avatar}
+                        alt="user-avatar"
+                        class="rounded-circle "
+                        width="30"
+                        height="30"
+                      />
+                      &nbsp;&nbsp;
+                      <small>{userData.username}</small>
+                    </a>
+                  </a>
+                  <div class="nav-item--dropdown">
+                    <ul>
+                      <li>
+                        <a hidden={!userId}>
+                          <Link to="/homeuser"> General Information</Link>
+                        </a>{" "}
+                      </li>
+                      <li>
+                        <a hidden={!userId}>
+                          <Link to="/profilstudent">Profil</Link>
+                        </a>
+                      </li>
+                    </ul>
                   </div>
-                </div>
-              </form>
-              <a class="button button--text" hidden={!userId}>
-                <Link to="/homeuser"> Accueil</Link>
-              </a>
-              <a class="button button--text" hidden={!userId}>
-                <Link to="/profilstudent">Profil</Link>
-              </a>
+                  
+                </li>
+              </ul>
               <a class="button button--text" hidden={userId}>
                 <Link to="/signin"> Sign in</Link>
               </a>
               <a class="button button--dark" hidden={userId}>
                 <Link to="/signup"> Sign Up</Link>
-              </a>
-              <a class="students-info-intro-start" hidden={!userId}>
-                <small>{userData.username}</small>
-
-                <img
-                  src={userData.avatar}
-                  alt="user-avatar"
-                  class="rounded-circle "
-                  width="25"
-                  height="25"
-                />
-              </a>
-              <a
-                class="button button--text"
-                onClick={handleLogout}
-                hidden={!userId}
-              >
-                Logout
               </a>
             </div>
           </div>

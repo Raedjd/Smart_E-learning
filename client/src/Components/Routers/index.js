@@ -34,13 +34,14 @@ import CreateTopic from "../Pages/ForumUser/Topic/CreateTopic";
 import SearchCourse from "../Pages/SearchCourse";
 import HomeP from "../Pages/HomeP";
 import Courses from "../Pages/Courses/Courses/Courses";
+import PassQuiz from "../Pages/Quiz/PassQuiz"
+import VideoChat from "../Pages/VideoChat/VideoChat"
+import AdminQuizes from "../Pages/Quiz/AdminQuizes";
 import HomeCourse from "../Pages/Courses/HomeCourse/HomeCourse";
 import { useContext } from "react";
 import cookie from "js-cookie";
 import { useSelector } from "react-redux";
 import Messenger from "../Pages/Messenger/Messenger";
-import PassQuiz from "../Pages/Quiz/PassQuiz";
-import VideoChat from "../Pages/VideoChat/VideoChat";
 import TopicManag from "../Pages/Categoryy/pages/Topics/TopicManag";
 
 const RRR = () => {
@@ -117,6 +118,9 @@ const RRR = () => {
               <Route index element={<BadgePage />} />
               <Route path=":badgeId" element={<SingleBadge />} />
             </Route>
+            <Route path="Quizes">
+              <Route index element={<AdminQuizes />} />
+              </Route>
             <Route path="topics">
               <Route index element={<TopicManag />} />
             </Route>

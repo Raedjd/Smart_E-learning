@@ -99,13 +99,13 @@ module.exports = {
       let reg = await registration.save();
       console.log(reg);
     } catch (err) {
-      console.log(err);
+      console.log(err); 
     }
   },
   signUp: async function (fields) {
     const user = new UserModel({
       username: fields.name.stringValue,
-      password: fields.password.stringValue,
+      password: fields.password.stringValue, 
       email: fields.email.stringValue,
       firstName: fields.firstName.stringValue,
       lastName: fields.lastName.stringValue,

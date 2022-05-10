@@ -17,6 +17,8 @@ function SingleQuiz({ quiz }) {
 
   const deletequizHandler = () => {
     quizes.delete(`/delete-quiz/${quiz._id}`);
+    
+
   };
   return (
 
@@ -62,18 +64,3 @@ function SingleQuiz({ quiz }) {
 }
 
 export default SingleQuiz;
-/*
-
-*/
-/*
-    <div>
-          <div class="box">
-  <div class="ribbon"><span>New</span></div>
-</div>
-<div class="box">
-  <div class="ribbon rouge"><span>Popular</span></div>
-</div>
-<div class="box">
-  <div class="ribbon bleu"><span>Popular</span></div>
-</div>
-    </div>*/
